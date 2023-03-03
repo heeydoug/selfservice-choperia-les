@@ -1,0 +1,116 @@
+<mat-toolbar class="cor-principal nav-bar">
+  <button (click)="sidenav.toggle()" mat-icon-button>
+    <mat-icon class="branco">menu</mat-icon>
+  </button>
+  <span class="branco">Restaurante e Chopperia - Grupo 4</span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button>
+    <mat-icon class="branco">exit_to_app</mat-icon>
+  </button>
+</mat-toolbar>
+
+
+<mat-sidenav-container class="container">
+  <mat-sidenav class="size-sidenav" #sidenav mode="side" opened>
+    <mat-nav-list>
+
+      <a routerLink="" mat-list-item >
+        <div>
+          <i class="material-icons" style="float: left;">home</i>
+        </div>
+        Home
+      </a>
+
+      <a routerLink="/usuarios" mat-list-item>
+        <div>
+          <i class="material-icons" style="float: left;">supervised_user_circle</i>
+        </div>
+        Usuários
+      </a>
+
+      <a mat-list-item>
+        <div>
+          <i class="material-icons" style="float: left;">stars</i>
+        </div>
+        Produtos
+      </a>
+
+      <a mat-list-item>
+        <div>
+          <i class="material-icons" style="float: left;">assignment_returned</i>
+        </div>
+        Entrada Estoque
+      </a>
+
+      <a mat-list-item>
+        <div>
+          <i class="material-icons" style="float: left;">assignment_return</i>
+        </div>
+        Saída Estoque
+      </a>
+
+      <a mat-list-item>
+        <div>
+          <i class="material-icons" style="float: left;">credit_card</i>
+        </div>
+        Cartão RFID Cliente
+      </a>
+
+      <a mat-list-item>
+        <div>
+          <i class="material-icons" style="float: left;">add_shopping_cart</i>
+        </div>
+        Caixa
+      </a>
+
+      <a mat-list-item>
+        <div>
+          <i class="material-icons" style="float: left;">fastfood</i>
+        </div>
+        Self-Service
+      </a>
+
+      <a mat-list-item>
+        <div>
+          <i class="material-icons" style="float: left;">local_drink</i>
+        </div>
+        Chopperia
+      </a>
+
+      <a mat-list-item>
+        <div>
+          <i class="material-icons" style="float: left;">kitchen</i>
+        </div>
+        Cozinha
+      </a>
+
+      <a mat-list-item>
+        <div>
+          <i class="material-icons" style="float: left;">directions_run</i>
+        </div>
+        Entrada Clientes
+      </a>
+
+      <a mat-list-item>
+        <div>
+          <i class="material-icons" style="float: left;">directions_run</i>
+        </div>
+        Saída Clientes
+      </a>
+
+      <a mat-list-item>
+        <div>
+          <i class="material-icons" style="float: left;">note</i>
+        </div>
+        Relatórios
+      </a>
+
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+  <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+
