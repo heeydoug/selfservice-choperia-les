@@ -4,13 +4,13 @@
   </div>
 
   <div>
-    <button mat-raised-button>
+    <button (click)="adicionarUsuario()" mat-raised-button>
       Cadastrar Usuário
     </button>
   </div>
   <div mat-table class="mat-elevation-z8 content-table">
 
-    <table class="table" mat-table>
+    <table [dataSource]="usuarios" class="table" mat-table>
 
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef> ID </th>
@@ -33,8 +33,18 @@
       </ng-container>
 
       <ng-container matColumnDef="acoes">
-        <th mat-header-cell *matHeaderCellDef> Ações </th>
-        <td mat-cell *matCellDef="let row"> {{ row.acoes }} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="">Ações</th>
+        <td mat-cell *matCellDef="let row">
+
+          <button mat-icon-button aria-label="Excluir Usuário">
+            <i class="material-icons icone-excluir"> delete </i>
+          </button>
+
+          <button mat-icon-button aria-label="Editar Usuário">
+            <i class="material-icons icone-editar"> edit </i>
+          </button>
+
+        </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

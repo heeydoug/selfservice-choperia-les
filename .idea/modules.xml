@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/backend/backendSelfChop/backendSelfChop/backendSelfChop.iml" filepath="$PROJECT_DIR$/backend/backendSelfChop/backendSelfChop/backendSelfChop.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/chopperia-self-service.iml" filepath="$PROJECT_DIR$/.idea/chopperia-self-service.iml" />
     </modules>
   </component>
