@@ -22,5 +22,4 @@ public class Usuario implements Serializable {
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "usuario_tela", joinColumns = {@JoinColumn(name = "cpf")}, inverseJoinColumns = {@JoinColumn(name = "idTela")})
     private List<Tela> telas;
-
 }

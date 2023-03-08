@@ -8,20 +8,16 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+@Data
 public class UsuarioDTO implements Serializable {
 
     private String cpf;
     private String nome;
     private String senha;
     private Set<TelaDTO> telas;
-
 }
 
 /*

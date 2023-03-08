@@ -20,6 +20,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from '@angular/material/select';
+import { UsuariosFormEditComponent } from './components/usuarios/usuarios-form-edit/usuarios-form-edit.component';
+import { UsuariosExcluirComponent } from './components/usuarios/usuarios-excluir/usuarios-excluir.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 
@@ -34,27 +37,30 @@ import {MatSelectModule} from '@angular/material/select';
     NavbarComponent,
     HomeComponent,
     UsuariosReadComponent,
-    UsuariosFormComponent
+    UsuariosFormComponent,
+    UsuariosFormEditComponent,
+    UsuariosExcluirComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatListModule,
-    MatCardModule,
-    MatTableModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    FormsModule
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        MatSidenavModule,
+        MatListModule,
+        MatCardModule,
+        MatTableModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        FormsModule,
+        MatDialogModule
 
-  ],
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

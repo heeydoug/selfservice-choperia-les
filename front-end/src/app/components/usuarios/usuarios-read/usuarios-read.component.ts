@@ -3,6 +3,9 @@ import {UsuariosService} from "../../../services/usuarios.service";
 import {Observable} from "rxjs";
 import {Usuario} from "../../../models/usuario";
 import {ActivatedRoute, Router} from "@angular/router";
+import {Location} from "@angular/common";
+import {UsuariosExcluirComponent} from "../usuarios-excluir/usuarios-excluir.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-usuarios-read',
@@ -16,7 +19,9 @@ export class UsuariosReadComponent implements OnInit {
   constructor(
     private usuariosService: UsuariosService,
     private router: Router,
-    private route: ActivatedRoute
+    private dialog: MatDialog,
+    private route: ActivatedRoute,
+    private location: Location
   ) {
     this.usuarios = this.usuariosService.list();
   }
@@ -27,4 +32,16 @@ export class UsuariosReadComponent implements OnInit {
     this.router.navigate(['usuarios/novo']);
 
   }
+
+  editar() {
+    this.router.navigate(['usuarios/editar']);
+  }
+
+  excluir(row: Usuario): void {
+    this.dialog.open(UsuariosExcluirComponent, {
+      width: '400px',
+      data: row
+    });
+  }
+
 }

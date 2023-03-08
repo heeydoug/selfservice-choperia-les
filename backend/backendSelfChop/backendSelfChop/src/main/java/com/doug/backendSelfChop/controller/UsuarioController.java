@@ -6,6 +6,7 @@ import com.doug.backendSelfChop.repository.UsuarioRepository;
 import com.doug.backendSelfChop.service.UsuarioService;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,28 @@ public class UsuarioController {
     @GetMapping
     public @ResponseBody List<Usuario> list(){
         return usuarioRepository.findAll();
+    }
+
+    @Autowired
+    private UsuarioService usuarioService;
+
+    @GetMapping("/{cpf}")
+    public UsuarioDTO getUsuarioByCpf(@PathVariable String cpf) {
+        return usuarioService.getUsuarioByCpf(cpf);
+    }
+
+    @PostMapping("/criar")
+    public UsuarioDTO criarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
+        return usuarioService.criarUsuario(usuarioDTO);
+    }
+
+    @PutMapping("/")
+    public UsuarioDTO updateUser(@RequestBody UsuarioDTO usuarioDTO) {
+        return usuarioService.editarUsuario(usuarioDTO);
+    }
+    @DeleteMapping("/usuarios/excluir/{cpf}")
+    public void deleteUser(@PathVariable String cpf) {
+        usuarioService.deletarUsuario(cpf);
     }
 
 }
