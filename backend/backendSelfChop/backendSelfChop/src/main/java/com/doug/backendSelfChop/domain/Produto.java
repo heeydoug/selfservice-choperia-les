@@ -23,5 +23,9 @@ public class Produto implements Serializable {
     private Double precoCompra;
     @Column(name = "descricao", nullable = false)
     private String descricao;
+    @Column(name = "unidade_compra", nullable = false)
+    private String unidadeCompra;
+    @Column(name = "ponto_compra", nullable = false)
+    private Integer pontoCompra;
 
 }

@@ -12,4 +12,6 @@ public class ProdutoDTO implements Serializable {
     private Integer saldoEstoque;
     private Double precoCompra;
     private String descricao;
+    private String unidadeCompra;
+    private Integer pontoCompra;
 }

@@ -16,14 +16,10 @@ public class ProdutoService {
     @Autowired
     private final ProdutoRepository produtoRepository;
 
-
     public ProdutoDTO getProdutoByCodigoBarras(String codigoBarras){
         Produto produto = produtoRepository.findByCodigoBarras(codigoBarras);
         return convertToDTO(produto);
     }
-
-
-
 
     private ProdutoDTO convertToDTO(Produto produto){
         ProdutoDTO produtoDTO = new ProdutoDTO();
@@ -32,6 +28,8 @@ public class ProdutoService {
         produtoDTO.setSaldoEstoque(produto.getSaldoEstoque());
         produtoDTO.setPrecoCompra(produto.getPrecoCompra());
         produtoDTO.setDescricao(produto.getDescricao());
+        produtoDTO.setUnidadeCompra(produto.getUnidadeCompra());
+        produtoDTO.setPontoCompra(produto.getPontoCompra());
         return produtoDTO;
     }
 
@@ -42,6 +40,8 @@ public class ProdutoService {
         Produto.setSaldoEstoque(produtoDTO.getSaldoEstoque());
         Produto.setPrecoCompra(produtoDTO.getPrecoCompra());
         Produto.setDescricao(produtoDTO.getDescricao());
+        Produto.setUnidadeCompra(produtoDTO.getUnidadeCompra());
+        Produto.setUnidadeCompra(produtoDTO.getUnidadeCompra());
         return Produto;
     }
 
@@ -61,4 +61,6 @@ public class ProdutoService {
         produto = produtoRepository.save(produto);
         return  convertToDTO(produto);
     }
+
+
 }
