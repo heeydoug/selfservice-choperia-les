@@ -12,11 +12,6 @@
 
     <table [dataSource]="usuarios" class="table" mat-table>
 
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef> ID </th>
-        <td mat-cell *matCellDef="let row"> {{ row.id }} </td>
-      </ng-container>
-
       <ng-container matColumnDef="cpf">
         <th mat-header-cell *matHeaderCellDef> CPF </th>
         <td mat-cell *matCellDef="let row"> {{ row.cpf }} </td>
@@ -29,14 +24,16 @@
 
       <ng-container matColumnDef="telas">
         <th mat-header-cell *matHeaderCellDef> Telas </th>
-        <td mat-cell *matCellDef="let row"> {{ row.telas }} </td>
+        <td mat-cell *matCellDef="let row">
+          <span *ngFor="let tela of row.telas">{{tela.nome}}, </span>
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="acoes">
         <th mat-header-cell *matHeaderCellDef mat-sort-header="">Ações</th>
         <td mat-cell *matCellDef="let row">
 
-          <button mat-icon-button aria-label="Editar Usuário" (click)="editar()">
+          <button mat-icon-button aria-label="Editar Usuário" (click)="editar(row)">
             <i class="material-icons icone-editar"> edit </i>
           </button>
 

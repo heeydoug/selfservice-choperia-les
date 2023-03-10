@@ -1,0 +1,32 @@
+<div class="content">
+  <div class="title">
+    <h1>Produtos</h1>
+  </div>
+
+  <div>
+    <button (click)="adicionarProduto()" mat-raised-button>
+      Cadastrar Produto
+    </button>
+  </div>
+  <div mat-table class="mat-elevation-z8 content-table">
+
+    <table [dataSource]="produtos" class="table" mat-table>
+
+
+          <button mat-icon-button aria-label="Editar Usuário" (click)="editar()">
+            <i class="material-icons icone-editar"> edit </i>
+          </button>
+
+          <button mat-icon-button aria-label="Excluir Usuário" (click)="excluir()">
+            <i class="material-icons icone-excluir"> delete </i>
+          </button>
+
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+
+</div>

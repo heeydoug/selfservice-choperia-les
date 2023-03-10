@@ -23,6 +23,12 @@ import {MatSelectModule} from '@angular/material/select';
 import { UsuariosFormEditComponent } from './components/usuarios/usuarios-form-edit/usuarios-form-edit.component';
 import { UsuariosExcluirComponent } from './components/usuarios/usuarios-excluir/usuarios-excluir.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { ProdutosExcluirComponent } from './components/produtos/produtos-excluir/produtos-excluir.component';
+import { ProdutosFormComponent } from './components/produtos/produtos-form/produtos-form.component';
+import { ProdutosFormEditComponent } from './components/produtos/produtos-form-edit/produtos-form-edit.component';
+import { ProdutosReadComponent } from './components/produtos/produtos-read/produtos-read.component';
+
 
 
 
@@ -39,7 +45,11 @@ import {MatDialogModule} from "@angular/material/dialog";
     UsuariosReadComponent,
     UsuariosFormComponent,
     UsuariosFormEditComponent,
-    UsuariosExcluirComponent
+    UsuariosExcluirComponent,
+    ProdutosExcluirComponent,
+    ProdutosFormComponent,
+    ProdutosFormEditComponent,
+    ProdutosReadComponent
   ],
     imports: [
         BrowserModule,
@@ -58,7 +68,8 @@ import {MatDialogModule} from "@angular/material/dialog";
         MatFormFieldModule,
         MatSelectModule,
         FormsModule,
-        MatDialogModule
+        MatDialogModule,
+        MatSnackBarModule
 
     ],
   providers: [],

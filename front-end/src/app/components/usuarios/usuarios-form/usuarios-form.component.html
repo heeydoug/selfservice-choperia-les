@@ -9,7 +9,9 @@
       <mat-form-field class="full-width">
         <input matInput
                placeholder="CPF"
-               formControlName="cpf" name="cpf">
+               formControlName="cpf" name="cpf"
+               maxlength="10"
+               mask="000.000.000-00">
       </mat-form-field>
 
       <mat-form-field class="full-width">
@@ -20,7 +22,7 @@
 
       <mat-form-field appearance="fill" class="full-width">
         <mat-label>Enter your password</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'">
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="senha" name="senha">
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
@@ -36,7 +38,7 @@
 
   <mat-card-actions>
 
-    <button class="salvar" style="background-color: #01a86c" mat-raised-button>
+    <button class="salvar" (click)="salvar()" style="background-color: #01a86c" mat-raised-button>
       Salvar
     </button>
 

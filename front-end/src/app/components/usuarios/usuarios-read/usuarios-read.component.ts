@@ -29,12 +29,12 @@ export class UsuariosReadComponent implements OnInit {
   }
 
   adicionarUsuario() {
-    this.router.navigate(['usuarios/novo']);
+    this.router.navigate(['usuarios/cadastrar']);
 
   }
 
-  editar() {
-    this.router.navigate(['usuarios/editar']);
+  editar(usuario: Usuario) {
+    this.router.navigate(['usuarios/editar',usuario.cpf]);
   }
 
   excluir(row: Usuario): void {

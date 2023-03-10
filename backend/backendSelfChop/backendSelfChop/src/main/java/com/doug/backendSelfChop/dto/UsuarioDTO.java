@@ -1,14 +1,8 @@
 package com.doug.backendSelfChop.dto;
 
-import com.doug.backendSelfChop.domain.Tela;
-import com.doug.backendSelfChop.domain.Usuario;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
 @Data
