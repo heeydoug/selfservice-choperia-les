@@ -41,7 +41,7 @@ public class ProdutoService {
         Produto.setPrecoCompra(produtoDTO.getPrecoCompra());
         Produto.setDescricao(produtoDTO.getDescricao());
         Produto.setUnidadeCompra(produtoDTO.getUnidadeCompra());
-        Produto.setUnidadeCompra(produtoDTO.getUnidadeCompra());
+        Produto.setPontoCompra(produtoDTO.getPontoCompra());
         return Produto;
     }
 

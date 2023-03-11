@@ -24,10 +24,13 @@ import { UsuariosFormEditComponent } from './components/usuarios/usuarios-form-e
 import { UsuariosExcluirComponent } from './components/usuarios/usuarios-excluir/usuarios-excluir.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { ProdutosExcluirComponent } from './components/produtos/produtos-excluir/produtos-excluir.component';
-import { ProdutosFormComponent } from './components/produtos/produtos-form/produtos-form.component';
-import { ProdutosFormEditComponent } from './components/produtos/produtos-form-edit/produtos-form-edit.component';
-import { ProdutosReadComponent } from './components/produtos/produtos-read/produtos-read.component';
+import { ProdutosListComponent } from './components/produtos/produtos-list/produtos-list.component';
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {AuthInterceptorProvider} from "./interceptors/auth.interceptor";
+import { ProdutosCreateComponent } from './components/produtos/produtos-create/produtos-create.component';
+import {ToastrModule} from "ngx-toastr";
+import { ProdutosUpdateComponent } from './components/produtos/produtos-update/produtos-update.component';
+import { ProdutosDeleteComponent } from './components/produtos/produtos-delete/produtos-delete.component';
 
 
 
@@ -46,33 +49,39 @@ import { ProdutosReadComponent } from './components/produtos/produtos-read/produ
     UsuariosFormComponent,
     UsuariosFormEditComponent,
     UsuariosExcluirComponent,
-    ProdutosExcluirComponent,
-    ProdutosFormComponent,
-    ProdutosFormEditComponent,
-    ProdutosReadComponent
+    ProdutosListComponent,
+    ProdutosCreateComponent,
+    ProdutosUpdateComponent,
+    ProdutosDeleteComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatButtonModule,
-        MatSidenavModule,
-        MatListModule,
-        MatCardModule,
-        MatTableModule,
-        HttpClientModule,
-        ReactiveFormsModule,
-        MatInputModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        FormsModule,
-        MatDialogModule,
-        MatSnackBarModule
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatListModule,
+    MatCardModule,
+    MatTableModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    FormsModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    MatPaginatorModule,
+    ToastrModule.forRoot({
+      timeOut: 4000,
+      closeButton: true,
+      progressBar: true
+    })
 
-    ],
-  providers: [],
+  ],
+  providers: [AuthInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

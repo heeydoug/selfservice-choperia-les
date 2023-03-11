@@ -24,13 +24,14 @@ export class UsuariosFormEditComponent implements OnInit {
   // });
 
   usuario: Usuario = {
-   cpf: '',
-   nome: '',
-   senha: '',
-   telas: []
+    cpf: '',
+    nome: '',
+    senha: '',
+    telas: []
   }
 
   telas: Tela[] = [];
+  form: any;
 
   constructor(
     private formBuilder: FormBuilder,

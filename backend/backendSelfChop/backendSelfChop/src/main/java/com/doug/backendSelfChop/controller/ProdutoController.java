@@ -40,8 +40,8 @@ public class ProdutoController {
         produtoService.deleteProduto(codigoBarras);
     }
 
-    @PutMapping("/")
-    public ProdutoDTO uptadeProduto(@RequestBody ProdutoDTO produtoDTO){
+    @PutMapping("/{codigoBarras}")
+    public ProdutoDTO editarProduto(@RequestBody ProdutoDTO produtoDTO){
         return produtoService.editarProduto(produtoDTO);
     }
 }

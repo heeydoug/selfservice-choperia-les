@@ -1,0 +1,85 @@
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title class="title">Excluir Produto</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Cód. de Barras</mat-label>
+      <input matInput
+             [(ngModel)]="produto.codigoBarras"
+             name="codigoBarras"
+             [disabled]="true">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Nome</mat-label>
+      <input matInput
+             [(ngModel)]="produto.nome"
+             name="nome"
+             [disabled]="true">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Saldo Estoque</mat-label>
+      <input matInput
+             [(ngModel)]="produto.saldoEstoque"
+             name="saldoEstoque"
+             [disabled]="true">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Preço Compra</mat-label>
+      <input matInput
+             [(ngModel)]="produto.precoCompra"
+             name="precoCompra"
+             [disabled]="true">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Descrição</mat-label>
+      <textarea matInput
+                [(ngModel)]="produto.descricao"
+                name="descricao"
+                [disabled]="true">
+
+      </textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Unidade Compra</mat-label>
+      <mat-select
+        [(ngModel)]="produto.unidadeCompra"
+        name="unidadeCompra"
+        [disabled]="true">
+        <mat-option value="un">Unidade</mat-option>
+        <mat-option value="kg">Quilograma</mat-option>
+        <mat-option value="g">Grama</mat-option>
+        <mat-option value="l">Litro</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Ponto Compra</mat-label>
+      <input matInput
+             [(ngModel)]="produto.pontoCompra"
+             name="pontoCompra"
+             [disabled]="true">
+    </mat-form-field>
+
+  </mat-card-content>
+
+  <mat-card-actions>
+
+    <button (click)="cancelar()" class="cancelar" style="background-color: indianred" mat-raised-button>
+      Cancelar
+    </button>
+
+    <button class="salvar" (click)="delete()" style="background-color: #01a86c" mat-raised-button>
+      Excluir
+    </button>
+
+  </mat-card-actions>
+</mat-card>

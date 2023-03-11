@@ -34,7 +34,7 @@ export class UsuariosService {
   deletar(cpf: string){
     return this.httpClient.delete<string>(this.API + "/" + cpf);
   }
- findByCpf(cpf: string): Observable<Usuario> {
+  findByCpf(cpf: string): Observable<Usuario> {
     return this.httpClient.get<Usuario>(this.API + "/editar/" + cpf );
   }
 

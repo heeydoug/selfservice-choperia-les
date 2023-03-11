@@ -1,7 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Usuario} from "../../../models/usuario";
-import {first} from "rxjs";
+import {first, Observable} from "rxjs";
 import {UsuariosService} from "../../../services/usuarios.service";
 
 @Component({
@@ -14,10 +14,12 @@ export class UsuariosExcluirComponent {
 
   constructor(
     public dialogRef: MatDialogRef<UsuariosExcluirComponent>,
+    private usuariosService: UsuariosService,
     @Inject(MAT_DIALOG_DATA) public data: Usuario,
     private service: UsuariosService,
   ) {
     this.usuario = data
+
   }
 
 

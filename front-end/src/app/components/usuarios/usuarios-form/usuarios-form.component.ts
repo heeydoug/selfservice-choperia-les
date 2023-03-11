@@ -5,6 +5,7 @@ import {Location} from "@angular/common";
 import {TelasService} from "../../../services/telas.service";
 import {UsuariosService} from "../../../services/usuarios.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {Usuario} from "../../../models/usuario";
 
 @Component({
   selector: 'app-usuarios-form',

@@ -1,0 +1,96 @@
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title class="title">Cadastrar Produto</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Cód. de Barras</mat-label>
+      <input matInput
+             [(ngModel)]="produto.codigoBarras"
+             name="codigoBarras"
+             [formControl]="codigoBarras"
+             required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Nome</mat-label>
+      <input matInput
+             [(ngModel)]="produto.nome"
+             name="nome"
+             [formControl]="nome"
+             required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Saldo Estoque</mat-label>
+      <input matInput
+             [(ngModel)]="produto.saldoEstoque"
+             name="saldoEstoque"
+             [formControl]="saldoEstoque"
+             required
+             type="number" step="1">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Preço Compra</mat-label>
+      <input matInput
+             [(ngModel)]="produto.precoCompra"
+             name="precoCompra"
+             [formControl]="precoCompra"
+             required
+             type="number" step="0.01" >
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Descrição</mat-label>
+      <textarea matInput
+                [(ngModel)]="produto.descricao"
+                name="descricao"
+                [formControl]="descricao"
+                required>
+
+      </textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Selecione uma Unidade de Compra</mat-label>
+      <mat-select
+        [(ngModel)]="produto.unidadeCompra"
+        name="unidadeCompra"
+        [formControl]="unidadeCompra"
+        required
+        placeholder="Unidade Compra">
+        <mat-option value="un">Unidade</mat-option>
+        <mat-option value="kg">Quilograma</mat-option>
+        <mat-option value="g">Grama</mat-option>
+        <mat-option value="l">Litro</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Ponto Compra</mat-label>
+      <input matInput
+             [(ngModel)]="produto.pontoCompra"
+             name="pontoCompra"
+             [formControl]="pontoCompra"
+             required
+             type="number" step="1">
+    </mat-form-field>
+
+  </mat-card-content>
+
+  <mat-card-actions>
+
+    <button (click)="cancelar()" class="cancelar" style="background-color: indianred" mat-raised-button>
+      Cancelar
+    </button>
+
+    <button class="salvar" [disabled]="!validaCampos()" (click)="create()" style="background-color: #01a86c" mat-raised-button>
+      Salvar
+    </button>
+
+  </mat-card-actions>
+</mat-card>
