@@ -4,10 +4,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {Produto} from "../../../models/produto";
 import {ProdutosService} from "../../../services/produtos.service";
 import {Router} from "@angular/router";
-import {UsuariosExcluirComponent} from "../../usuarios/usuarios-excluir/usuarios-excluir.component";
-import {ProdutosDeleteComponent} from "../produtos-delete/produtos-delete.component";
 import {MatDialog} from "@angular/material/dialog";
-import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-produtos-list',
@@ -23,7 +20,7 @@ export class ProdutosListComponent implements OnInit{
   constructor(
     private service: ProdutosService,
     private router: Router,
-    private dialog: MatDialog,
+
 
   ) {
 

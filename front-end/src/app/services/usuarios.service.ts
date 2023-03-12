@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {first, Observable, tap} from "rxjs";
 import {FormArray, ɵElement, ɵFormGroupValue, ɵTypedOrUntyped} from "@angular/forms";
 import {Tela} from "../models/tela";
+import {Produto} from "../models/produto";
 
 @Injectable({
   providedIn: 'root'
@@ -12,31 +13,27 @@ export class UsuariosService {
 
   private readonly API = 'api/usuarios';
   constructor(
-    private httpClient: HttpClient
+    private http: HttpClient
   ) { }
 
-  list() {
-    return this.httpClient.get<Usuario[]>(this.API)
-      .pipe(
-        first(),
-        tap(usuarios => console.log(usuarios))
-      )
+  findAll(): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(this.API);
   }
 
-  save(record: Partial<Usuario>){
-    return this.httpClient.post<Usuario>(this.API + "/cadastrar", record).pipe(first());
+  findByCpf(cpf: any): Observable<Usuario>{
+    return this.http.get<Usuario>(this.API + '/' + cpf);
   }
 
-  editar(record: Partial<Usuario>){
-    return this.httpClient.put<Usuario>(`${this.API}/${record.cpf}`, record).pipe(first());
+  create(usuario: Usuario): Observable<Usuario>{
+    return this.http.post<Usuario>(this.API + '/cadastrar', usuario);
   }
 
-  deletar(cpf: string){
-    return this.httpClient.delete<string>(this.API + "/" + cpf);
-  }
-  findByCpf(cpf: string): Observable<Usuario> {
-    return this.httpClient.get<Usuario>(this.API + "/editar/" + cpf );
+  update(usuario: Usuario){
+    return this.http.put<Usuario>(`${this.API}/${usuario.cpf}`, usuario);
   }
 
+  delete(cpf: any): Observable<Usuario>{
+    return this.http.delete<Usuario>(this.API + '/deletar/' + cpf);
+  }
 
 }

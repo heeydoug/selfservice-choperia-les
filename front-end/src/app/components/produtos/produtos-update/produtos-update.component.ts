@@ -41,7 +41,6 @@ export class ProdutosUpdateComponent implements OnInit{
 
   validaCampos(): boolean{
     return this.nome.valid &&
-      this.codigoBarras.valid &&
       this.saldoEstoque.valid &&
       this.precoCompra.valid &&
       this.descricao.valid &&

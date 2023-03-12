@@ -10,12 +10,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping(value = "api/usuarios")
 public class UsuarioController {
-    public UsuarioController(UsuarioRepository usuarioRepository) {
-        this.usuarioRepository = usuarioRepository;
-    }
-
+    @Autowired
+    private UsuarioService usuarioService;
     private UsuarioRepository usuarioRepository;
 
     @GetMapping
@@ -24,22 +23,21 @@ public class UsuarioController {
     }
 
     @GetMapping("/{cpf}")
-    public Usuario getUsuarioByCpf(@PathVariable String cpf) {
-        return usuarioRepository.findByCpf(cpf);
+    public UsuarioDTO getUsuarioByCpf(@PathVariable String cpf) {
+        return usuarioService.findByCpf(cpf);
     }
 
     @PostMapping("/cadastrar")
-    public Usuario criarUsuario(@RequestBody Usuario usuario) {
-        return usuarioRepository.save(usuario);
+    public UsuarioDTO criarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
+        return usuarioService.criarUsuario(usuarioDTO);
     }
-
-    @PutMapping("/editar")
-    public Usuario editarUser(@RequestBody Usuario usuario) {
-        return usuarioRepository.save(usuario);
+    @DeleteMapping("/deletar/{cpf}")
+    public void deletarUsuario(@PathVariable String cpf) {
+        usuarioService.deletarUsuario(cpf);
     }
-    @DeleteMapping("/{cpf}")
-    public void deleteUser(@PathVariable String cpf) {
-        usuarioRepository.deleteById(cpf);
+    @PutMapping("/{cpf}")
+    public UsuarioDTO editarUsario(@RequestBody UsuarioDTO usuarioDTO) {
+        return usuarioService.editarUsuario(usuarioDTO);
     }
 
 }

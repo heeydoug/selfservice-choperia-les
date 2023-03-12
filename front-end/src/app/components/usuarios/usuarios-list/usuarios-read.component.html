@@ -1,16 +1,22 @@
-<div class="content">
+<div class="container">
   <div class="title">
     <h1>Usuários</h1>
   </div>
 
   <div>
-    <button (click)="adicionarUsuario()" mat-raised-button>
+    <button (click)="create()" mat-raised-button>
       Cadastrar Usuário
     </button>
   </div>
+
+  <mat-form-field>
+    <mat-label>Filtro</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex: Douglas" #input>
+  </mat-form-field>
+
   <div mat-table class="mat-elevation-z8 content-table">
 
-    <table [dataSource]="usuarios" class="table" mat-table>
+    <table mat-table [dataSource]="dataSource" class="table" >
 
       <ng-container matColumnDef="cpf">
         <th mat-header-cell *matHeaderCellDef> CPF </th>
@@ -33,11 +39,11 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header="">Ações</th>
         <td mat-cell *matCellDef="let row">
 
-          <button mat-icon-button aria-label="Editar Usuário" (click)="editar(row)">
+          <button mat-icon-button aria-label="Editar Usuário" (click)="update(row)">
             <i class="material-icons icone-editar"> edit </i>
           </button>
 
-          <button mat-icon-button aria-label="Excluir Usuário" (click)="excluir(row)">
+          <button mat-icon-button aria-label="Excluir Usuário" (click)="delete(row)">
             <i class="material-icons icone-excluir"> delete </i>
           </button>
 
@@ -48,6 +54,11 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                   showFirstLastButtons
+                   aria-label="Select page of periodic elements">
+    </mat-paginator>
   </div>
 
 
