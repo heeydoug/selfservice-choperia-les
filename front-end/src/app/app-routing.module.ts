@@ -9,11 +9,18 @@ import {ProdutosCreateComponent} from "./components/produtos/produtos-create/pro
 import {ProdutosUpdateComponent} from "./components/produtos/produtos-update/produtos-update.component";
 import {ProdutosDeleteComponent} from "./components/produtos/produtos-delete/produtos-delete.component";
 import {UsuariosExcluirComponent} from "./components/usuarios/usuarios-delete/usuarios-excluir.component";
+import {LoginComponent} from "./components/login/login.component";
 
 const routes: Routes = [
 
   {
-    path: '', component: HomeComponent
+    path: 'home', component: HomeComponent
+  },
+
+  { path: '', redirectTo: 'login', pathMatch: 'full'},
+
+  {
+    path: 'login', component: LoginComponent
   },
 
   {

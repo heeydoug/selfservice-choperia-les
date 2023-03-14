@@ -31,6 +31,7 @@ import { ProdutosCreateComponent } from './components/produtos/produtos-create/p
 import {ToastrModule} from "ngx-toastr";
 import { ProdutosUpdateComponent } from './components/produtos/produtos-update/produtos-update.component';
 import { ProdutosDeleteComponent } from './components/produtos/produtos-delete/produtos-delete.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 
@@ -53,6 +54,7 @@ import { ProdutosDeleteComponent } from './components/produtos/produtos-delete/p
     ProdutosCreateComponent,
     ProdutosUpdateComponent,
     ProdutosDeleteComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

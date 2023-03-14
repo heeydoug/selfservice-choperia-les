@@ -1,20 +1,19 @@
-<mat-toolbar class="cor-principal nav-bar">
-  <button (click)="sidenav.toggle()" mat-icon-button>
-    <mat-icon class="branco">menu</mat-icon>
-  </button>
+<mat-toolbar *ngIf="estaLogado()" class="cor-principal nav-bar">
+<!--  <button (click)="sidenav.toggle()" mat-icon-button>-->
+<!--    <mat-icon class="branco">menu</mat-icon>-->
+<!--  </button>-->
   <span class="branco">Restaurante e Chopperia - Grupo 4</span>
   <span class="example-spacer"></span>
-  <button mat-icon-button>
+  <button (click)="logout()" mat-icon-button>
     <mat-icon class="branco">exit_to_app</mat-icon>
   </button>
 </mat-toolbar>
 
-
 <mat-sidenav-container class="container">
-  <mat-sidenav class="size-sidenav" #sidenav mode="side" opened>
+  <mat-sidenav *ngIf="estaLogado()" class="size-sidenav" #sidenav mode="side" opened>
     <mat-nav-list>
 
-      <a routerLink="" mat-list-item >
+      <a routerLink="/home" mat-list-item >
         <div>
           <i class="material-icons" style="float: left;">home</i>
         </div>
@@ -109,8 +108,10 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-  <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 
 </mat-sidenav-container>
+
+
 

@@ -1,0 +1,30 @@
+<div class="container">
+  <form class="form mat-elevation-z8" [formGroup]="formulario">
+
+    <h1>Self-Service e Choperia</h1>
+
+<!--    <img src="assets/img/logo.png" alt="logo">-->
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>CPF</mat-label>
+      <input
+        required
+        formControlName="cpf"
+        matInput
+        placeholder="CPF">
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Senha</mat-label>
+      <input
+        required
+        formControlName="senha"
+        type="password"
+        matInput
+        placeholder="Ex. 123">
+    </mat-form-field>
+
+    <button (click)="verificarUsuario()" class="full-width mat-elevation-z4" mat-stroked-button color="primary">Login</button>
+  </form>
+
+</div>

@@ -7,6 +7,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {Usuario} from "../../../models/usuario";
 import {ToastrService} from "ngx-toastr";
 import {FormControl, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-usuarios-form',
@@ -34,9 +35,14 @@ export class UsuariosFormComponent implements OnInit{
     private telaService: TelasService,
     private usuarioService: UsuariosService,
     private snackBar: MatSnackBar,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private router: Router
 
   ) {
+    if(localStorage.getItem('usuario') == null){
+      console.log(localStorage.getItem('usuario'));
+      this.router.navigate(['/login']);
+    }
 
   }
   validaCampos(): boolean{
@@ -71,15 +77,4 @@ export class UsuariosFormComponent implements OnInit{
     });
   }
 
-  // salvar() {
-  //   this.usuarioService.save(this.form.value)
-  //     .subscribe(result => this.sucesso(), error => this.erro());
-  // }
-  // private sucesso(){
-  //   this.snackBar.open("Cadastro realizado com sucesso!", '', {duration: 5000});
-  //   this.cancelar();
-  // }
-  // private erro(){
-  //   this.snackBar.open("Erro ao cadastrar.", '', {duration: 5000});
-  // }
 }
