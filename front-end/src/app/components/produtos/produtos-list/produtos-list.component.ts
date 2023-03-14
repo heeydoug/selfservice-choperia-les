@@ -20,10 +20,11 @@ export class ProdutosListComponent implements OnInit{
   constructor(
     private service: ProdutosService,
     private router: Router,
-
-
   ) {
-
+    if(localStorage.getItem('usuario') == null){
+      console.log(localStorage.getItem('usuario'));
+      this.router.navigate(['/login']);
+    }
   }
   ngOnInit() {
     this.findAll();

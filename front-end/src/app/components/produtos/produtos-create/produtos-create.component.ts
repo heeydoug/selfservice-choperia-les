@@ -4,6 +4,7 @@ import {FormControl, Validators} from "@angular/forms";
 import {ProdutosService} from "../../../services/produtos.service";
 import {Produto} from "../../../models/produto";
 import {ToastrService} from "ngx-toastr";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-produtos-create',
@@ -32,8 +33,13 @@ export class ProdutosCreateComponent {
   constructor(
     private service: ProdutosService,
     private location: Location,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private router: Router
   ) {
+    if(localStorage.getItem('usuario') == null){
+      console.log(localStorage.getItem('usuario'));
+      this.router.navigate(['/login']);
+    }
 
   }
 

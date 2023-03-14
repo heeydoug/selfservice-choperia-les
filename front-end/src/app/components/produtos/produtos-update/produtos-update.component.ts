@@ -4,7 +4,7 @@ import {FormControl, Validators} from "@angular/forms";
 import {ProdutosService} from "../../../services/produtos.service";
 import {Location} from "@angular/common";
 import {ToastrService} from "ngx-toastr";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-produtos-update',
@@ -34,8 +34,13 @@ export class ProdutosUpdateComponent implements OnInit{
     private service: ProdutosService,
     private location: Location,
     private toast: ToastrService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
+    if(localStorage.getItem('usuario') == null){
+      console.log(localStorage.getItem('usuario'));
+      this.router.navigate(['/login']);
+    }
 
   }
 

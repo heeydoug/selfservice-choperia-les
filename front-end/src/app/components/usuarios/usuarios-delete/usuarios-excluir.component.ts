@@ -5,7 +5,7 @@ import {first, Observable} from "rxjs";
 import {UsuariosService} from "../../../services/usuarios.service";
 import {ToastrService} from "ngx-toastr";
 import {Location} from "@angular/common";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {TelasService} from "../../../services/telas.service";
 import {Tela} from "../../../models/tela";
 
@@ -25,14 +25,20 @@ export class UsuariosExcluirComponent implements OnInit{
   }
 
   telasArray: Tela[] = [];
-  constructor(
 
+  constructor(
     private usuarioService: UsuariosService,
     private telaService: TelasService,
     private toast: ToastrService,
     private location: Location,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
+
+    if(localStorage.getItem('usuario') == null){
+      console.log(localStorage.getItem('usuario'));
+      this.router.navigate(['/login']);
+    }
 
   }
   ngOnInit() {

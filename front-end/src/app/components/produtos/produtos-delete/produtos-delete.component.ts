@@ -4,7 +4,7 @@ import {ProdutosService} from "../../../services/produtos.service";
 import {ToastrService} from "ngx-toastr";
 import {Location} from "@angular/common";
 import {FormControl, Validators} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 
 @Component({
@@ -27,8 +27,13 @@ export class ProdutosDeleteComponent {
     private service: ProdutosService,
     private location: Location,
     private toast: ToastrService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
+    if (localStorage.getItem('usuario') == null) {
+      console.log(localStorage.getItem('usuario'));
+      this.router.navigate(['/login']);
+    }
 
   }
 
