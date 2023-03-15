@@ -1,6 +1,7 @@
 package com.doug.backendSelfChop.service;
 
 import com.doug.backendSelfChop.domain.Produto;
+import com.doug.backendSelfChop.dto.EstoqueDTO;
 import com.doug.backendSelfChop.dto.ProdutoDTO;
 import com.doug.backendSelfChop.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
@@ -63,4 +64,19 @@ public class ProdutoService {
     }
 
 
+    public EstoqueDTO getByCodigoBarrasEstoque(String codigoBarras) {
+        Produto produto = produtoRepository.findByCodigoBarras(codigoBarras);
+        EstoqueDTO estoqueDTO = new EstoqueDTO();
+        estoqueDTO.setCodigoBarras(produto.getCodigoBarras());
+        estoqueDTO.setSaldoEstoque(produto.getSaldoEstoque());
+        estoqueDTO.setDescricao(produto.getDescricao());
+        estoqueDTO.setNome(produto.getNome());
+        return estoqueDTO;
+    }
+
+    public void atualizarEstoque(EstoqueDTO estoqueDTO) {
+        Produto produto = produtoRepository.findByCodigoBarras(estoqueDTO.getCodigoBarras());
+        produto.setSaldoEstoque(estoqueDTO.getSaldoEstoque());
+        produtoRepository.save(produto);
+    }
 }

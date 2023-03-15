@@ -4,9 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @Entity
@@ -19,7 +17,6 @@ public class Usuario implements Serializable {
     private String nome;
     @Column(name = "senha", nullable = false)
     private String senha;
-    @ManyToMany
     @JoinTable(name = "usuario_tela", joinColumns = {@JoinColumn(name = "cpf")}, inverseJoinColumns = {@JoinColumn(name = "idTela")})
     private List<Tela> telas;
 }
