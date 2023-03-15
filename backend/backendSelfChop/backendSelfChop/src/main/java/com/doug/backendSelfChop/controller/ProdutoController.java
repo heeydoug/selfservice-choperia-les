@@ -44,4 +44,5 @@ public class ProdutoController {
     public ProdutoDTO editarProduto(@RequestBody ProdutoDTO produtoDTO){
         return produtoService.editarProduto(produtoDTO);
     }
+
 }

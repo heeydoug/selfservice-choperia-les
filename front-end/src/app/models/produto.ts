@@ -1,10 +1,10 @@
 export interface Produto{
   codigoBarras?: any,
-  nome: string;
+  nome?: string;
   saldoEstoque: number
-  precoCompra: number
-  descricao: string;
-  unidadeCompra: string
+  precoCompra?: number
+  descricao?: string;
+  unidadeCompra?: string
   pontoCompra?: number
 
 }

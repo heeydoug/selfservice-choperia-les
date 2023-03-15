@@ -1,14 +1,18 @@
 package com.doug.backendSelfChop.dto;
 
-import lombok.Data;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import lombok.*;
 
 import java.io.Serializable;
 
-@Data
-public class EstoqueDTO implements Serializable {
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+public class EstoqueDTO {
 
     private String codigoBarras;
-    private String nome;
     private Integer saldoEstoque;
-    private String descricao;
 }

@@ -32,6 +32,8 @@ import {ToastrModule} from "ngx-toastr";
 import { ProdutosUpdateComponent } from './components/produtos/produtos-update/produtos-update.component';
 import { ProdutosDeleteComponent } from './components/produtos/produtos-delete/produtos-delete.component';
 import { LoginComponent } from './components/login/login.component';
+import { EstoqueEntradaComponent } from './components/estoque-entrada/estoque-entrada.component';
+import { EstoqueSaidaComponent } from './components/estoque-saida/estoque-saida.component';
 
 
 
@@ -55,6 +57,8 @@ import { LoginComponent } from './components/login/login.component';
     ProdutosUpdateComponent,
     ProdutosDeleteComponent,
     LoginComponent,
+    EstoqueEntradaComponent,
+    EstoqueSaidaComponent,
   ],
   imports: [
     BrowserModule,

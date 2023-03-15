@@ -10,6 +10,8 @@ import {ProdutosUpdateComponent} from "./components/produtos/produtos-update/pro
 import {ProdutosDeleteComponent} from "./components/produtos/produtos-delete/produtos-delete.component";
 import {UsuariosExcluirComponent} from "./components/usuarios/usuarios-delete/usuarios-excluir.component";
 import {LoginComponent} from "./components/login/login.component";
+import {EstoqueEntradaComponent} from "./components/estoque-entrada/estoque-entrada.component";
+import {EstoqueSaidaComponent} from "./components/estoque-saida/estoque-saida.component";
 
 const routes: Routes = [
 
@@ -47,7 +49,13 @@ const routes: Routes = [
   },
   {
     path: 'produtos/deletar/:codigoBarras', component: ProdutosDeleteComponent
-  }
+  },
+
+  {
+    path: 'estoque/entrada', component: EstoqueEntradaComponent
+  },{
+    path: 'estoque/saida', component: EstoqueSaidaComponent
+  },
 
 ];
 

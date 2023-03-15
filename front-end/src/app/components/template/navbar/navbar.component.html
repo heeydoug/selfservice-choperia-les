@@ -4,6 +4,8 @@
 <!--  </button>-->
   <span class="branco">Restaurante e Chopperia - Grupo 4</span>
   <span class="example-spacer"></span>
+  <span class="usuario">Bem-vindo {{nomeUsuarioLogado}}</span>
+
   <button (click)="logout()" mat-icon-button>
     <mat-icon class="branco">exit_to_app</mat-icon>
   </button>
@@ -34,14 +36,14 @@
         Produtos
       </a>
 
-      <a mat-list-item>
+      <a routerLink="/estoque/entrada" mat-list-item>
         <div>
           <i class="material-icons" style="float: left;">assignment_returned</i>
         </div>
         Entrada Estoque
       </a>
 
-      <a mat-list-item>
+      <a routerLink="/estoque/saida" mat-list-item>
         <div>
           <i class="material-icons" style="float: left;">assignment_return</i>
         </div>
