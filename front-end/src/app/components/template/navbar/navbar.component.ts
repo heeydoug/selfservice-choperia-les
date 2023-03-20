@@ -13,18 +13,21 @@ export class NavbarComponent implements OnInit{
   constructor(private router: Router) {
   }
 
-  ngOnInit() {
-    this.nomeUsuarioLogado = JSON.parse(localStorage.getItem('usuario') || '').nome;
+  ngOnInit(): void {
+
   }
 
   estaLogado() {
     if(localStorage.getItem('usuario') == null){
       return false;
     }
+    this.nomeUsuarioLogado = JSON.parse(localStorage.getItem('usuario') || '').nome;
     return true;
   }
+
+
   logout(): void{
-  localStorage.removeItem("usuario");
-  this.router.navigate(['/login']);
+    localStorage.removeItem("usuario");
+    this.router.navigate(['/login']);
   }
 }
