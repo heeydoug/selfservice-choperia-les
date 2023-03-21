@@ -24,7 +24,8 @@ public class ProdutoService {
 
     public ProdutoDTO getProdutoByCodigoBarras(String codigoBarras){
         Produto produto = produtoRepository.findByCodigoBarras(codigoBarras);
-        return convertToDTO(produto);
+        //return convertToDTO(produto);
+        return  modelMapper.map(produto,ProdutoDTO.class);
     }
 
     private ProdutoDTO convertToDTO(Produto produto){
@@ -52,9 +53,11 @@ public class ProdutoService {
     }
 
     public ProdutoDTO cadastrarProduto(ProdutoDTO produtoDTO) {
-        Produto produto = convertToEntity(produtoDTO);
+        //Produto produto = convertToEntity(produtoDTO);
+        Produto produto = modelMapper.map(produtoDTO,Produto.class);
         produto = produtoRepository.save(produto);
-        return convertToDTO(produto);
+        //return convertToDTO(produto);
+        return modelMapper.map(produto,ProdutoDTO.class);
     }
 
     public void deleteProduto(String codigoBarras) {
@@ -63,9 +66,11 @@ public class ProdutoService {
 
     public ProdutoDTO editarProduto(ProdutoDTO produtoDTO) {
         produtoRepository.findByCodigoBarras(produtoDTO.getCodigoBarras());
-        Produto produto = convertToEntity(produtoDTO);
+        //Produto produto = convertToEntity(produtoDTO);
+        Produto produto = modelMapper.map(produtoDTO,Produto.class);
         produto = produtoRepository.save(produto);
-        return  convertToDTO(produto);
+        //return convertToDTO(produto);
+        return  modelMapper.map(produto,ProdutoDTO.class);
     }
 
 
