@@ -38,6 +38,10 @@ import { ClientesCreateComponent } from './components/clientes/clientes-create/c
 import { ClientesDeleteComponent } from './components/clientes/clientes-delete/clientes-delete.component';
 import { ClientesListComponent } from './components/clientes/clientes-list/clientes-list.component';
 import { ClientesUpdateComponent } from './components/clientes/clientes-update/clientes-update.component';
+import { ChopDeleteComponent } from './components/chop/chop-delete/chop-delete.component';
+import { ChopUpdateComponent } from './components/chop/chop-update/chop-update.component';
+import { ChopListComponent } from './components/chop/chop-list/chop-list.component';
+import { ChopCreateComponent } from './components/chop/chop-create/chop-create.component';
 
 
 
@@ -67,6 +71,10 @@ import { ClientesUpdateComponent } from './components/clientes/clientes-update/c
     ClientesDeleteComponent,
     ClientesListComponent,
     ClientesUpdateComponent,
+    ChopDeleteComponent,
+    ChopUpdateComponent,
+    ChopListComponent,
+    ChopCreateComponent,
   ],
   imports: [
     BrowserModule,

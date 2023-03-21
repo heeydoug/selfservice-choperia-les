@@ -15,6 +15,7 @@ export class EstoqueEntradaComponent implements AfterViewInit{
 
   codigoBarras: string = "";
   saldoEstoque: number = 1;
+  saldoEstoqueEntrada : number = 0;
   produtos: Produto[] = [];
 
   displayedColumns: string[] = ['codBarras', 'nome', 'saldoEstoque'];

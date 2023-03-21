@@ -16,6 +16,10 @@ import {ClientesListComponent} from "./components/clientes/clientes-list/cliente
 import {ClientesCreateComponent} from "./components/clientes/clientes-create/clientes-create.component";
 import {ClientesUpdateComponent} from "./components/clientes/clientes-update/clientes-update.component";
 import {ClientesDeleteComponent} from "./components/clientes/clientes-delete/clientes-delete.component";
+import {ChopListComponent} from "./components/chop/chop-list/chop-list.component";
+import {ChopCreateComponent} from "./components/chop/chop-create/chop-create.component";
+import {ChopUpdateComponent} from "./components/chop/chop-update/chop-update.component";
+import {ChopDeleteComponent} from "./components/chop/chop-delete/chop-delete.component";
 
 const routes: Routes = [
 
@@ -73,6 +77,20 @@ const routes: Routes = [
   },
   {
     path: 'clientes/deletar/:cpf', component: ClientesDeleteComponent
+  },
+
+
+  {
+    path: 'chops', component: ChopListComponent
+  },
+  {
+    path: 'chops/cadastrar', component: ChopCreateComponent
+  },
+  {
+    path: 'chops/editar/:rfid', component: ChopUpdateComponent
+  },
+  {
+    path: 'chops/deletar/:rfid', component: ChopDeleteComponent
   },
 
 
