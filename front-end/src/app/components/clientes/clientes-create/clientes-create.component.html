@@ -1,0 +1,55 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title class="title">Cadastrar Cliente</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>CPF</mat-label>
+      <input matInput
+             [(ngModel)]="cliente.cpf"
+             name="cpf"
+             [formControl]="cpf"
+             required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Nome</mat-label>
+    <input matInput
+           [(ngModel)]="cliente.nome"
+           name="nome"
+           [formControl]="nome"
+           required>
+  </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Telefone</mat-label>
+      <input matInput
+             [(ngModel)]="cliente.telefone"
+             name="telefone">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput
+             [(ngModel)]="cliente.email"
+             name="email"
+             [formControl]="email"
+             required>
+    </mat-form-field>
+
+  </mat-card-content>
+
+  <mat-card-actions>
+
+    <button (click)="cancelar()" class="cancelar" style="background-color: indianred" mat-raised-button>
+      Cancelar
+    </button>
+
+    <button class="salvar" [disabled]="!validaCampos()" (click)="create()" style="background-color: #01a86c" mat-raised-button>
+      Salvar
+    </button>
+
+  </mat-card-actions>
+</mat-card>

@@ -34,6 +34,10 @@ import { ProdutosDeleteComponent } from './components/produtos/produtos-delete/p
 import { LoginComponent } from './components/login/login.component';
 import { EstoqueEntradaComponent } from './components/estoque-entrada/estoque-entrada.component';
 import { EstoqueSaidaComponent } from './components/estoque-saida/estoque-saida.component';
+import { ClientesCreateComponent } from './components/clientes/clientes-create/clientes-create.component';
+import { ClientesDeleteComponent } from './components/clientes/clientes-delete/clientes-delete.component';
+import { ClientesListComponent } from './components/clientes/clientes-list/clientes-list.component';
+import { ClientesUpdateComponent } from './components/clientes/clientes-update/clientes-update.component';
 
 
 
@@ -59,6 +63,10 @@ import { EstoqueSaidaComponent } from './components/estoque-saida/estoque-saida.
     LoginComponent,
     EstoqueEntradaComponent,
     EstoqueSaidaComponent,
+    ClientesCreateComponent,
+    ClientesDeleteComponent,
+    ClientesListComponent,
+    ClientesUpdateComponent,
   ],
   imports: [
     BrowserModule,

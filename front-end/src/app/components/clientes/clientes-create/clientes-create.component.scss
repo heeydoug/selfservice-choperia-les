@@ -1,0 +1,32 @@
+.title{
+  padding: 1em;
+}
+.full-width{
+  width: 100%;
+}
+
+mat-card{
+  max-width: 70%;
+  margin: 2em auto;
+  text-align: center;
+}
+
+.min-width{
+  width: 100%;
+  min-width: 150px;
+}
+button{
+  padding: 2%;
+
+}
+.salvar{
+  margin: 1%;
+  background-color: green;
+}
+
+.cancelar{
+  margin: 1%;
+  background-color: red;
+}
+
+

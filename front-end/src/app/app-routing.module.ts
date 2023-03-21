@@ -12,6 +12,10 @@ import {UsuariosExcluirComponent} from "./components/usuarios/usuarios-delete/us
 import {LoginComponent} from "./components/login/login.component";
 import {EstoqueEntradaComponent} from "./components/estoque-entrada/estoque-entrada.component";
 import {EstoqueSaidaComponent} from "./components/estoque-saida/estoque-saida.component";
+import {ClientesListComponent} from "./components/clientes/clientes-list/clientes-list.component";
+import {ClientesCreateComponent} from "./components/clientes/clientes-create/clientes-create.component";
+import {ClientesUpdateComponent} from "./components/clientes/clientes-update/clientes-update.component";
+import {ClientesDeleteComponent} from "./components/clientes/clientes-delete/clientes-delete.component";
 
 const routes: Routes = [
 
@@ -53,9 +57,24 @@ const routes: Routes = [
 
   {
     path: 'estoque/entrada', component: EstoqueEntradaComponent
-  },{
+  },
+  {
     path: 'estoque/saida', component: EstoqueSaidaComponent
   },
+
+  {
+    path: 'clientes', component: ClientesListComponent
+  },
+  {
+    path: 'clientes/cadastrar', component: ClientesCreateComponent
+  },
+  {
+    path: 'clientes/editar/:cpf', component: ClientesUpdateComponent
+  },
+  {
+    path: 'clientes/deletar/:cpf', component: ClientesDeleteComponent
+  },
+
 
 ];
 
