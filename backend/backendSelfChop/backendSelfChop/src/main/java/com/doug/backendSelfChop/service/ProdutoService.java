@@ -28,30 +28,6 @@ public class ProdutoService {
         return  modelMapper.map(produto,ProdutoDTO.class);
     }
 
-    private ProdutoDTO convertToDTO(Produto produto){
-        ProdutoDTO produtoDTO = new ProdutoDTO();
-        produtoDTO.setNome(produto.getNome());
-        produtoDTO.setCodigoBarras(produto.getCodigoBarras());
-        produtoDTO.setSaldoEstoque(produto.getSaldoEstoque());
-        produtoDTO.setPrecoCompra(produto.getPrecoCompra());
-        produtoDTO.setDescricao(produto.getDescricao());
-        produtoDTO.setUnidadeCompra(produto.getUnidadeCompra());
-        produtoDTO.setPontoCompra(produto.getPontoCompra());
-        return produtoDTO;
-    }
-
-    private Produto convertToEntity(ProdutoDTO produtoDTO){
-        Produto Produto = new Produto();
-        Produto.setNome(produtoDTO.getNome());
-        Produto.setCodigoBarras(produtoDTO.getCodigoBarras());
-        Produto.setSaldoEstoque(produtoDTO.getSaldoEstoque());
-        Produto.setPrecoCompra(produtoDTO.getPrecoCompra());
-        Produto.setDescricao(produtoDTO.getDescricao());
-        Produto.setUnidadeCompra(produtoDTO.getUnidadeCompra());
-        Produto.setPontoCompra(produtoDTO.getPontoCompra());
-        return Produto;
-    }
-
     public ProdutoDTO cadastrarProduto(ProdutoDTO produtoDTO) {
         //Produto produto = convertToEntity(produtoDTO);
         Produto produto = modelMapper.map(produtoDTO,Produto.class);
