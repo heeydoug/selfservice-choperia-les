@@ -3,9 +3,6 @@
 <!--    <mat-icon class="branco">menu</mat-icon>-->
 <!--  </button>-->
   <span class="branco">Restaurante e Chopperia - Grupo 4</span>
-  <button mat-raised-button color="primary" class="botaoPequeno botao"
-          *ngIf="rfidService.rfid === null || rfidService.rfid === undefined"
-          (click)="rfidService.readerRfid()">Iniciar RFID</button>
   <span class="example-spacer"></span>
   <span class="usuario">Bem-vindo {{nomeUsuarioLogado}}</span>
 
@@ -79,13 +76,6 @@
           <i class="material-icons" style="float: left;">local_drink</i>
         </div>
         Chopes
-      </a>
-
-      <a routerLink="/estoque/chopes" mat-list-item>
-        <div>
-          <i class="material-icons" style="float: left;">local_cafe</i>
-        </div>
-        Estoque Chopes
       </a>
 
       <a mat-list-item>

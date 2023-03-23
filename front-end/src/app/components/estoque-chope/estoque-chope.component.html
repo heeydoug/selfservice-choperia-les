@@ -4,23 +4,30 @@
     <h1>Estoque Chope</h1>
   </div>
 
-  <form>
-    <mat-form-field appearance="fill" class="InputCodBarras">
-      <mat-label>RFID</mat-label>
-      <input matInput
-             [(ngModel)]="rfidService.rfid"
-             name="rfid"
-             id="rfidInput"
-             (ngModelChange)="inserir()">
-    </mat-form-field>
+  <div>
+    <button mat-raised-button class="button-mais"
+            *ngIf="rfidService.rfid === null || rfidService.rfid === undefined"
+            (click)="rfidService.readerRfid()">Iniciar Leitor RFID</button>
+  </div>
 
-  </form>
+  <div>
+    <form>
+      <mat-form-field appearance="fill" class="InputCodBarras">
+        <mat-label>RFID</mat-label>
+        <input matInput
+               [(ngModel)]="rfidService.rfid"
+               name="rfid"
+               id="rfidInput"
+               (ngModelChange)="inserir()">
+      </mat-form-field>
+      <button (click)="inserir()"
+              mat-raised-button
+              class="button-mais">
+        +
+      </button>
 
-  <button (click)="inserir()"
-          mat-raised-button class="button">
-    +
-  </button>
-
+    </form>
+  </div>
 
 
   <div class="mat-elevation-z8">
@@ -40,21 +47,6 @@
       <ng-container matColumnDef="saldoEstoque">
         <th mat-header-cell *matHeaderCellDef> Quantidade (L) </th>
         <td mat-cell *matCellDef="let element"> {{element.saldoEstoque}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="acoes">
-        <th mat-header-cell *matHeaderCellDef> Ações </th>
-        <td mat-cell *matCellDef="let element">
-
-          <button (click)="update()" mat-icon-button aria-label="Editar Entrada Chope">
-            <i class="material-icons icone-editar"> edit </i>
-          </button>
-
-          <button (click)="delete()" mat-icon-button aria-label="Excluir Entrada Chope">
-            <i class="material-icons icone-excluir"> delete </i>
-          </button>
-
-        </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

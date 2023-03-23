@@ -57,4 +57,7 @@ export class ChopListComponent implements OnInit{
     this.router.navigate(['chopes/deletar', chope.rfid]);
   }
 
+  abrirTelaEstoqueChope() {
+    this.router.navigate(['estoque/chopes']);
+  }
 }

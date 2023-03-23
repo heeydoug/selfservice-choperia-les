@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {Chope} from "../../models/chope";
 import {MatTableDataSource} from "@angular/material/table";
 import {ToastrService} from "ngx-toastr";
@@ -19,7 +19,7 @@ export class EstoqueChopeComponent implements AfterViewInit{
   saldoEstoqueEntrada : number = 0;
   chopes: Chope[] = [];
 
-  displayedColumns: string[] = ['rfid', 'nome', 'saldoEstoque', 'acoes'];
+  displayedColumns: string[] = ['rfid', 'nome', 'saldoEstoque'];
   dataSource = new MatTableDataSource<Chope>(this.chopes);
 
   @ViewChild(MatPaginator) paginator: any = MatPaginator;
@@ -40,6 +40,7 @@ export class EstoqueChopeComponent implements AfterViewInit{
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.focusInputRfid();
+
   }
   focusInputRfid(): void{
     let blurElement: HTMLElement = document.getElementById("rfidInput") as HTMLElement;
@@ -53,7 +54,6 @@ export class EstoqueChopeComponent implements AfterViewInit{
 
   inserir(){
     this.rfid = this.rfidService.rfid;
-
     if(this.rfid.length === 6){
       let chp: Chope | undefined = this.dataSource.data.find( chp =>
         chp?.rfid === this.rfid
@@ -79,22 +79,14 @@ export class EstoqueChopeComponent implements AfterViewInit{
           return c;
         });
       }
-      this.rfid = "";
+      this.rfidService.rfid = "";
     }
-  }
-
-  update() {
-
-  }
-
-  delete() {
-
   }
 
   finalizarEntradaEstoque() {
     this.estoqueChopeService.atualizarEstoque(this.dataSource.data).subscribe();
     this.toast.success('Entrada de chope realizada com sucesso!', 'Entrada Chope');
-    this.router.navigate(['/home']);
+    this.router.navigate(['/chopes']);
 
 
   }

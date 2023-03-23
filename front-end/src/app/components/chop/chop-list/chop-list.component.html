@@ -5,7 +5,7 @@
   </div>
 
   <div>
-    <button mat-raised-button (click)="create()">
+    <button mat-raised-button class="button" (click)="create()">
       Cadastrar Chope
     </button>
 
@@ -69,6 +69,13 @@
                    showFirstLastButtons
                    aria-label="Select page of periodic elements">
     </mat-paginator>
+  </div>
+
+  <div>
+    <button [disabled]="dataSource.data.length === 0" (click)="(abrirTelaEstoqueChope())"
+            mat-raised-button class="button-add">
+      Inserir Chopes no Estoque
+    </button>
   </div>
 
 </div>

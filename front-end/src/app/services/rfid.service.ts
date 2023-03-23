@@ -19,7 +19,6 @@ export class RfidService {
     if (this.navegador && this.navegador.serial) {
 
       if(this.porta === undefined || this.porta === null){
-        console.log("aa");
         const porta = await this.navegador.serial.requestPort();
         await porta.open({baudRate: 115200});
         this.porta = porta;
@@ -39,10 +38,7 @@ export class RfidService {
 
             const {value, done} = await this.reader.read();
 
-
-
             const hex = this.buf2hex(value)
-            console.log(hex)
             const ascii = this.hex2a(hex)
             this.rfid = hex.slice(-10, -4);
             break;
@@ -50,7 +46,6 @@ export class RfidService {
         } catch (error) {
         } finally {
           try{
-            console.log("aa");
             this.reader.releaseLock();
           } catch (err){}
 
