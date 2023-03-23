@@ -34,7 +34,6 @@ export class EstoqueEntradaComponent implements AfterViewInit{
       console.log(localStorage.getItem('usuario'));
       this.router.navigate(['/login']);
     }
-
   }
 
   ngAfterViewInit() {

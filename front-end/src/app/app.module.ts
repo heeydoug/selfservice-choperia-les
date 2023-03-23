@@ -42,6 +42,7 @@ import { ChopDeleteComponent } from './components/chop/chop-delete/chop-delete.c
 import { ChopUpdateComponent } from './components/chop/chop-update/chop-update.component';
 import { ChopListComponent } from './components/chop/chop-list/chop-list.component';
 import { ChopCreateComponent } from './components/chop/chop-create/chop-create.component';
+import { EstoqueChopeComponent } from './components/estoque-chope/estoque-chope.component';
 
 
 
@@ -75,6 +76,7 @@ import { ChopCreateComponent } from './components/chop/chop-create/chop-create.c
     ChopUpdateComponent,
     ChopListComponent,
     ChopCreateComponent,
+    EstoqueChopeComponent,
   ],
   imports: [
     BrowserModule,

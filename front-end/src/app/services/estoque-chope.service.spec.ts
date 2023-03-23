@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TelasService } from './telas.service';
+import { EstoqueChopeService } from './estoque-chope.service';
 
-describe('TelasService', () => {
-  let service: TelasService;
+describe('EstoqueChopeService', () => {
+  let service: EstoqueChopeService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(TelasService);
+    service = TestBed.inject(EstoqueChopeService);
   });
 
   it('should be created', () => {

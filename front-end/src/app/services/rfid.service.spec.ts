@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ProdutosService } from './produtos.service';
+import { RfidService } from './rfid.service';
 
-describe('ProdutosService', () => {
-  let service: ProdutosService;
+describe('RfidService', () => {
+  let service: RfidService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ProdutosService);
+    service = TestBed.inject(RfidService);
   });
 
   it('should be created', () => {

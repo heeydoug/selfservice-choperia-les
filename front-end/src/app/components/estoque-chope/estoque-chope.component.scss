@@ -13,7 +13,7 @@
 .title{
   text-align: center;
   margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 }
 
 .title h1{
@@ -22,11 +22,13 @@
   font-weight: 500;
 }
 
+.InputCodBarras{
+  width: 500px;
+}
 
-
-button {
+.button {
   margin-right: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 1.5rem;
 }
 
 table {

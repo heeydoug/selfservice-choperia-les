@@ -34,7 +34,6 @@ export class ProdutosDeleteComponent {
       console.log(localStorage.getItem('usuario'));
       this.router.navigate(['/login']);
     }
-
   }
 
 

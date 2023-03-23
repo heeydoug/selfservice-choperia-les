@@ -20,6 +20,7 @@ import {ChopListComponent} from "./components/chop/chop-list/chop-list.component
 import {ChopCreateComponent} from "./components/chop/chop-create/chop-create.component";
 import {ChopUpdateComponent} from "./components/chop/chop-update/chop-update.component";
 import {ChopDeleteComponent} from "./components/chop/chop-delete/chop-delete.component";
+import {EstoqueChopeComponent} from "./components/estoque-chope/estoque-chope.component";
 
 const routes: Routes = [
 
@@ -81,16 +82,20 @@ const routes: Routes = [
 
 
   {
-    path: 'chops', component: ChopListComponent
+    path: 'chopes', component: ChopListComponent
   },
   {
-    path: 'chops/cadastrar', component: ChopCreateComponent
+    path: 'chopes/cadastrar', component: ChopCreateComponent
   },
   {
-    path: 'chops/editar/:rfid', component: ChopUpdateComponent
+    path: 'chopes/editar/:rfid', component: ChopUpdateComponent
   },
   {
-    path: 'chops/deletar/:rfid', component: ChopDeleteComponent
+    path: 'chopes/deletar/:rfid', component: ChopDeleteComponent
+  },
+
+  {
+    path: 'estoque/chopes', component: EstoqueChopeComponent
   },
 
 

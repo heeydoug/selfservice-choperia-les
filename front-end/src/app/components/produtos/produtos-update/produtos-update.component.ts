@@ -41,7 +41,6 @@ export class ProdutosUpdateComponent implements OnInit{
       console.log(localStorage.getItem('usuario'));
       this.router.navigate(['/login']);
     }
-
   }
 
   validaCampos(): boolean{
