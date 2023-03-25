@@ -43,6 +43,7 @@ import { ChopUpdateComponent } from './components/chop/chop-update/chop-update.c
 import { ChopListComponent } from './components/chop/chop-list/chop-list.component';
 import { ChopCreateComponent } from './components/chop/chop-create/chop-create.component';
 import { EstoqueChopeComponent } from './components/estoque-chope/estoque-chope.component';
+import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 
 
 
@@ -78,33 +79,34 @@ import { EstoqueChopeComponent } from './components/estoque-chope/estoque-chope.
     ChopCreateComponent,
     EstoqueChopeComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatListModule,
-    MatCardModule,
-    MatTableModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    FormsModule,
-    MatDialogModule,
-    MatSnackBarModule,
-    MatPaginatorModule,
-    ToastrModule.forRoot({
-      timeOut: 4000,
-      closeButton: true,
-      progressBar: true
-    })
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        MatSidenavModule,
+        MatListModule,
+        MatCardModule,
+        MatTableModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        FormsModule,
+        MatDialogModule,
+        MatSnackBarModule,
+        MatPaginatorModule,
+        ToastrModule.forRoot({
+            timeOut: 4000,
+            closeButton: true,
+            progressBar: true
+        }),
+        NgMultiSelectDropDownModule
 
-  ],
+    ],
   providers: [AuthInterceptorProvider],
   bootstrap: [AppComponent]
 })

@@ -5,6 +5,12 @@
   </div>
 
   <div>
+    <button mat-raised-button class="button-mais"
+            *ngIf="rfidService.rfid === null || rfidService.rfid === undefined"
+            (click)="rfidService.readerRfid()">Iniciar Leitor RFID</button>
+  </div>
+
+  <div>
     <button mat-raised-button class="button" (click)="create()">
       Cadastrar Chope
     </button>

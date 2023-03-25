@@ -9,6 +9,7 @@ import {Usuario} from "../../../models/usuario";
 import {ActivatedRoute} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 
+
 @Component({
   selector: 'app-usuarios-form-edit',
   templateUrl: './usuarios-form-edit.component.html',
@@ -16,7 +17,6 @@ import {ToastrService} from "ngx-toastr";
 })
 export class UsuariosFormEditComponent implements OnInit {
   hide = true;
-
   usuario: Usuario = {
     cpf: '',
     nome: '',
@@ -38,7 +38,6 @@ export class UsuariosFormEditComponent implements OnInit {
     private route: ActivatedRoute,
     private toast: ToastrService
   ) {
-
   }
 
   validaCampos(): boolean{
@@ -57,10 +56,13 @@ export class UsuariosFormEditComponent implements OnInit {
     });
   }
 
+
   findByCpf(): void {
     this.usuarioService.findByCpf(this.usuario.cpf).subscribe(resposta => {
       this.usuario = resposta;
+      console.log(this.usuario);
     });
+
   }
 
   update(): void {

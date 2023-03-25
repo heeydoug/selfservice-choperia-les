@@ -5,6 +5,7 @@ import {Cliente} from "../../../models/cliente";
 import {ChopesService} from "../../../services/chopes.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {Chope} from "../../../models/chope";
+import {RfidService} from "../../../services/rfid.service";
 
 @Component({
   selector: 'app-chop-list',
@@ -20,6 +21,7 @@ export class ChopListComponent implements OnInit{
   @ViewChild(MatPaginator) paginator: any = MatPaginator;
   constructor(
     private service: ChopesService,
+    public rfidService: RfidService,
     private router: Router,
   ) {
     if(localStorage.getItem('usuario') == null){

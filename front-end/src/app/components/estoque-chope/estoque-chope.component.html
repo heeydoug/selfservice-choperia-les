@@ -4,11 +4,7 @@
     <h1>Estoque Chope</h1>
   </div>
 
-  <div>
-    <button mat-raised-button class="button-mais"
-            *ngIf="rfidService.rfid === null || rfidService.rfid === undefined"
-            (click)="rfidService.readerRfid()">Iniciar Leitor RFID</button>
-  </div>
+
 
   <div>
     <form>
@@ -18,14 +14,13 @@
                [(ngModel)]="rfidService.rfid"
                name="rfid"
                id="rfidInput"
-               (ngModelChange)="inserir()">
+               (keyup.enter)="inserir()">
       </mat-form-field>
-      <button (click)="inserir()"
-              mat-raised-button
-              class="button-mais">
-        +
-      </button>
-
+<!--      <button (click)="inserir()"-->
+<!--              mat-raised-button-->
+<!--              class="button-mais">-->
+<!--        +-->
+<!--      </button>-->
     </form>
   </div>
 

@@ -14,9 +14,9 @@ import {EstoqueChopeService} from "../../services/estoque-chope.service";
 })
 export class EstoqueChopeComponent implements AfterViewInit{
 
+
   rfid: string = "";
   saldoEstoque: number = 1;
-  saldoEstoqueEntrada : number = 0;
   chopes: Chope[] = [];
 
   displayedColumns: string[] = ['rfid', 'nome', 'saldoEstoque'];
@@ -35,6 +35,7 @@ export class EstoqueChopeComponent implements AfterViewInit{
       console.log(localStorage.getItem('usuario'));
       this.router.navigate(['/login']);
     }
+
   }
 
   ngAfterViewInit() {
@@ -53,6 +54,13 @@ export class EstoqueChopeComponent implements AfterViewInit{
   }
 
   inserir(){
+
+    // this.rfidService.rfid.addEventListener('change', () => {
+    //   // Simula a pressão da tecla Enter
+    //   const teclaEnter = new KeyboardEvent('keydown', { keyCode: 6 });
+    //   document.dispatchEvent(teclaEnter);
+    // });
+
     this.rfid = this.rfidService.rfid;
     if(this.rfid.length === 6){
       let chp: Chope | undefined = this.dataSource.data.find( chp =>
