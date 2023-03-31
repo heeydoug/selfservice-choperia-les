@@ -44,6 +44,11 @@ import { ChopListComponent } from './components/chop/chop-list/chop-list.compone
 import { ChopCreateComponent } from './components/chop/chop-create/chop-create.component';
 import { EstoqueChopeComponent } from './components/estoque-chope/estoque-chope.component';
 import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
+import { ImprimirCodbarrasComponent } from './components/produtos/imprimir-codbarras/imprimir-codbarras.component';
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import { EntradaClientesComponent } from './components/entrada-clientes/entrada-clientes.component';
+import { EntradaClientesEditarComponent } from './components/entrada-clientes/entrada-clientes-editar/entrada-clientes-editar.component';
+import { SaidaClientesComponent } from './components/saida-clientes/saida-clientes.component';
 
 
 
@@ -78,6 +83,10 @@ import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
     ChopListComponent,
     ChopCreateComponent,
     EstoqueChopeComponent,
+    ImprimirCodbarrasComponent,
+    EntradaClientesComponent,
+    EntradaClientesEditarComponent,
+    SaidaClientesComponent,
   ],
     imports: [
         BrowserModule,
@@ -104,7 +113,8 @@ import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
             closeButton: true,
             progressBar: true
         }),
-        NgMultiSelectDropDownModule
+        NgMultiSelectDropDownModule,
+        MatCheckboxModule
 
     ],
   providers: [AuthInterceptorProvider],

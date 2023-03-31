@@ -1,0 +1,18 @@
+<div class="container">
+
+  <div class="title">
+    <h1>Saída Clientes</h1>
+  </div>
+
+  <form>
+    <mat-form-field appearance="fill" class="InputCpf">
+      <mat-label>RFID</mat-label>
+      <input matInput
+             [(ngModel)]="rfid"
+             name="rfid"
+             id="rfidInput"
+             (ngModelChange)="procurarRFID()">
+    </mat-form-field>
+  </form>
+
+</div>

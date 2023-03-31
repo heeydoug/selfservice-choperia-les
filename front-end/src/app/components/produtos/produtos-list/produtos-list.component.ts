@@ -55,5 +55,9 @@ export class ProdutosListComponent implements OnInit{
   delete(produto: Produto) {
     this.router.navigate(['produtos/deletar', produto.codigoBarras]);
   }
+
+  imprimirCodBarras() {
+    this.router.navigate(['produtos/imprimir']);
+  }
 }
 

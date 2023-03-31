@@ -15,6 +15,9 @@ export class ClientesService {
   findByCpf(cpf: any): Observable<Cliente>{
     return this.http.get<Cliente>(this.API + '/' + cpf);
   }
+  findByRfid(rfid: any): Observable<Cliente>{
+    return this.http.get<Cliente>(this.API + '/' + rfid);
+  }
   findAll(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(this.API);
   }
