@@ -29,6 +29,7 @@ export class UsuariosFormEditComponent implements OnInit {
   senha: FormControl = new FormControl(null, Validators.required);
   telas: FormControl = new FormControl(null, Validators.required);
   telasArray: Tela[] = [];
+  compareWith = (o1: Tela, o2: Tela) => o1.idTela == o2.idTela;
 
   constructor(
     private location: Location,

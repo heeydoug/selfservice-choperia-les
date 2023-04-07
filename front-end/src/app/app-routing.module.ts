@@ -21,6 +21,12 @@ import {ChopCreateComponent} from "./components/chop/chop-create/chop-create.com
 import {ChopUpdateComponent} from "./components/chop/chop-update/chop-update.component";
 import {ChopDeleteComponent} from "./components/chop/chop-delete/chop-delete.component";
 import {EstoqueChopeComponent} from "./components/estoque-chope/estoque-chope.component";
+import {ImprimirCodbarrasComponent} from "./components/produtos/imprimir-codbarras/imprimir-codbarras.component";
+import {EntradaClientesComponent} from "./components/entrada-clientes/entrada-clientes.component";
+import {
+  EntradaClientesEditarComponent
+} from "./components/entrada-clientes/entrada-clientes-editar/entrada-clientes-editar.component";
+import {SaidaClientesComponent} from "./components/saida-clientes/saida-clientes.component";
 
 const routes: Routes = [
 
@@ -61,6 +67,10 @@ const routes: Routes = [
   },
 
   {
+    path: 'produtos/imprimir', component: ImprimirCodbarrasComponent
+  },
+
+  {
     path: 'estoque/entrada', component: EstoqueEntradaComponent
   },
   {
@@ -78,6 +88,15 @@ const routes: Routes = [
   },
   {
     path: 'clientes/deletar/:cpf', component: ClientesDeleteComponent
+  },
+  {
+    path: 'clientes/entrada', component: EntradaClientesComponent
+  },
+  {
+    path: 'clientes/entrada/:cpf', component: EntradaClientesEditarComponent
+  },
+  {
+    path: 'clientes/saida', component: SaidaClientesComponent
   },
 
 
@@ -97,6 +116,8 @@ const routes: Routes = [
   {
     path: 'estoque/chopes', component: EstoqueChopeComponent
   },
+
+
 
 
 ];

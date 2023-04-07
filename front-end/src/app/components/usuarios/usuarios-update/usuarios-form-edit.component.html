@@ -39,7 +39,7 @@
       <mat-label>Selecione as Telas do Usuário</mat-label>
       <mat-select multiple
                   [(ngModel)]="usuario.telas"
-                  name="telas"
+                  [compareWith]="compareWith"
                   [formControl]="telas"
                   required>
         <mat-option *ngFor="let tela of telasArray" [value]="tela" >{{ tela.nome }}</mat-option>
