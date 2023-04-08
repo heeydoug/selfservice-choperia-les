@@ -1,0 +1,68 @@
+<div class="container">
+
+  <div class="title">
+    <h1>Self-Service</h1>
+  </div>
+
+  <div class="form">
+    <form>
+      <mat-form-field appearance="fill" class="InputCpf">
+        <mat-label>RFID</mat-label>
+        <input matInput
+               [(ngModel)]="selfservice.rfid"
+               name="rfid"
+               id="rfidInput">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Nome</mat-label>
+        <input matInput
+               [(ngModel)]="selfservice.nome"
+               name="nome"
+               [disabled]="true">
+
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Preço do KG</mat-label>
+        <input matInput
+               [(ngModel)]="selfservice.precoKg"
+               name="precoKg"
+               type="number" step="0.01" min="0.01">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Peso</mat-label>
+        <input matInput
+               [(ngModel)]="selfservice.peso"
+               name="peso"
+               [formControl]="peso"
+               required
+               type="number" step="0.01" min="0.01">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Valor Total</mat-label>
+        <input matInput
+               [(ngModel)]="selfservice.valorTotal"
+               name="valorTotal"
+               [formControl]="valorTotal"
+               required
+               type="number" step="0.01" min="0.01">
+      </mat-form-field>
+
+    </form>
+    <div>
+      <button mat-raised-button>
+        Registrar pedido
+      </button>
+
+
+      <button mat-raised-button (click)="abrirCriarNotificacao()">
+        Registrar itens para reposição
+      </button>
+
+    </div>
+  </div>
+
+</div>

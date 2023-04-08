@@ -27,6 +27,9 @@ import {
   EntradaClientesEditarComponent
 } from "./components/entrada-clientes/entrada-clientes-editar/entrada-clientes-editar.component";
 import {SaidaClientesComponent} from "./components/saida-clientes/saida-clientes.component";
+import {SelfserviceComponent} from "./components/selfservice/selfservice.component";
+import {NotificacaoCreateComponent} from "./components/notificacao/notificacao-create/notificacao-create.component";
+import {NotificacaoListComponent} from "./components/cozinha/notificacao-list/notificacao-list.component";
 
 const routes: Routes = [
 
@@ -115,6 +118,17 @@ const routes: Routes = [
 
   {
     path: 'estoque/chopes', component: EstoqueChopeComponent
+  },
+
+  {
+    path: 'selfservice', component: SelfserviceComponent
+  },
+  {
+    path: 'selfservice/registrarNotificacao', component: NotificacaoCreateComponent
+  },
+
+  {
+    path: 'cozinha', component: NotificacaoListComponent
   },
 
 

@@ -1,0 +1,60 @@
+<div class="container">
+
+  <div class="title">
+    <h1>Cozinha</h1>
+  </div>
+
+  <div class="title">
+    <h2>Itens para Reposição</h2>
+  </div>
+
+  <mat-form-field>
+    <mat-label>Filtro</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex: Juliano" #input>
+  </mat-form-field>
+  <div class="mat-elevation-z8">
+
+    <table mat-table [dataSource]="dataSource">
+
+      <ng-container matColumnDef="id_notificao">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.id_notificao}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="mensagem">
+        <th mat-header-cell *matHeaderCellDef> Descrição </th>
+        <td mat-cell *matCellDef="let element"> {{element.mensagem}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="data">
+        <th mat-header-cell *matHeaderCellDef> Data </th>
+        <td mat-cell *matCellDef="let element"> {{element.data}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="acoes">
+        <th mat-header-cell *matHeaderCellDef> Ações </th>
+        <td mat-cell *matCellDef="let element">
+
+          <button (click)="confirmarPreparo(element)" mat-raised-button style="margin-top: 1rem; background-color: #01a86c" aria-label="Confirmar Preparo">
+            <i class="material-icons">check</i> <span> &nbsp; Confirmar Preparo </span>
+          </button>
+
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                   showFirstLastButtons
+                   aria-label="Select page of periodic elements">
+    </mat-paginator>
+  </div>
+
+</div>
