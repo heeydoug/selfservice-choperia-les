@@ -24,12 +24,6 @@ public class ClienteService {
         //Transforma a primeira classe (cliente) na classe da segunda (cliente DTO)
     }
 
-    public ClienteDTO findByRfid(String rfid){
-        Cliente cliente = clienteRepository.findByRfid(rfid);
-        return modelMapper.map(cliente, ClienteDTO.class);
-        //Transforma a primeira classe (cliente) na classe da segunda (cliente DTO)
-    }
-
     public ClienteDTO criarCliente(ClienteDTO clienteDTO){
         Cliente cliente = modelMapper.map(clienteDTO,Cliente.class);
         clienteRepository.save(cliente);

@@ -2,6 +2,7 @@ package com.doug.backendSelfChop.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -18,6 +19,7 @@ public class Notificacao implements Serializable {
     @Column(name = "mensagem", nullable = false)
     private String mensagem;
 
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     @Column(name = "data", nullable = false)
     private LocalDate data;
 

@@ -12,9 +12,6 @@ import java.io.Serializable;
 @Entity
 @Table(name = "cliente")
 public class Cliente implements Serializable {
-
-    @Column(name = "rfid",nullable = true,unique = true)
-    private String rfid;
     @Column(name = "telefone", nullable = false, length = 11)
     private String telefone;
     @Column(name = "nome", nullable = false, length = 50)

@@ -44,8 +44,4 @@ public class ClienteController {
         return clienteService.editarCliente(clienteDTO);
     }
 
-    @GetMapping("/rfid/{rfid}")
-    public ClienteDTO getClienteByRfid(@PathVariable String rfid){
-        return clienteService.findByRfid(rfid);
-    }
 }
