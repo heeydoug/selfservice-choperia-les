@@ -5,6 +5,7 @@ import com.doug.backendSelfChop.dto.NotificacaoDTO;
 import com.doug.backendSelfChop.repository.NotificacaoRepository;
 import com.doug.backendSelfChop.service.NotificaoService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,8 +31,8 @@ public class NotificacaoController {
     }
 
     @PostMapping("/cadastrar")
-    public NotificacaoDTO cadastrarNotificacao(@PathVariable String mensagem){
-        return notificaoService.cadastrarNotificacao(mensagem);
+    public ResponseEntity<NotificacaoDTO> cadastrarNotificacao(@RequestBody String mensagem){
+        return ResponseEntity.status(HttpStatus.CREATED).body(notificaoService.cadastrarNotificacao(mensagem));
     }
 
     @PatchMapping("/alterar_status/{id_notificacao}")
