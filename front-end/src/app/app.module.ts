@@ -53,6 +53,7 @@ import { SelfserviceComponent } from './components/selfservice/selfservice.compo
 import { NotificacaoCreateComponent } from './components/notificacao/notificacao-create/notificacao-create.component';
 import { NotificacaoListComponent } from './components/cozinha/notificacao-list/notificacao-list.component';
 import { NotificacaoUpdateComponent } from './components/notificacao/notificacao-update/notificacao-update.component';
+import { EntradaClientesCartaoComponent } from './components/entrada-clientes/entrada-clientes-cartao/entrada-clientes-cartao.component';
 
 
 
@@ -95,6 +96,7 @@ import { NotificacaoUpdateComponent } from './components/notificacao/notificacao
     NotificacaoCreateComponent,
     NotificacaoListComponent,
     NotificacaoUpdateComponent,
+    EntradaClientesCartaoComponent,
   ],
     imports: [
         BrowserModule,

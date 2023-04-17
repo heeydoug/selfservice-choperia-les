@@ -14,6 +14,8 @@ import {Router} from "@angular/router";
   templateUrl: './usuarios-form.component.html',
   styleUrls: ['./usuarios-form.component.scss']
 })
+
+
 export class UsuariosFormComponent implements OnInit{
   hide = true;
 
@@ -63,6 +65,7 @@ export class UsuariosFormComponent implements OnInit{
   }
 
   create(): void {
+    console.log(this.usuario)
     this.usuarioService.create(this.usuario).subscribe(() =>{
       this.toast.success('Usuário cadastrado com sucesso!', 'Cadastro de Usuário');
       this.location.back();

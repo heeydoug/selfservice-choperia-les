@@ -1,6 +1,5 @@
 package com.doug.backendSelfChop.controller;
 
-import com.doug.backendSelfChop.domain.CartaoCliente;
 import com.doug.backendSelfChop.dto.CartaoClienteDTO;
 import com.doug.backendSelfChop.dto.CartaoClienteGastosDTO;
 import com.doug.backendSelfChop.repository.CartaoClienteRepository;
@@ -18,7 +17,7 @@ import java.util.List;
 public class CartaoClienteController {
 
     @Autowired
-    private final CartaoClienteService cartaoClienteService;
+    private final CartaoClienteService cartaoCliente;
 
     @Autowired
     private final CartaoClienteGastosService cartaoClienteGastosService;
@@ -27,26 +26,26 @@ public class CartaoClienteController {
     private final CartaoClienteRepository cartaoClienteRepository;
 
     @GetMapping
-    public @ResponseBody List<CartaoCliente> list(){return cartaoClienteRepository.findAll();}
+    public @ResponseBody List<com.doug.backendSelfChop.domain.CartaoCliente> list(){return cartaoClienteRepository.findAll();}
 
     @GetMapping("/rfid/{rfid}")
     public CartaoClienteDTO acharCartaoAberto(@PathVariable String rfid){
-        return cartaoClienteService.acharCartaoAberto(rfid);
+        return cartaoCliente.acharCartaoAberto(rfid);
     }
 
     @GetMapping("/cpf/{cpf}")
     public CartaoClienteDTO acharClienteAberto(@PathVariable String cpf){
-        return cartaoClienteService.acharClienteAberto(cpf);
+        return cartaoCliente.acharClienteAberto(cpf);
     }
 
     @PostMapping("/cadastrar")
     public CartaoClienteDTO cadastrarCartao(@RequestBody CartaoClienteDTO cartaoClienteDTO){
-        return cartaoClienteService.cadastrarCartao(cartaoClienteDTO);
+        return cartaoCliente.cadastrarCartao(cartaoClienteDTO);
     }
 
     @PutMapping("/editar")
     public CartaoClienteDTO editarCartao(@RequestBody CartaoClienteDTO cartaoClienteDTO){
-        return cartaoClienteService.editarCartao(cartaoClienteDTO);
+        return cartaoCliente.editarCartao(cartaoClienteDTO);
     }
 
     @PostMapping("/gastos/cadastrar")

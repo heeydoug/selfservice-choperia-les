@@ -1,6 +1,5 @@
 package com.doug.backendSelfChop.service;
 
-import com.doug.backendSelfChop.domain.CartaoCliente;
 import com.doug.backendSelfChop.dto.CartaoClienteDTO;
 import com.doug.backendSelfChop.repository.CartaoClienteRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,19 +21,19 @@ public class CartaoClienteService {
     ModelMapper modelMapper = new ModelMapper();
 
     public CartaoClienteDTO acharCartaoAberto(String rfid){
-        CartaoCliente cartaoCliente = cartaoClienteRepository.findByRfid(rfid);
+        com.doug.backendSelfChop.domain.CartaoCliente cartaoCliente = cartaoClienteRepository.findByRfid(rfid);
         return modelMapper.map(cartaoCliente, CartaoClienteDTO.class);
     }
 
     public CartaoClienteDTO cadastrarCartao(CartaoClienteDTO cartaoClienteDTO){
-        CartaoCliente cartaoCliente = modelMapper.map(cartaoClienteDTO, CartaoCliente.class);
+        com.doug.backendSelfChop.domain.CartaoCliente cartaoCliente = modelMapper.map(cartaoClienteDTO, com.doug.backendSelfChop.domain.CartaoCliente.class);
         cartaoCliente.setEntrada(LocalDateTime.now());
         cartaoCliente = cartaoClienteRepository.save(cartaoCliente);
         return modelMapper.map(cartaoCliente, CartaoClienteDTO.class);
     }
 
     public CartaoClienteDTO acharClienteAberto(String cpf){
-        CartaoCliente cartaoCliente = cartaoClienteRepository.findByCliente(cpf);
+        com.doug.backendSelfChop.domain.CartaoCliente cartaoCliente = cartaoClienteRepository.findByCliente(cpf);
         return modelMapper.map(cartaoCliente,CartaoClienteDTO.class);
     }
 
