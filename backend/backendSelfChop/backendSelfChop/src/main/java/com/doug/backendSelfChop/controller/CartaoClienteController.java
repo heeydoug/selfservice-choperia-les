@@ -29,6 +29,9 @@ public class CartaoClienteController {
     @GetMapping
     public @ResponseBody List<CartaoCliente> list(){return cartaoClienteRepository.findAll();}
 
+    @GetMapping("/abertos")
+    public @ResponseBody List<CartaoCliente> listOpen(){return cartaoClienteRepository.findOpenCart();}
+
     @GetMapping("/rfid/{rfid}")
     public CartaoClienteDTO acharCartaoAberto(@PathVariable String rfid){
         return cartaoClienteService.acharCartaoAberto(rfid);
