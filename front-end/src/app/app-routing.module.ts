@@ -30,6 +30,9 @@ import {SaidaClientesComponent} from "./components/saida-clientes/saida-clientes
 import {SelfserviceComponent} from "./components/selfservice/selfservice.component";
 import {NotificacaoCreateComponent} from "./components/notificacao/notificacao-create/notificacao-create.component";
 import {NotificacaoListComponent} from "./components/cozinha/notificacao-list/notificacao-list.component";
+import {
+  EntradaClientesCartaoComponent
+} from "./components/entrada-clientes/entrada-clientes-cartao/entrada-clientes-cartao.component";
 
 const routes: Routes = [
 
@@ -93,7 +96,7 @@ const routes: Routes = [
     path: 'clientes/deletar/:cpf', component: ClientesDeleteComponent
   },
   {
-    path: 'clientes/entrada', component: EntradaClientesComponent
+    path: 'clientes/entrada', component: EntradaClientesCartaoComponent
   },
   {
     path: 'clientes/entrada/:cpf', component: EntradaClientesEditarComponent

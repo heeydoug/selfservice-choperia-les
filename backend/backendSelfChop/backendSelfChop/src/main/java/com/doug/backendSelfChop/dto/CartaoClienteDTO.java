@@ -13,7 +13,7 @@ public class CartaoClienteDTO {
 
     private Long id;
 
-    private Cliente cliente;
+    private ClienteDTO cliente;
 
     private String rfid;
 

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {first, Observable, tap} from "rxjs";
 import {Produto} from "../models/produto";
 import {Cliente} from "../models/cliente";
+import {Tela} from "../models/tela";
 
 @Injectable({
   providedIn: 'root'

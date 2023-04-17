@@ -24,7 +24,7 @@ public class CartaoCliente {
     @Column(name = "rfid", nullable = false)
     private String rfid;
 
-    @Column(name = "metodo_pagamento",nullable = false)
+    @Column(name = "metodo_pagamento")
     private String metodoPagamento;
 
     @DateTimeFormat(pattern = "dd-MM-yyyy")
