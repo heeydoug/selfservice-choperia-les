@@ -1,5 +1,6 @@
 package com.doug.backendSelfChop.controller;
 
+import com.doug.backendSelfChop.domain.CartaoCliente;
 import com.doug.backendSelfChop.dto.CartaoClienteDTO;
 import com.doug.backendSelfChop.dto.CartaoClienteGastosDTO;
 import com.doug.backendSelfChop.repository.CartaoClienteRepository;

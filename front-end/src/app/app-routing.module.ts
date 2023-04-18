@@ -33,6 +33,7 @@ import {NotificacaoListComponent} from "./components/cozinha/notificacao-list/no
 import {
   EntradaClientesCartaoComponent
 } from "./components/entrada-clientes/entrada-clientes-cartao/entrada-clientes-cartao.component";
+import {ServirChopeComponent} from "./components/servir-chope/servir-chope.component";
 
 const routes: Routes = [
 
@@ -121,6 +122,10 @@ const routes: Routes = [
 
   {
     path: 'estoque/chopes', component: EstoqueChopeComponent
+  },
+
+  {
+    path: 'servir-chope', component: ServirChopeComponent
   },
 
   {
