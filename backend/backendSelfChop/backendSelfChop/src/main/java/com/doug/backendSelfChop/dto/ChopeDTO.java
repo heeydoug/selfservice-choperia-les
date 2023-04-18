@@ -12,4 +12,8 @@ public class ChopeDTO implements Serializable {
     private Double precoCompra;
     private Double precoCopo;
     private Double saldoEstoque;
+
+    public void saidaChope(){
+        this.setSaldoEstoque(this.getSaldoEstoque() - 0.5);
+    }
 }

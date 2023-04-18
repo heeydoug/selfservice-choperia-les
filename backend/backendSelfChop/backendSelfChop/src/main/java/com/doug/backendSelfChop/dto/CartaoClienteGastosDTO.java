@@ -1,10 +1,5 @@
 package com.doug.backendSelfChop.dto;
 
-import com.doug.backendSelfChop.domain.CartaoCliente;
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -20,4 +15,13 @@ public class CartaoClienteGastosDTO {
     private String descricao;
 
     private LocalDateTime data;
+
+    public CartaoClienteGastosDTO() {
+    }
+
+    public CartaoClienteGastosDTO(CartaoClienteDTO cartao, Double valor, String descricao) {
+        this.cartao = cartao;
+        this.valor = valor;
+        this.descricao = descricao;
+    }
 }

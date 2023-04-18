@@ -2,10 +2,13 @@ package com.doug.backendSelfChop.controller;
 
 import com.doug.backendSelfChop.domain.Chope;
 import com.doug.backendSelfChop.dto.ChopeDTO;
+import com.doug.backendSelfChop.dto.GastosChopeDTO;
 import com.doug.backendSelfChop.repository.ChopeRepository;
 import com.doug.backendSelfChop.service.ChopeService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,6 +46,12 @@ public class ChopeController {
     @PutMapping("/{rfid}")
     public ChopeDTO editarChope(@RequestBody ChopeDTO chopeDTO){
         return chopeService.editarChope(chopeDTO);
+    }
+
+    @PostMapping("/servir")
+    public ResponseEntity<Void> servir(@RequestBody GastosChopeDTO gastosChopeDTO){
+        chopeService.Servir(gastosChopeDTO);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
 }
