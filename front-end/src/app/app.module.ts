@@ -54,6 +54,7 @@ import { NotificacaoCreateComponent } from './components/notificacao/notificacao
 import { NotificacaoListComponent } from './components/cozinha/notificacao-list/notificacao-list.component';
 import { NotificacaoUpdateComponent } from './components/notificacao/notificacao-update/notificacao-update.component';
 import { EntradaClientesCartaoComponent } from './components/entrada-clientes/entrada-clientes-cartao/entrada-clientes-cartao.component';
+import { ServirChopeComponent } from './components/servir-chope/servir-chope.component';
 
 
 
@@ -97,6 +98,7 @@ import { EntradaClientesCartaoComponent } from './components/entrada-clientes/en
     NotificacaoListComponent,
     NotificacaoUpdateComponent,
     EntradaClientesCartaoComponent,
+    ServirChopeComponent,
   ],
     imports: [
         BrowserModule,

@@ -41,8 +41,9 @@ export class EntradaClientesCartaoComponent implements OnInit{
   }
 
   procurarClientes(): void {
-    this.clienteService.findAll().subscribe(clientes =>{
+    this.clienteService.findAllWithCard({ status: 'false'} ).subscribe(clientes =>{
       this.cliente = clientes;
+
     });
   }
 
@@ -51,9 +52,6 @@ export class EntradaClientesCartaoComponent implements OnInit{
       this.toast.warning('Verifique os dados inseridos!');
       return;
     }
-    //const vinc: VincularClienteCartao = Object.assign(new VincularClienteCartao(), this.form.value);
-    //console.log(vinc)
-    console.log(this.form.value)
     this.cartaoClienteService.cadastrarCartao(this.form.value)
       .pipe(finalize(() => {
         this.form.reset();

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {first, Observable, tap} from "rxjs";
 import {Produto} from "../models/produto";
 import {Cliente} from "../models/cliente";
 import {Tela} from "../models/tela";
+import {query} from "@angular/animations";
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,10 @@ export class ClientesService {
   }
   findAll(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(this.API);
+  }
+  findAllWithCard(query?: { [key: string]: string }): Observable<Cliente[]> {
+    const params = new HttpParams({ fromObject: query });
+    return this.http.get<Cliente[]>(this.API, {params});
   }
   create(cliente: Cliente): Observable<Cliente>{
     return this.http.post<Cliente>(this.API + '/cadastrar', cliente);
