@@ -10,7 +10,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -25,12 +24,6 @@ public class CartaoClienteController {
 
     @Autowired
     private final CartaoClienteRepository cartaoClienteRepository;
-
-    @GetMapping
-    public @ResponseBody List<com.doug.backendSelfChop.domain.CartaoCliente> list(){return cartaoClienteRepository.findAll();}
-
-    @GetMapping("/abertos")
-    public @ResponseBody List<CartaoCliente> listOpen(){return cartaoClienteRepository.findOpenCart();}
 
     @GetMapping("/rfid/{rfid}")
     public CartaoClienteDTO acharCartaoAberto(@PathVariable String rfid){
