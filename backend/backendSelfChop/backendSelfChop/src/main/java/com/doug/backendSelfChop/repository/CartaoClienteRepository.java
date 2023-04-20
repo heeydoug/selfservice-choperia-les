@@ -4,8 +4,9 @@ import com.doug.backendSelfChop.domain.CartaoCliente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
-
+@Repository
 public interface CartaoClienteRepository extends JpaRepository<CartaoCliente,Long> {
 
     @Query("SELECT cartao FROM CartaoCliente cartao WHERE cartao.rfid = :rfid and cartao.status = TRUE")

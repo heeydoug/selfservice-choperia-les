@@ -23,7 +23,7 @@ public class CartaoClienteDTO {
 
     private LocalDateTime saida;
 
-    private boolean status = true;
+    private Boolean status = true;
 
     private List<CartaoClienteGastosDTO> gastos = new ArrayList<>();
 }

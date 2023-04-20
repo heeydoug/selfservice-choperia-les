@@ -36,7 +36,7 @@ public class CartaoCliente {
     private LocalDateTime saida;
 
     @Column(name = "status",nullable = false)
-    private boolean status = true;
+    private Boolean status = true;
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "cartao")
     private List<CartaoClienteGastos> gastos = new ArrayList<>();
