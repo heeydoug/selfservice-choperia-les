@@ -1,5 +1,6 @@
 package com.doug.backendSelfChop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -17,7 +18,7 @@ public class CartaoCliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cpf_cliente", referencedColumnName = "cpf", nullable = false)
     private Cliente cliente;
 
@@ -38,7 +39,8 @@ public class CartaoCliente {
     @Column(name = "status",nullable = false)
     private Boolean status = true;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "cartao")
+    @JsonIgnoreProperties(value = "cartao")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "cartao",cascade = CascadeType.ALL)
     private List<CartaoClienteGastos> gastos = new ArrayList<>();
 
     public Double obterTotal(){

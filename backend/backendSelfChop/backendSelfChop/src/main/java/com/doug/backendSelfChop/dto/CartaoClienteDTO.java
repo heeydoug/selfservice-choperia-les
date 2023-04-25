@@ -1,7 +1,6 @@
 package com.doug.backendSelfChop.dto;
 
-import com.doug.backendSelfChop.domain.CartaoClienteGastos;
-import com.doug.backendSelfChop.domain.Cliente;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -25,5 +24,6 @@ public class CartaoClienteDTO {
 
     private Boolean status = true;
 
+    @JsonIgnoreProperties(value = "cartao")
     private List<CartaoClienteGastosDTO> gastos = new ArrayList<>();
 }

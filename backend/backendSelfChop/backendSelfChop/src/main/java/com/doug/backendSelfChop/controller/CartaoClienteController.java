@@ -1,6 +1,5 @@
 package com.doug.backendSelfChop.controller;
 
-import com.doug.backendSelfChop.domain.CartaoCliente;
 import com.doug.backendSelfChop.dto.CartaoClienteDTO;
 import com.doug.backendSelfChop.dto.CartaoClienteGastosDTO;
 import com.doug.backendSelfChop.repository.CartaoClienteRepository;
@@ -26,13 +25,13 @@ public class CartaoClienteController {
     private final CartaoClienteRepository cartaoClienteRepository;
 
     @GetMapping("/rfid/{rfid}")
-    public CartaoClienteDTO acharCartaoAberto(@PathVariable String rfid){
-        return cartaoCliente.acharCartaoAberto(rfid);
+    public CartaoClienteDTO findByRfidOpenCart(@PathVariable String rfid){
+        return  cartaoCliente.findByRfidOpenCart(rfid);
     }
 
     @GetMapping("/cpf/{cpf}")
-    public CartaoClienteDTO acharClienteAberto(@PathVariable String cpf){
-        return cartaoCliente.acharClienteAberto(cpf);
+    public CartaoClienteDTO findByCpfOpenCart(@PathVariable String cpf){
+        return cartaoCliente.findByCpfOpenCart(cpf);
     }
 
     @PostMapping("/cadastrar")

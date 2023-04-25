@@ -58,7 +58,7 @@ public class ChopeService {
     }
 
     private void cadastrarGastoChope(GastosChopeDTO gastosChopeDTO, ChopeDTO chopeDTO){
-        CartaoClienteDTO cartaoClienteDTO = cartaoClienteService.acharCartaoAberto(gastosChopeDTO.getCartao());
+        CartaoClienteDTO cartaoClienteDTO = cartaoClienteService.findByRfidOpenCart(gastosChopeDTO.getCartao());
         String descricao = chopeDTO.getNome();
         CartaoClienteGastosDTO cartaoClienteGastosDTO = new CartaoClienteGastosDTO(cartaoClienteDTO,chopeDTO.getPrecoCopo(),descricao);
         cartaoClienteGastosService.cadastrarGasto(cartaoClienteGastosDTO);
