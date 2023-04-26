@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -36,5 +39,12 @@ public class ClienteService {
 
     public void deletarCliente(String cpf){
         clienteRepository.deleteById(cpf);
+    }
+
+    public List<ClienteDTO> findClientWithoutCart(){
+        List<Cliente> clientes = clienteRepository.findClientWithoutCart();
+        return clientes.stream()
+                .map(cliente -> modelMapper.map(cliente, ClienteDTO.class))
+                .collect(Collectors.toList());
     }
 }

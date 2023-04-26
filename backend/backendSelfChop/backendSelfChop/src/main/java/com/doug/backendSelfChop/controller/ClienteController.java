@@ -24,6 +24,11 @@ public class ClienteController {
         return clienteRepository.findAll();
     }
 
+    @GetMapping("/sem_cartao")
+    public @ResponseBody List<ClienteDTO> whioutCart(){
+        return clienteService.findClientWithoutCart();
+    }
+
     @GetMapping("/{cpf}")
     public ClienteDTO getClienteByCpf(@PathVariable String cpf){
         return clienteService.findByCpf(cpf);
