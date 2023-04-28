@@ -38,6 +38,7 @@ public class CartaoCliente {
 
     @Column(name = "status",nullable = false)
     private Boolean status = true;
+    //True = Cartão em aberto , False = cartão fechado.
 
     @JsonIgnoreProperties(value = "cartao")
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "cartao",cascade = CascadeType.ALL)

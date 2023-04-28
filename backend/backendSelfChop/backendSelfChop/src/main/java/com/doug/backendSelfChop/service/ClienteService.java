@@ -47,4 +47,12 @@ public class ClienteService {
                 .map(cliente -> modelMapper.map(cliente, ClienteDTO.class))
                 .collect(Collectors.toList());
     }
+
+    public List<ClienteDTO> findClientWithCart(){
+        List<Cliente> clientes = clienteRepository.findClientWithCart();
+        return clientes.stream()
+                .map(cliente -> modelMapper.map(cliente, ClienteDTO.class))
+                .collect(Collectors.toList());
+    }
+
 }

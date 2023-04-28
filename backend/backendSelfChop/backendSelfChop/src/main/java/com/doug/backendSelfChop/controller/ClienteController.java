@@ -25,8 +25,13 @@ public class ClienteController {
     }
 
     @GetMapping("/sem_cartao")
-    public @ResponseBody List<ClienteDTO> whioutCart(){
+    public @ResponseBody List<ClienteDTO> withoutCart(){
         return clienteService.findClientWithoutCart();
+    }
+
+    @GetMapping("/com_cartao")
+    public @ResponseBody List<ClienteDTO> whithCart(){
+        return clienteService.findClientWithCart();
     }
 
     @GetMapping("/{cpf}")

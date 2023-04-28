@@ -14,4 +14,9 @@ public interface ClienteRepository extends JpaRepository<Cliente,String> {
     @Query("SELECT c FROM Cliente c WHERE NOT EXISTS (SELECT cc FROM CartaoCliente cc WHERE cc.cliente = c AND cc.status = true)")
     List<Cliente> findClientWithoutCart();
 
+    @Query("SELECT DISTINCT cc.cliente FROM CartaoCliente cc WHERE cc.status = true")
+    List<Cliente> findClientWithCart();
+
+    @Query("SELECT DISTINCT cc.cliente FROM CartaoCliente cc WHERE cc.entrada >= CURRENT_DATE - 30")
+    List<Cliente> findClientWithRecentAccount();
 }
