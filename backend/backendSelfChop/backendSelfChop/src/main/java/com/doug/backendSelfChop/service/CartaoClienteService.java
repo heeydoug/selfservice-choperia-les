@@ -2,6 +2,7 @@ package com.doug.backendSelfChop.service;
 
 import com.doug.backendSelfChop.domain.CartaoCliente;
 import com.doug.backendSelfChop.dto.CartaoClienteDTO;
+import com.doug.backendSelfChop.dto.ClienteDTO;
 import com.doug.backendSelfChop.exception.ResourceInUseException;
 import com.doug.backendSelfChop.repository.CartaoClienteRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,8 +13,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -64,6 +67,11 @@ public class CartaoClienteService {
 
     public CartaoClienteDTO editarCartao(CartaoClienteDTO cartaoClienteDTO){
         return cadastrarCartao(cartaoClienteDTO);
+    }
+
+    public List<CartaoClienteDTO> findOpenCart(){
+        List<CartaoCliente> cartaoClientes = cartaoClienteRepository.findOpenCart();
+        return cartaoClientes.stream().map(cartaoCliente -> modelMapper.map(cartaoCliente,CartaoClienteDTO.class)).collect(Collectors.toList());
     }
 
 

@@ -1,8 +1,11 @@
 package com.doug.backendSelfChop.controller;
 
 import com.doug.backendSelfChop.domain.Cliente;
+import com.doug.backendSelfChop.dto.CartaoClienteDTO;
 import com.doug.backendSelfChop.dto.ClienteDTO;
+import com.doug.backendSelfChop.repository.CartaoClienteRepository;
 import com.doug.backendSelfChop.repository.ClienteRepository;
+import com.doug.backendSelfChop.service.CartaoClienteService;
 import com.doug.backendSelfChop.service.ClienteService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,8 @@ public class ClienteController {
 
     private final ClienteRepository clienteRepository;
 
+    private final CartaoClienteService cartaoClienteService;
+
     @GetMapping
     public @ResponseBody List<Cliente> list(){
         return clienteRepository.findAll();
@@ -30,8 +35,8 @@ public class ClienteController {
     }
 
     @GetMapping("/com_cartao")
-    public @ResponseBody List<ClienteDTO> whithCart(){
-        return clienteService.findClientWithCart();
+    public @ResponseBody List<CartaoClienteDTO> whithCart(){
+        return cartaoClienteService.findOpenCart();
     }
 
     @GetMapping("/{cpf}")

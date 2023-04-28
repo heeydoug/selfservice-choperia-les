@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface CartaoClienteRepository extends JpaRepository<CartaoCliente,Long> {
 
@@ -15,4 +17,6 @@ public interface CartaoClienteRepository extends JpaRepository<CartaoCliente,Lon
     @Query("SELECT cartao FROM CartaoCliente cartao WHERE cartao.cliente.cpf = :cpf and cartao.status = TRUE")
     CartaoCliente findByCliente(@Param("cpf")String cpf);
 
+    @Query("SELECT cartao FROM CartaoCliente cartao WHERE cartao.status = TRUE")
+    List<CartaoCliente> findOpenCart();
 }
