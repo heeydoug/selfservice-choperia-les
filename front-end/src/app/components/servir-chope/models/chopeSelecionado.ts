@@ -2,7 +2,7 @@ import {Chope} from "../../../models/chope";
 
 export class ChopeSelecionado {
   public nomeChope?: string;
-  public rfidChop?: number;
+  public rfidChop?: string;
   public precoCopo?: number;
 
   constructor(chope: Chope) {

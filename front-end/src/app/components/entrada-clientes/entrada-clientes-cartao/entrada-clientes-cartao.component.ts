@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Cliente} from "../../../models/cliente";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Location} from "@angular/common";
@@ -7,7 +7,9 @@ import {Router} from "@angular/router";
 import {ClientesService} from "../../../services/clientes.service";
 import {CartaoClienteService} from "../../../services/cartao-cliente.service";
 import {finalize} from "rxjs";
-import {VincularClienteCartao} from "../../../models/vincularClienteCartao";
+import {MatTableDataSource} from "@angular/material/table";
+import {MatPaginator} from "@angular/material/paginator";
+import {CartaoCliente} from "../../../models/cartaoCliente";
 
 @Component({
   selector: 'app-entrada-clientes-cartao',
@@ -18,6 +20,10 @@ import {VincularClienteCartao} from "../../../models/vincularClienteCartao";
 export class EntradaClientesCartaoComponent implements OnInit{
   form: FormGroup;
   cliente: Cliente[] = [];
+  ELEMENT_DATA: CartaoCliente[] = [];
+  displayedColumns: string[] = ['cpf', 'nome', 'telefone', 'email', 'rfid'];
+  dataSource = new MatTableDataSource<CartaoCliente>(this.ELEMENT_DATA);
+  @ViewChild(MatPaginator) paginator: any = MatPaginator;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,10 +44,22 @@ export class EntradaClientesCartaoComponent implements OnInit{
   }
   ngOnInit(): void {
     this.procurarClientes();
+    this.findAllClientesWithCard();
+  }
+  findAllClientesWithCard(){
+    this.clienteService.findClientesWithCard().subscribe(resposta =>{
+      this.ELEMENT_DATA = resposta
+      this.dataSource = new MatTableDataSource<CartaoCliente>(resposta);
+      this.dataSource.paginator = this.paginator;
+    })
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   procurarClientes(): void {
-    this.clienteService.findAllWithCard({ status: 'false'} ).subscribe(clientes =>{
+    this.clienteService.findClientesWithoutCard().subscribe(clientes =>{
       this.cliente = clientes;
 
     });
@@ -56,6 +74,7 @@ export class EntradaClientesCartaoComponent implements OnInit{
       .pipe(finalize(() => {
         this.form.reset();
         this.procurarClientes();
+        this.findAllClientesWithCard();
       }))
       .subscribe(() => {
         this.toast.success('Cartão RFID vinculado ao Cliente com sucesso!', 'Vincular Cartão RFID');

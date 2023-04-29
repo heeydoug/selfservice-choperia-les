@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Cliente} from "../models/cliente";
 import {Chope} from "../models/chope";
+import {Servir} from "../components/servir-chope/models/servir";
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +27,8 @@ export class ChopesService {
   }
   delete(rfid: any): Observable<Chope>{
     return this.http.delete<Chope>(this.API + '/deletar/' + rfid);
+  }
+  public servirChope(servir: Servir): Observable<void> {
+    return this.http.post<void>(this.API + '/servir',servir);
   }
 }

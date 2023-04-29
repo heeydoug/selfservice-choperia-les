@@ -18,7 +18,7 @@ public class EmailController {
     @Autowired
     private final EmailService emailService;
 
-    @PostMapping("/promocao")
+    @PostMapping("/promocao")   
     public Integer enviarPromocao(@RequestBody String mensagem) throws MessagingException {
         return emailService.sendPromotion(mensagem);
     }

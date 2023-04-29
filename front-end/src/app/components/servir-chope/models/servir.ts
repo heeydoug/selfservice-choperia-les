@@ -1,7 +1,7 @@
 export class Servir {
   constructor(
-    public chope?: number,
-    public rfid?: number,
+    public chope?: string,
+    public cartao?: string,
   ) {
   }
 }

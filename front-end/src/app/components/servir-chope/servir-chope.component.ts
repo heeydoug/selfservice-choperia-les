@@ -4,6 +4,8 @@ import {ChopesService} from "../../services/chopes.service";
 import {Router} from "@angular/router";
 import {Servir} from "./models/servir";
 import {ChopeSelecionado} from "./models/chopeSelecionado";
+import {finalize, Observable} from "rxjs";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-servir-chope',
@@ -17,6 +19,8 @@ export class ServirChopeComponent implements OnInit{
   constructor(
     private service: ChopesService,
     private router: Router,
+    private toast: ToastrService,
+
   ) {
     if(localStorage.getItem('usuario') == null){
       console.log(localStorage.getItem('usuario'));
@@ -53,15 +57,27 @@ export class ServirChopeComponent implements OnInit{
     return 0;
   }
 
-  teste()  {
-    console.log(this.chopeSelecionado.chope)
-  }
 
   focusCampoRfif() {
     document.getElementById('inputRfid')?.focus();
   }
 
   servirChope() {
-
+    console.log(this.chopeSelecionado);
+    this.service.servirChope(this.chopeSelecionado)
+      .pipe(finalize(() => this.chopeSelecionado.cartao = undefined))
+      .subscribe(() => {
+        this.toast.success('Chope debitado com sucesso!', 'Servir Chope');
+      },
+        ex =>{
+          if(ex.error.errors){
+            ex.error.errors.forEach((element: { message: string | undefined; }) => {
+              this.toast.error(element.message);
+            });
+          }
+          else{
+            this.toast.error(ex.error.message)
+          }
+        });
   }
 }
