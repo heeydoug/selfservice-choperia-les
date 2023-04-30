@@ -5,15 +5,15 @@
   </div>
 
   <mat-card-content>
-      <mat-form-field class="full-width">
-        <mat-label>Selecione um Chope</mat-label>
-        <mat-select [ngModel]="chopeSelecionado.chope"
-                    name="chope"
-                    (ngModelChange)="focusCampoRfif()"
-                    required>
-          <mat-option *ngFor="let chope of chopes" [value]="chope" >{{chope.nomeChope}}</mat-option>
-        </mat-select>
-      </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Selecione um Chope</mat-label>
+      <mat-select [(ngModel)]="chopeSelecionado.chope"
+                  name="chope"
+                  required>
+        <mat-option *ngFor="let chope of chopes" [value]="chope.rfidChop" >{{chope.nomeChope}}</mat-option>
+      </mat-select>
+    </mat-form-field>
 
     <mat-card-content>
       <label></label>
@@ -24,8 +24,8 @@
       <mat-form-field appearance="fill" class="full-width">
         <mat-label>RFID</mat-label>
         <input matInput
-               [ngModel]="chopeSelecionado.rfid"
-               name="rfid"
+               [(ngModel)]="chopeSelecionado.cartao"
+               name="cartao"
                id="inputRfid"
                required
                [minlength]="10"
@@ -36,10 +36,6 @@
   </mat-card-content>
 
   <mat-card-actions>
-
-    <button mat-raised-button (click)="teste"> teste
-    </button>
-
   </mat-card-actions>
 
 </div>

@@ -5,6 +5,7 @@ import {Produto} from "../models/produto";
 import {Cliente} from "../models/cliente";
 import {Tela} from "../models/tela";
 import {query} from "@angular/animations";
+import {CartaoCliente} from "../models/cartaoCliente";
 
 @Injectable({
   providedIn: 'root'
@@ -23,10 +24,14 @@ export class ClientesService {
   findAll(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(this.API);
   }
-  findAllWithCard(query?: { [key: string]: string }): Observable<Cliente[]> {
-    const params = new HttpParams({ fromObject: query });
-    return this.http.get<Cliente[]>(this.API, {params});
+  findClientesWithoutCard(): Observable<Cliente[]> {
+    return this.http.get<Cliente[]>(this.API + '/sem_cartao');
   }
+
+  findClientesWithCard(): Observable<CartaoCliente[]> {
+    return this.http.get<CartaoCliente[]>(this.API + '/com_cartao');
+  }
+
   create(cliente: Cliente): Observable<Cliente>{
     return this.http.post<Cliente>(this.API + '/cadastrar', cliente);
   }
