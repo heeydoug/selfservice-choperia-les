@@ -1,5 +1,6 @@
 package com.doug.backendSelfChop.domain;
 
+import com.doug.backendSelfChop.exception.OutOfStockException;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -24,4 +25,11 @@ public class Chope implements Serializable {
     private Double precoCopo;
     @Column(name = "saldo_estoque", nullable = false)
     private Double saldoEstoque;
+
+    public void setSaldoEstoque(Double saldoEstoque){
+        if (saldoEstoque < 0) {
+            throw new OutOfStockException("Chope fora de estoque!");
+        }
+        this.saldoEstoque = saldoEstoque;
+    }
 }

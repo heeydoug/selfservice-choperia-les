@@ -26,6 +26,8 @@ export class SelfserviceComponent {
     private router: Router
   ) {
   }
+
+
   abrirCriarNotificacao() {
     this.router.navigate(['selfservice/registrarNotificacao']);
   }
