@@ -48,4 +48,19 @@ public class CartaoClienteController {
     public CartaoClienteGastosDTO cadastrarGastos(@RequestBody CartaoClienteGastosDTO cartaoClienteGastosDTO){
         return cartaoClienteGastosService.cadastrarGasto(cartaoClienteGastosDTO);
     }
+
+    @PutMapping("/fechar/{rfid}")
+    public CartaoClienteDTO fecharCartao(@PathVariable String rfid){
+        return cartaoCliente.fecharCartao(rfid);
+    }
+
+    @PutMapping("/desvincular/{rfid}")
+    public CartaoClienteDTO desvincularCartao(@PathVariable String rfid){
+        return cartaoCliente.desvincularCartao(rfid);
+    }
+
+    @GetMapping("/total/{rfid}")
+    public Double obterTotal(@PathVariable String rfid){
+        return cartaoCliente.cartaoTotal(rfid);
+    }
 }

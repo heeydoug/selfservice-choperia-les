@@ -74,5 +74,21 @@ public class CartaoClienteService {
         return cartaoClientes.stream().map(cartaoCliente -> modelMapper.map(cartaoCliente,CartaoClienteDTO.class)).collect(Collectors.toList());
     }
 
+    public CartaoClienteDTO fecharCartao(String rfid){
+        CartaoCliente cartaoCliente = cartaoClienteRepository.findByRfid(rfid);
+        cartaoCliente.setStatus(false);
+        return editarCartao(modelMapper.map(cartaoCliente,CartaoClienteDTO.class));
+    }
+
+    public CartaoClienteDTO desvincularCartao(String rfid){
+        CartaoCliente cartaoCliente = cartaoClienteRepository.findByRfidToUnlink(rfid);
+        cartaoCliente.setSaida(LocalDateTime.now());
+        return editarCartao(modelMapper.map(cartaoCliente,CartaoClienteDTO.class));
+    }
+
+    public Double cartaoTotal(String rfid){
+        CartaoCliente cartaoCliente = cartaoClienteRepository.findByRfid(rfid);
+        return cartaoCliente.obterTotal();
+    }
 
 }

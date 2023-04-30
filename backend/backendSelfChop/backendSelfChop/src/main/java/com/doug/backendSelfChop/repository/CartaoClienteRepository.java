@@ -19,4 +19,7 @@ public interface CartaoClienteRepository extends JpaRepository<CartaoCliente,Lon
 
     @Query("SELECT cartao FROM CartaoCliente cartao WHERE cartao.status = TRUE")
     List<CartaoCliente> findOpenCart();
+
+    @Query("SELECT cartao FROM CartaoCliente cartao WHERE cartao.rfid = :rfid and cartao.status = FALSE and cartao.saida IS NULL")
+    CartaoCliente findByRfidToUnlink(@Param("rfid")String rfid);
 }
