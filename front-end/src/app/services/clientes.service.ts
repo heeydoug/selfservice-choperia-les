@@ -32,6 +32,10 @@ export class ClientesService {
     return this.http.get<CartaoCliente[]>(this.API + '/com_cartao');
   }
 
+  findClienteByRfid(rfid: any): Observable<Cliente> {
+    return this.http.get<Cliente>(this.API + '/rfid/' + rfid);
+  }
+
   create(cliente: Cliente): Observable<Cliente>{
     return this.http.post<Cliente>(this.API + '/cadastrar', cliente);
   }

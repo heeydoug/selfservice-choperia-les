@@ -5,20 +5,23 @@
   </div>
 
   <div class="form">
-    <form>
+    <form [formGroup]="formGroup">
       <mat-form-field appearance="fill" class="InputCpf">
         <mat-label>RFID</mat-label>
         <input matInput
-               [(ngModel)]="selfservice.rfid"
-               name="rfid"
-               id="rfidInput">
+               formControlName="cartao"
+               id="rfidInput"
+               [minlength]="10"
+               [maxlength]="10"
+               (change)="findClienteByRFID($event)">
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="full-width">
         <mat-label>Nome</mat-label>
         <input matInput
-               [(ngModel)]="selfservice.nome"
+               formControlName="nome"
                name="nome"
+               id="nome"
                [disabled]="true">
 
       </mat-form-field>
@@ -26,17 +29,16 @@
       <mat-form-field appearance="fill" class="full-width">
         <mat-label>Preço do KG</mat-label>
         <input matInput
-               [(ngModel)]="selfservice.precoKg"
-               name="precoKg"
+               formControlName="preco"
+               name="preco"
                type="number" step="0.01" min="0.01">
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="full-width">
         <mat-label>Peso</mat-label>
         <input matInput
-               [(ngModel)]="selfservice.peso"
+               formControlName="peso"
                name="peso"
-               [formControl]="peso"
                required
                type="number" step="0.01" min="0.01">
       </mat-form-field>
@@ -44,16 +46,15 @@
       <mat-form-field appearance="fill" class="full-width">
         <mat-label>Valor Total</mat-label>
         <input matInput
-               [(ngModel)]="selfservice.valorTotal"
+               formControlName="valorTotal"
                name="valorTotal"
-               [formControl]="valorTotal"
                required
                type="number" step="0.01" min="0.01">
       </mat-form-field>
 
     </form>
     <div>
-      <button mat-raised-button>
+      <button mat-raised-button (click)="registrarPedido()">
         Registrar pedido
       </button>
 

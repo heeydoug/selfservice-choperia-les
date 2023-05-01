@@ -1,7 +1,6 @@
 export interface SelfService {
-  rfid?: any;
+  cartao?: any;
   nome: string;
-  precoKg: number;
+  preco: number;
   peso: number;
-  valorTotal: number;
 }
