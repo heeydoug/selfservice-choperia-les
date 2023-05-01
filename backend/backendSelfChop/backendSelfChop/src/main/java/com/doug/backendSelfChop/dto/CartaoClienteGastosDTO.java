@@ -1,5 +1,7 @@
 package com.doug.backendSelfChop.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -8,6 +10,7 @@ import java.time.LocalDateTime;
 public class CartaoClienteGastosDTO {
     private Long id;
 
+    @JsonIgnore
     private CartaoClienteDTO cartao;
 
     private Double valor = 0.0;

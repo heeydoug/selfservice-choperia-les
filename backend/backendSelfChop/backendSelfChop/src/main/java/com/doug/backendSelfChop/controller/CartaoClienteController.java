@@ -2,12 +2,15 @@ package com.doug.backendSelfChop.controller;
 
 import com.doug.backendSelfChop.dto.CartaoClienteDTO;
 import com.doug.backendSelfChop.dto.CartaoClienteGastosDTO;
+import com.doug.backendSelfChop.dto.GastosChopeDTO;
 import com.doug.backendSelfChop.repository.CartaoClienteRepository;
 import com.doug.backendSelfChop.service.CartaoClienteGastosService;
 import com.doug.backendSelfChop.service.CartaoClienteService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -61,6 +64,16 @@ public class CartaoClienteController {
 
     @GetMapping("/total/{rfid}")
     public Double obterTotal(@PathVariable String rfid){
-        return cartaoCliente.cartaoTotal(rfid);
+        return cartaoCliente.obterTotal(rfid);
+    }
+
+    @GetMapping("/gastos/{rfid}")
+    public @ResponseBody List<CartaoClienteGastosDTO> obterGastos(@PathVariable String rfid){
+        return cartaoCliente.obterGastos(rfid);
+    }
+
+    @GetMapping("/nome/{rfid}")
+    public String obterNomeCliente(@PathVariable String rfid){
+        return cartaoCliente.clienteByRfid(rfid).getNome();
     }
 }

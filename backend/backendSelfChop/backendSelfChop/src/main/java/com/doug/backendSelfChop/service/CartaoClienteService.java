@@ -1,7 +1,9 @@
 package com.doug.backendSelfChop.service;
 
 import com.doug.backendSelfChop.domain.CartaoCliente;
+import com.doug.backendSelfChop.domain.CartaoClienteGastos;
 import com.doug.backendSelfChop.dto.CartaoClienteDTO;
+import com.doug.backendSelfChop.dto.CartaoClienteGastosDTO;
 import com.doug.backendSelfChop.dto.ClienteDTO;
 import com.doug.backendSelfChop.exception.ResourceInUseException;
 import com.doug.backendSelfChop.repository.CartaoClienteRepository;
@@ -86,7 +88,7 @@ public class CartaoClienteService {
         return editarCartao(modelMapper.map(cartaoCliente,CartaoClienteDTO.class));
     }
 
-    public Double cartaoTotal(String rfid){
+    public Double obterTotal(String rfid){
         CartaoCliente cartaoCliente = cartaoClienteRepository.findByRfid(rfid);
         return cartaoCliente.obterTotal();
     }
@@ -94,6 +96,10 @@ public class CartaoClienteService {
     public ClienteDTO clienteByRfid(String rfid){
         CartaoCliente cartaoCliente = cartaoClienteRepository.findByRfid(rfid);
         return modelMapper.map(cartaoCliente.getCliente(), ClienteDTO.class);
+    }
+
+    public List<CartaoClienteGastosDTO> obterGastos(String rfid){
+        return findByRfidOpenCart(rfid).getGastos();
     }
 
 }
