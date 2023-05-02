@@ -1,8 +1,9 @@
 package com.doug.backendSelfChop.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 import java.time.LocalDateTime;
 
@@ -16,7 +17,7 @@ public class CartaoClienteGastosDTO {
     private Double valor = 0.0;
 
     private String descricao;
-
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDateTime data;
 
     public CartaoClienteGastosDTO() {
