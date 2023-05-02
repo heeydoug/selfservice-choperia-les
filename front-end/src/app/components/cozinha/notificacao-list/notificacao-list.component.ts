@@ -17,7 +17,7 @@ export class NotificacaoListComponent implements OnInit{
 
   ELEMENT_DATA: Notificacao[] = [];
 
-  displayedColumns: string[] = ['id_notificao','mensagem', 'data', 'status', 'acoes'];
+  displayedColumns: string[] = ['id_notificao','mensagem', 'data', 'acoes'];
   dataSource = new MatTableDataSource<Notificacao>(this.ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: any = MatPaginator;
 

@@ -57,13 +57,11 @@ export class ServirChopeComponent implements OnInit{
     return 0;
   }
 
-
   focusCampoRfif() {
     document.getElementById('inputRfid')?.focus();
   }
 
   servirChope() {
-    console.log(this.chopeSelecionado);
     this.service.servirChope(this.chopeSelecionado)
       .pipe(finalize(() => this.chopeSelecionado.cartao = undefined))
       .subscribe(() => {
@@ -76,7 +74,7 @@ export class ServirChopeComponent implements OnInit{
             });
           }
           else{
-            this.toast.error(ex.error.message)
+            this.toast.error('Insira um cartão RFID!', 'Servir Chope');
           }
         });
   }

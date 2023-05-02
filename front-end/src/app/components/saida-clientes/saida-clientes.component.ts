@@ -3,6 +3,9 @@ import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 import {ClientesService} from "../../services/clientes.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {Cliente} from "../../models/cliente";
+import {CartaoClienteService} from "../../services/cartao-cliente.service";
+import {CartaoCliente} from "../../models/cartaoCliente";
 
 @Component({
   selector: 'app-saida-clientes',
@@ -11,12 +14,14 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 })
 export class SaidaClientesComponent implements AfterViewInit{
   rfid: string = "";
+  nome: string = "";
 
   constructor(
     private toast: ToastrService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private clienteService: ClientesService
+    private clienteService: ClientesService,
+    private cartaoClienteService: CartaoClienteService,
   ) {
     if(localStorage.getItem('usuario') == null){
       console.log(localStorage.getItem('usuario'));
@@ -37,13 +42,29 @@ export class SaidaClientesComponent implements AfterViewInit{
       focusElement.focus();
     },0);
   }
+  preencherCamposCliente(cartao: Cliente): void{
+    this.nome = cartao.nome;
+  }
 
-  procurarRFID() {
-    if(this.rfid.length === 10){
-      this.toast.warning('Cartão Vazio!')
-      this.rfid = "";
-      this.focusInputRfid();
-    }
+  findClienteByRfid(event: any): void {
+    this.clienteService.obterNomeClienteComCompraFinalizada(event.target.value)
+      .subscribe({
+        next: (response) => {
+          this.nome = response.nome;
+        },
+        error: () => {
+          this.toast.error('Não existe nenhum cliente vinculado a este cartão ou a conta ainda não foi paga!', 'Saída de Clientes')
+          this.cancelar();
+        }
+      });
+  }
+
+  cancelar() {
+    this.rfid = '';
+    this.nome = '';
+  }
+
+  finalizarSaidaCliente() {
 
   }
 }

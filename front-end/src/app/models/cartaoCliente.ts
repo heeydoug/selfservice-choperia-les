@@ -1,5 +1,5 @@
 import {Cliente} from "./cliente";
-import {CartaoClienteGastos} from "./CartaoClienteGastos";
+import {CartaoClienteGastos} from "./cartaoClienteGastos";
 
 export interface CartaoCliente {
   id?: number;

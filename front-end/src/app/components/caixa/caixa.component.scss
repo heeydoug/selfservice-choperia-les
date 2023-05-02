@@ -1,6 +1,6 @@
 
 .container{
-  width: 90%;
+  width: 70%;
   margin: 1rem auto;
 
 }
@@ -8,6 +8,15 @@
 .mat-mdc-form-field {
   font-size: 14px;
   width: 100%;
+}
+
+.form {
+  display: flex;
+  vertical-align: top;
+}
+
+.espacamento{
+  margin-left: 20px;
 }
 
 
@@ -27,6 +36,11 @@
   width: 500px;
 }
 
+
+.campoCartaoRfid{
+  width: 30%;
+}
+
 .button {
   margin-right: 1rem;
   margin-top: 1.5rem;
@@ -36,9 +50,10 @@ table {
   width: 100%;
 }
 
-.espacamento{
-  margin-left: 20px;
+.toolbar-itens{
+  font-size: 1rem;
 }
+
 
 .material-icons.icone-excluir{
   color: indianred;

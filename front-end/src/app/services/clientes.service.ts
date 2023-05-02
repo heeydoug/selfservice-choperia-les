@@ -27,11 +27,13 @@ export class ClientesService {
   findClientesWithoutCard(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(this.API + '/sem_cartao');
   }
+  obterNomeClienteComCompraFinalizada(rfid: string): Observable<Cliente>{
+    return this.http.get<Cliente>('api/cartao/cliente/nome/' + rfid);
+  }
 
   findClientesWithCard(): Observable<CartaoCliente[]> {
     return this.http.get<CartaoCliente[]>(this.API + '/com_cartao');
   }
-
   findClienteByRfid(rfid: any): Observable<Cliente> {
     return this.http.get<Cliente>(this.API + '/rfid/' + rfid);
   }

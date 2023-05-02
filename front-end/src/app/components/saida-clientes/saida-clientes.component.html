@@ -11,8 +11,30 @@
              [(ngModel)]="rfid"
              name="rfid"
              id="rfidInput"
-             (ngModelChange)="procurarRFID()">
+             [minlength]="10"
+             [maxlength]="10"
+             (change)="findClienteByRfid($event)">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Nome</mat-label>
+      <input matInput
+             [(ngModel)]="nome"
+             name="nome"
+             id="nome"
+             disabled="true">
     </mat-form-field>
   </form>
+
+  <mat-card-actions>
+    <button class="" (click)="cancelar()" style="background-color: #676363; margin-top: 1rem" mat-raised-button>
+      Cencelar
+    </button>
+
+    <button class="espacamento" [disabled]="!rfid" (click)="finalizarSaidaCliente()" style="background-color: #01a86c; margin-top: 1rem" mat-raised-button>
+      Finalizar Saída
+    </button>
+
+  </mat-card-actions>
 
 </div>

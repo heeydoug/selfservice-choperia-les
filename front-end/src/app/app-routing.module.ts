@@ -34,6 +34,7 @@ import {
   EntradaClientesCartaoComponent
 } from "./components/entrada-clientes/entrada-clientes-cartao/entrada-clientes-cartao.component";
 import {ServirChopeComponent} from "./components/servir-chope/servir-chope.component";
+import {CaixaComponent} from "./components/caixa/caixa.component";
 
 const routes: Routes = [
 
@@ -137,6 +138,10 @@ const routes: Routes = [
 
   {
     path: 'cozinha', component: NotificacaoListComponent
+  },
+
+  {
+    path: 'caixa', component: CaixaComponent
   },
 
 
