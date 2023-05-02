@@ -2,6 +2,7 @@ package com.doug.backendSelfChop.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
@@ -24,6 +25,7 @@ public class CartaoClienteGastos {
     @Column(name = "descricao", nullable = false)
     private String descricao;
 
+    @DateTimeFormat(pattern = "dd/MM/yyyy kk:mm")
     @Column(name = "data", nullable = false)
     private LocalDateTime data;
 }

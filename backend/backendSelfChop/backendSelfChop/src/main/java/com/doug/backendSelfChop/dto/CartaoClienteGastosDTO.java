@@ -17,7 +17,7 @@ public class CartaoClienteGastosDTO {
     private Double valor = 0.0;
 
     private String descricao;
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @DateTimeFormat(pattern = "dd/MM/yyyy kk:mm")
     private LocalDateTime data;
 
     public CartaoClienteGastosDTO() {

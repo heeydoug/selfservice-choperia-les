@@ -31,6 +31,10 @@ export class ClientesService {
     return this.http.get<Cliente>('api/cartao/cliente/nome/' + rfid);
   }
 
+  desvincularCartao(rfid: string): Observable<Cliente>{
+    return this.http.put<Cliente>('api/cartao/cliente/desvincular/' + rfid, rfid);
+  }
+
   findClientesWithCard(): Observable<CartaoCliente[]> {
     return this.http.get<CartaoCliente[]>(this.API + '/com_cartao');
   }
