@@ -1,0 +1,102 @@
+<div class="container">
+
+  <div class="title">
+    <h1>Caixa</h1>
+  </div>
+
+  <mat-card-content>
+    <form [formGroup]="form">
+
+      <div class="campoCartaoRfid">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Código do cartão RFID</mat-label>
+          <input matInput
+                 formControlName="cartao"
+                 id="inputRfid"
+                 required
+                 [minlength]="10"
+                 [maxlength]="10"
+                 (change)="findCardByRfid($event)">
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Nome</mat-label>
+        <input matInput
+               formControlName="nome"
+               name="nome"
+               id="nome">
+      </mat-form-field>
+
+      <div class="form">
+        <mat-form-field appearance="fill" class="">
+          <mat-label>Valor Total</mat-label>
+          <input matInput
+                 formControlName="valorTotal"
+                 name="valorTotal"
+                 required
+                 type="number" step="0.01" min="0.01">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="espacamento">
+          <mat-label>Método de Pagamento</mat-label>
+          <mat-select
+            formControlName="metodoPagamento"
+            name="metodoPagamento"
+            required
+            placeholder="Selecione um...">
+            <mat-option value="pix">Pix</mat-option>
+            <mat-option value="cartao">Cartão</mat-option>
+            <mat-option value="">Dinheiro</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </form>
+
+    <div class="mat-elevation-z8">
+      <mat-toolbar>
+        <span class="toolbar-itens">Itens do Cartão</span>
+      </mat-toolbar>
+
+      <table mat-table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="itens">
+          <th mat-header-cell *matHeaderCellDef> Item </th>
+          <td mat-cell *matCellDef="let element"> {{element.descricao}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="data">
+          <th mat-header-cell *matHeaderCellDef> Data e Hora </th>
+          <td mat-cell *matCellDef="let element"> {{element.data}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="valor">
+          <th mat-header-cell *matHeaderCellDef> Valor </th>
+          <td mat-cell *matCellDef="let element"> {{element.valor}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                     showFirstLastButtons
+                     aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>
+
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button class="" (click)="cancelar()" style="background-color: #676363; margin-top: 1rem" mat-raised-button>
+      Cencelar
+    </button>
+
+    <button class="espacamento" [disabled]="!form.valid" (click)="finalizarVenda()" style="background-color: #01a86c; margin-top: 1rem" mat-raised-button>
+      Finalizar Venda
+    </button>
+
+  </mat-card-actions>
+
+
+</div>

@@ -54,7 +54,7 @@
 
     </form>
     <div>
-      <button mat-raised-button (click)="registrarPedido()">
+      <button mat-raised-button (click)="registrarPedido()" [disabled]="!formGroup.valid" >
         Registrar pedido
       </button>
 

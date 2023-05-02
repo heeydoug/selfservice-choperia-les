@@ -50,7 +50,17 @@ export class SelfserviceComponent implements OnInit{
   }
 
   ngOnInit() {
+    this.focusInputRfid();
+  }
 
+  focusInputRfid(): void{
+    let blurElement: HTMLElement = document.getElementById("rfidInput") as HTMLElement;
+    blurElement.blur();
+
+    setTimeout(function(){
+      let focusElement: HTMLElement = document.getElementById("rfidInput") as HTMLElement;
+      focusElement.focus();
+    },0);
   }
 
   findClienteByRFID(event: any): void {
