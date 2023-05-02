@@ -53,8 +53,8 @@ public class CartaoClienteController {
     }
 
     @PutMapping("/fechar/{rfid}")
-    public CartaoClienteDTO fecharCartao(@PathVariable String rfid){
-        return cartaoCliente.fecharCartao(rfid);
+    public CartaoClienteDTO fecharCartao(@PathVariable String rfid,@RequestBody String metodo){
+        return cartaoCliente.fecharCartao(rfid, metodo);
     }
 
     @PutMapping("/desvincular/{rfid}")

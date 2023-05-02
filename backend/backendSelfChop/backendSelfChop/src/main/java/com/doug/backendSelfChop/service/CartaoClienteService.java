@@ -76,8 +76,9 @@ public class CartaoClienteService {
         return cartaoClientes.stream().map(cartaoCliente -> modelMapper.map(cartaoCliente,CartaoClienteDTO.class)).collect(Collectors.toList());
     }
 
-    public CartaoClienteDTO fecharCartao(String rfid){
+    public CartaoClienteDTO fecharCartao(String rfid,String metodo){
         CartaoCliente cartaoCliente = cartaoClienteRepository.findByRfid(rfid);
+        cartaoCliente.setMetodoPagamento(metodo);
         cartaoCliente.setStatus(false);
         return editarCartao(modelMapper.map(cartaoCliente,CartaoClienteDTO.class));
     }
