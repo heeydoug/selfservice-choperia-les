@@ -2,6 +2,7 @@ package com.doug.backendSelfChop.controller;
 
 import com.doug.backendSelfChop.dto.CartaoClienteDTO;
 import com.doug.backendSelfChop.dto.CartaoClienteGastosDTO;
+import com.doug.backendSelfChop.dto.ClienteDTO;
 import com.doug.backendSelfChop.dto.GastosChopeDTO;
 import com.doug.backendSelfChop.repository.CartaoClienteRepository;
 import com.doug.backendSelfChop.service.CartaoClienteGastosService;
@@ -73,7 +74,7 @@ public class CartaoClienteController {
     }
 
     @GetMapping("/nome/{rfid}")
-    public String obterNomeCliente(@PathVariable String rfid){
-        return cartaoCliente.clienteByRfidToUnlik(rfid).getNome();
+    public ClienteDTO obterNomeCliente(@PathVariable String rfid){
+        return cartaoCliente.clienteByRfidToUnlik(rfid);
     }
 }
