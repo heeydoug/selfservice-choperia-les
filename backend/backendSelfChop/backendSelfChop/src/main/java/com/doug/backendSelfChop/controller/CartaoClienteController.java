@@ -74,6 +74,6 @@ public class CartaoClienteController {
 
     @GetMapping("/nome/{rfid}")
     public String obterNomeCliente(@PathVariable String rfid){
-        return cartaoCliente.clienteByRfid(rfid).getNome();
+        return cartaoCliente.clienteByRfidToUnlik(rfid).getNome();
     }
 }

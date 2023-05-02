@@ -94,6 +94,11 @@ public class CartaoClienteService {
     }
 
     public ClienteDTO clienteByRfid(String rfid){
+        CartaoCliente cartaoCliente = cartaoClienteRepository.findByRfid(rfid);
+        return modelMapper.map(cartaoCliente.getCliente(), ClienteDTO.class);
+    }
+
+    public ClienteDTO clienteByRfidToUnlik(String rfid){
         CartaoCliente cartaoCliente = cartaoClienteRepository.findByRfidToUnlink(rfid);
         return modelMapper.map(cartaoCliente.getCliente(), ClienteDTO.class);
     }
