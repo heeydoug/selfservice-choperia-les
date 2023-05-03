@@ -1,7 +1,9 @@
 package com.doug.backendSelfChop.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
@@ -24,6 +26,8 @@ public class CartaoClienteGastos {
     @Column(name = "descricao", nullable = false)
     private String descricao;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @Column(name = "data", nullable = false)
     private LocalDateTime data;
 }

@@ -1,5 +1,6 @@
 package com.doug.backendSelfChop.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -28,11 +29,13 @@ public class CartaoCliente {
     @Column(name = "metodo_pagamento")
     private String metodoPagamento;
 
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @Column(name = "entrada")
     private LocalDateTime entrada = LocalDateTime.now();
 
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @Column(name = "saida")
     private LocalDateTime saida;
 

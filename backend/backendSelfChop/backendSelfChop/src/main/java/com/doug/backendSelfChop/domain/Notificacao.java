@@ -1,5 +1,6 @@
 package com.doug.backendSelfChop.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -19,7 +20,8 @@ public class Notificacao implements Serializable {
     @Column(name = "mensagem", nullable = false)
     private String mensagem;
 
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @Column(name = "data", nullable = false)
     private LocalDate data;
 
