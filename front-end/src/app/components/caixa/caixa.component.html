@@ -3,7 +3,9 @@
   <div class="title">
     <h1>Caixa</h1>
   </div>
+  <div>
 
+  </div>
   <mat-card-content>
     <form [formGroup]="form">
 
@@ -53,7 +55,7 @@
       </div>
     </form>
 
-    <div class="mat-elevation-z8">
+    <div id="itens" class="mat-elevation-z8">
       <mat-toolbar>
         <span class="toolbar-itens">Itens do Cartão</span>
       </mat-toolbar>
@@ -78,11 +80,6 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
       </table>
-
-      <mat-paginator [pageSizeOptions]="[5, 10, 20]"
-                     showFirstLastButtons
-                     aria-label="Select page of periodic elements">
-      </mat-paginator>
     </div>
 
   </mat-card-content>
@@ -94,6 +91,10 @@
 
     <button class="espacamento" [disabled]="!form.valid" (click)="finalizarVenda()" style="background-color: #01a86c; margin-top: 1rem" mat-raised-button>
       Finalizar Venda
+    </button>
+
+    <button (click)="imprimirComprovante()" style="background-color: #9e16ee; margin-top: 1rem" mat-raised-button>
+      Imprimir
     </button>
 
   </mat-card-actions>

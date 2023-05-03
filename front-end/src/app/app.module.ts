@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -131,7 +131,9 @@ import { CaixaComponent } from './components/caixa/caixa.component';
         MatCheckboxModule
 
     ],
-  providers: [AuthInterceptorProvider],
+  providers: [
+    AuthInterceptorProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
