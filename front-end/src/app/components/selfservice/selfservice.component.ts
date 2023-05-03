@@ -77,7 +77,6 @@ export class SelfserviceComponent implements OnInit{
   }
 
   registrarPedido(): void {
-    console.log(this.formGroup.value)
     this.selfserviceService.registrarPedido(this.formGroup.value)
       .subscribe({
         next: () => {

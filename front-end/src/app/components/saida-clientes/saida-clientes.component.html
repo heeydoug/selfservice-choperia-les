@@ -4,11 +4,11 @@
     <h1>Saída Clientes</h1>
   </div>
 
-  <form>
+  <form [formGroup]="form">
     <mat-form-field appearance="fill" class="InputCpf">
       <mat-label>RFID</mat-label>
       <input matInput
-             [(ngModel)]="rfid"
+             formControlName="rfid"
              name="rfid"
              id="rfidInput"
              [minlength]="10"
@@ -19,10 +19,9 @@
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Nome</mat-label>
       <input matInput
-             [(ngModel)]="nome"
+             formControlName="nome"
              name="nome"
-             id="nome"
-             disabled="true">
+             id="nome">
     </mat-form-field>
   </form>
 
@@ -31,7 +30,7 @@
       Cencelar
     </button>
 
-    <button class="espacamento" [disabled]="!rfid" (click)="finalizarSaidaCliente()" style="background-color: #01a86c; margin-top: 1rem" mat-raised-button>
+    <button class="espacamento" [disabled]="formValid()" (click)="finalizarSaidaCliente()" style="background-color: #01a86c; margin-top: 1rem" mat-raised-button>
       Finalizar Saída
     </button>
 
