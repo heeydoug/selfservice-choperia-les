@@ -3,6 +3,7 @@ package com.doug.backendSelfChop.service;
 
 import com.doug.backendSelfChop.domain.Usuario;
 import com.doug.backendSelfChop.dto.UsuarioDTO;
+import com.doug.backendSelfChop.repository.TelaRepository;
 import com.doug.backendSelfChop.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ public class UsuarioService {
 
     @Autowired
     private final UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private final TelaRepository telaRepository;
 
     public UsuarioDTO findByCpf(String cpf){
         Usuario usuario = usuarioRepository.findByCpf(cpf);
@@ -66,5 +70,16 @@ public class UsuarioService {
         UsuarioDTO.setCpf(Usuario.getCpf());
         UsuarioDTO.setSenha(Usuario.getSenha());
         return Usuario;
+    }
+
+    public void criarRegistro(){
+        if (usuarioRepository.findByNome("Administrador") == null){
+            Usuario admin = new Usuario();
+            admin.setCpf("0");
+            admin.setNome("Administrador");
+            admin.setSenha("adm123");
+            admin.setTelas(telaRepository.findAll());
+            usuarioRepository.save(admin);
+        }
     }
 }
