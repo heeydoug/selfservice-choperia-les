@@ -21,8 +21,7 @@
         <input matInput
                formControlName="nome"
                name="nome"
-               id="nome"
-               [disabled]="true">
+               id="nome">
 
       </mat-form-field>
 
@@ -32,6 +31,7 @@
                formControlName="preco"
                name="preco"
                type="number" step="0.01" min="0.01">
+        <mat-icon matSuffix>attach_money</mat-icon>
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="full-width">
@@ -40,7 +40,8 @@
                formControlName="peso"
                name="peso"
                required
-               type="number" step="0.01" min="0.01">
+               type="number" step="0.01" min="0.01"
+               (change)="multValorTotal($event)">
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="full-width">
@@ -50,6 +51,7 @@
                name="valorTotal"
                required
                type="number" step="0.01" min="0.01">
+        <mat-icon matSuffix>attach_money</mat-icon>
       </mat-form-field>
 
     </form>
@@ -61,6 +63,10 @@
 
       <button mat-raised-button (click)="abrirCriarNotificacao()">
         Registrar itens para reposição
+      </button>
+
+      <button mat-raised-button (click)="abrirAlterarPrecoSelfService()">
+        Alterar preço do Self-service
       </button>
 
     </div>

@@ -18,8 +18,6 @@ import {ToastrService} from "ngx-toastr";
 export class SelfserviceComponent implements OnInit{
 
   formGroup: FormGroup;
-  selfService: SelfService;
-  clienteGastos?: CartaoCliente;
 
   constructor(
     private router: Router,
@@ -36,23 +34,23 @@ export class SelfserviceComponent implements OnInit{
     this.formGroup = this.formBuilder.group({
       cartao: [null, Validators.required],
       nome: [{value: '', disabled: true}],
-      preco: [null, Validators.required],
+      preco: [{value: '', disabled: true}],
       peso: [null, Validators.required],
-      valorTotal: [{value: '', disabled: true}]
+      valorTotal: [Validators.required]
     });
-
-    this.selfService = {
-      cartao: '',
-      nome: '',
-      preco: 0,
-      peso: 0,
-    }
   }
-
   ngOnInit() {
     this.focusInputRfid();
+    this.receberPrecoSelfService();
   }
+  receberPrecoSelfService(){
+    this.selfserviceService.receberPrecoSelfService()
+      .pipe()
+      .subscribe( (res) => {
+        this.formGroup.controls['preco'].setValue(res);
 
+      });
+  }
   focusInputRfid(): void{
     let blurElement: HTMLElement = document.getElementById("rfidInput") as HTMLElement;
     blurElement.blur();
@@ -82,7 +80,7 @@ export class SelfserviceComponent implements OnInit{
         next: () => {
           this.toast.success('Pedido registrado com sucesso!', 'Self-Service');
           this.formGroup.reset();
-          this.formGroup.get('valorTotal')?.setValue('');
+          this.receberPrecoSelfService();
         },
         error: (error) => {
           this.toast.error('Erro!', 'Erro');
@@ -92,5 +90,17 @@ export class SelfserviceComponent implements OnInit{
 
   abrirCriarNotificacao() {
     this.router.navigate(['selfservice/registrarNotificacao']);
+  }
+
+  abrirAlterarPrecoSelfService() {
+    this.router.navigate(['selfservice/alterarPreco']);
+  }
+
+  multValorTotal(event: any): void {
+    let mult = 0;
+    let preco = this.formGroup.get('preco')?.value;
+    let peso = Number(event.target.value);
+    mult = peso * preco;
+    this.formGroup.controls['valorTotal'].setValue(mult);
   }
 }
