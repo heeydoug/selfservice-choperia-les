@@ -17,4 +17,12 @@ export class SelfserviceService {
     return this.http.post<SelfService>(this.API + '/cadastrar', self);
   }
 
+  receberPrecoSelfService(){
+    return this.http.get(this.API + '/preco');
+  }
+
+  alterarPreco(preco: number){
+    return this.http.put(this.API + '/preco/alterar', preco);
+  }
+
 }
