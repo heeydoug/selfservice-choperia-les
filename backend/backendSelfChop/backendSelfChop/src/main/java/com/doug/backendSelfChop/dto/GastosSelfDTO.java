@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Setter
 public class GastosSelfDTO implements Serializable {
 
-    private Double preco;
+    private Double valorTotal;
 
     private Float peso;
 
