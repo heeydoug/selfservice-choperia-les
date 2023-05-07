@@ -1,0 +1,48 @@
+
+.container{
+  width: 90%;
+  margin: 1rem auto;
+
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.title{
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.title h1{
+  font-size: 2rem;
+  color: black;
+  font-weight: 500;
+}
+
+button {
+  margin: 20px;
+  color: #01a86c;
+}
+
+.botoes{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+}
+
+.material-icons.icone-excluir{
+  color: indianred;
+}
+
+.material-icons.icone-editar{
+  color: #0B2641;
+}

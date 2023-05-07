@@ -17,7 +17,6 @@ export class NotificacaoCreateComponent {
 
   @Output() create: EventEmitter<Notificacao> = new EventEmitter<Notificacao>();
   notificacaoForm: FormGroup;
-  descricaoFormControl: FormControl = new FormControl(null, Validators.required);
 
   constructor(
     private formBuilder: FormBuilder,
@@ -35,9 +34,6 @@ export class NotificacaoCreateComponent {
       'mensagem': ['', [Validators.required, Validators.minLength(3)]]
     });
   }
-  validaCampos() {
-    return this.descricaoFormControl.valid
-  }
 
   criarNotificacao() {
     this.service.create(this.notificacaoForm.value['mensagem'])
@@ -53,20 +49,6 @@ export class NotificacaoCreateComponent {
             this.toast.error(ex.error.message)
           }
       });
-
-    // this.service.create(this.notificacao.mensagem).subscribe(() =>{
-    //   this.toast.success('Notificação enviada com sucesso!', 'Registrar Itens Para Reposição');
-    //   this.location.back();
-    // }, ex => {
-    //   if(ex.error.errors){
-    //     ex.error.errors.forEach((element: { message: string | undefined; }) => {
-    //       this.toast.error(element.message);
-    //     });
-    //   } else{
-    //     this.toast.error(ex.error.message)
-    //   }
-    // });
-
   }
   cancelar() {
     this.location.back();

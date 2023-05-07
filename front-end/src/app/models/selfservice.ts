@@ -1,6 +1,5 @@
 export interface SelfService {
   cartao?: any;
-  nome: string;
-  preco: number;
+  valorTotal: number;
   peso: number;
 }

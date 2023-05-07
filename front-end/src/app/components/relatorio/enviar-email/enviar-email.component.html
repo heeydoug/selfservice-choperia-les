@@ -1,0 +1,18 @@
+<div mat-dialog-content>
+  <h1 class="title">Enviar E-mail</h1>
+</div>
+
+<mat-dialog-content>
+  <mat-form-field appearance="fill" class="full-width">
+    <textarea matInput placeholder="Mensagem"  [(ngModel)]="email"></textarea>
+    <mat-label>Mensagem</mat-label>
+  </mat-form-field>
+</mat-dialog-content>
+
+<div mat-dialog-actions>
+  <div class="center">
+    <button mat-raised-button class="botao-cancelar" (click)="cancelar()">Cancelar</button>
+    <button mat-raised-button class="botao-sim" [disabled]="this.email.length < 10" (click)="confirmar()" cdkFocusInitial>Confirmar</button>
+  </div>
+
+</div>
