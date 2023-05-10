@@ -4,6 +4,7 @@ import com.doug.backendSelfChop.domain.CartaoCliente;
 import com.doug.backendSelfChop.dto.CartaoClienteDTO;
 import com.doug.backendSelfChop.dto.CartaoClienteGastosDTO;
 import com.doug.backendSelfChop.dto.ClienteDTO;
+import com.doug.backendSelfChop.exception.ClientWihoutCheckoutException;
 import com.doug.backendSelfChop.exception.ResourceInUseException;
 import com.doug.backendSelfChop.repository.CartaoClienteRepository;
 import lombok.RequiredArgsConstructor;
@@ -89,9 +90,12 @@ public class CartaoClienteService {
     }
 
     public CartaoClienteDTO desvincularCartao(String rfid){
-        CartaoCliente cartaoCliente = cartaoClienteRepository.findByRfidToUnlink(rfid);
-        cartaoCliente.setSaida(LocalDateTime.now());
-        return editarCartao(modelMapper.map(cartaoCliente,CartaoClienteDTO.class));
+        CartaoCliente cartaoCliente = cartaoClienteRepository.findByRfidWithouCheckout(rfid);
+        if (cartaoCliente.obterTotal() == 0.0 || !cartaoCliente.getStatus()){
+            cartaoCliente.setSaida(LocalDateTime.now());
+            return editarCartao(modelMapper.map(cartaoCliente,CartaoClienteDTO.class));
+        }
+        throw new ClientWihoutCheckoutException("Cliente ainda possui cartão em aberto");
     }
 
     public Double obterTotal(String rfid){
@@ -105,7 +109,7 @@ public class CartaoClienteService {
     }
 
     public ClienteDTO clienteByRfidWithouCheckout(String rfid){
-        CartaoCliente cartaoCliente = cartaoClienteRepository.findByRfidToClient(rfid);
+        CartaoCliente cartaoCliente = cartaoClienteRepository.findByRfidWithouCheckout(rfid);
         return modelMapper.map(cartaoCliente.getCliente(), ClienteDTO.class);
     }
 
