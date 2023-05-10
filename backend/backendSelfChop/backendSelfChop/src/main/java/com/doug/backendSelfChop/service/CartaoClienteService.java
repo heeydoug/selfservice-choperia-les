@@ -1,7 +1,6 @@
 package com.doug.backendSelfChop.service;
 
 import com.doug.backendSelfChop.domain.CartaoCliente;
-import com.doug.backendSelfChop.domain.CartaoClienteGastos;
 import com.doug.backendSelfChop.dto.CartaoClienteDTO;
 import com.doug.backendSelfChop.dto.CartaoClienteGastosDTO;
 import com.doug.backendSelfChop.dto.ClienteDTO;
@@ -105,8 +104,8 @@ public class CartaoClienteService {
         return modelMapper.map(cartaoCliente.getCliente(), ClienteDTO.class);
     }
 
-    public ClienteDTO clienteByRfidToUnlik(String rfid){
-        CartaoCliente cartaoCliente = cartaoClienteRepository.findByRfidToUnlink(rfid);
+    public ClienteDTO clienteByRfidWithouCheckout(String rfid){
+        CartaoCliente cartaoCliente = cartaoClienteRepository.findByRfidToClient(rfid);
         return modelMapper.map(cartaoCliente.getCliente(), ClienteDTO.class);
     }
 
