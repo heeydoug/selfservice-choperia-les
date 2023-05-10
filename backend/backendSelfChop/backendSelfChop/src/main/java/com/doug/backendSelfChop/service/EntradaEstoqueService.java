@@ -29,10 +29,10 @@ public class EntradaEstoqueService {
     public void EntradaChope(Chope chope){
         Optional<Chope> chopeBD = Optional.ofNullable(chopeRepository.findByRfid(chope.getRfid()));
         if (chopeBD.isEmpty()){
-            EntradaEstoque entradaEstoque = new EntradaEstoque(chope.getNome(),chope.getPrecoCompra(),1);
+            EntradaEstoque entradaEstoque = new EntradaEstoque(chope.getNome(),chope.getPrecoCompra(), (int) (chope.getSaldoEstoque()/100));
             entradaEstoqueRepository.save(entradaEstoque);
         }else if (chope.getSaldoEstoque() > chopeBD.get().getSaldoEstoque()){
-            EntradaEstoque entradaEstoque = new EntradaEstoque(chope.getNome(),chope.getPrecoCompra(),1);
+            EntradaEstoque entradaEstoque = new EntradaEstoque(chope.getNome(),chope.getPrecoCompra(),(int) (chope.getSaldoEstoque()/100));
             entradaEstoqueRepository.save(entradaEstoque);
         }
     }
