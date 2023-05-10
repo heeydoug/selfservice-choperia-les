@@ -32,7 +32,7 @@ public class EntradaEstoqueService {
             EntradaEstoque entradaEstoque = new EntradaEstoque(chope.getNome(),chope.getPrecoCompra(), (int) (chope.getSaldoEstoque()/100));
             entradaEstoqueRepository.save(entradaEstoque);
         }else if (chope.getSaldoEstoque() > chopeBD.get().getSaldoEstoque()){
-            EntradaEstoque entradaEstoque = new EntradaEstoque(chope.getNome(),chope.getPrecoCompra(),(int) (chope.getSaldoEstoque()-chopeBD.get().getSaldoEstoque()/100));
+            EntradaEstoque entradaEstoque = new EntradaEstoque(chope.getNome(),chope.getPrecoCompra(),(int) ((chope.getSaldoEstoque()-chopeBD.get().getSaldoEstoque())/100));
             entradaEstoqueRepository.save(entradaEstoque);
         }
     }
