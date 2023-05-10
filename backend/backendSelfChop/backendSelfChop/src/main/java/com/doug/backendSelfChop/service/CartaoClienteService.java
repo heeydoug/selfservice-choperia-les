@@ -49,15 +49,21 @@ public class CartaoClienteService {
 
     private void validarCartaoEmUso(String rfid) throws ResourceInUseException{
         Optional<CartaoCliente> cartaoCliente = Optional.ofNullable(cartaoClienteRepository.findByRfid(rfid));
+        Optional<CartaoCliente> cartaoClienteCheckout= Optional.ofNullable(cartaoClienteRepository.findByRfidWithouCheckout(rfid));
         if (cartaoCliente.isPresent()){
             throw new ResourceInUseException(messageSource.getMessage("Cartao já possui cliente atrelado",new Object[]{cartaoCliente.get().getCliente().getNome()}, Locale.getDefault()));
+        } else if (cartaoClienteCheckout.isPresent()) {
+            throw new ResourceInUseException(messageSource.getMessage("Cartao atualmente se encontra fechado mas sem Checkout",new Object[]{cartaoCliente.get().getCliente().getNome()}, Locale.getDefault()));
         }
     }
 
-    private void validarClienteComCartao(String rfid) throws ResourceInUseException{
-        Optional<CartaoCliente> cartaoCliente = Optional.ofNullable(cartaoClienteRepository.findByRfid(rfid));
+    private void validarClienteComCartao(String cpf) throws ResourceInUseException{
+        Optional<CartaoCliente> cartaoCliente = Optional.ofNullable(cartaoClienteRepository.findByCliente(cpf));
+        Optional<CartaoCliente> cartaoClienteCheckout = Optional.ofNullable(cartaoClienteRepository.findByCpfWithouCheckout(cpf));
         if (cartaoCliente.isPresent()){
             throw new ResourceInUseException(messageSource.getMessage("Cliente já possui cartão",new Object[]{cartaoCliente.get().getRfid()}, Locale.getDefault()));
+        }else if (cartaoClienteCheckout.isPresent()) {
+            throw new ResourceInUseException(messageSource.getMessage("Cliente possui cartão fechado mas sem Checkout",new Object[]{cartaoCliente.get().getCliente().getNome()}, Locale.getDefault()));
         }
     }
 
