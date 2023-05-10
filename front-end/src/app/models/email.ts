@@ -1,4 +1,6 @@
 export interface Email{
-  email?: string;
+  conteudo?: string;
+  dataInicio?: Date;
+  dataFim?: Date;
 
 }

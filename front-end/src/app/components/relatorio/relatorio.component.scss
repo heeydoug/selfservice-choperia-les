@@ -1,8 +1,12 @@
 
 .container{
-  width: 90%;
+  width: 70%;
   margin: 1rem auto;
 
+}
+.half-container{
+  width: 50%;
+  margin: 1rem auto;
 }
 
 .mat-mdc-form-field {
@@ -23,16 +27,14 @@
 }
 
 button {
+  flex: 1 0 30%; /* Distribui os botões em três colunas, cada uma com 30% da largura do contêiner */
   margin: 20px;
   color: #01a86c;
 }
 
 .botoes{
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  margin-top: 20px;
+  flex-wrap: wrap;;
 }
 
 table {

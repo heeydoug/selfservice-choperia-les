@@ -59,6 +59,9 @@ import { CaixaComponent } from './components/caixa/caixa.component';
 import { AlterarPrecoSelfserviceComponent } from './components/selfservice/alterar-preco-selfservice/alterar-preco-selfservice.component';
 import { RelatorioComponent } from './components/relatorio/relatorio.component';
 import { EnviarEmailComponent } from './components/relatorio/enviar-email/enviar-email.component';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import { MatNativeDateModule } from '@angular/material/core';
+
 
 
 
@@ -134,7 +137,9 @@ import { EnviarEmailComponent } from './components/relatorio/enviar-email/enviar
             progressBar: true
         }),
         NgMultiSelectDropDownModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatDatepickerModule,
+      MatNativeDateModule
 
     ],
   providers: [
