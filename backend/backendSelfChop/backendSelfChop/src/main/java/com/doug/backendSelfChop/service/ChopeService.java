@@ -6,6 +6,7 @@ import com.doug.backendSelfChop.dto.CartaoClienteGastosDTO;
 import com.doug.backendSelfChop.dto.ChopeDTO;
 import com.doug.backendSelfChop.dto.GastosChopeDTO;
 import com.doug.backendSelfChop.repository.ChopeRepository;
+import com.doug.backendSelfChop.repository.EntradaEstoqueRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ public class ChopeService {
 
     private final CartaoClienteService cartaoClienteService;
 
+    private final EntradaEstoqueService entradaEstoqueService;
+
     private final CartaoClienteGastosService cartaoClienteGastosService;
 
     public ChopeDTO getChopeByRfid(String rfid){
@@ -34,6 +37,7 @@ public class ChopeService {
 
     public ChopeDTO cadastrarChope(ChopeDTO chopeDTO){
         Chope chope = modelMapper.map(chopeDTO, Chope.class);
+        entradaEstoqueService.EntradaChope(chope);
         chope = chopeRepository.save(chope);
         return modelMapper.map(chope, ChopeDTO.class);
     }
@@ -54,6 +58,9 @@ public class ChopeService {
     }
 
     public void salvarTodos(List<Chope> chopesList){
+        for (Chope chope : chopesList){
+            entradaEstoqueService.EntradaChope(chope);
+        }
         chopeRepository.saveAll(chopesList);
     }
 

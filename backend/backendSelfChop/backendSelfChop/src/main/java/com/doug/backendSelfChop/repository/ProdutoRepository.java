@@ -9,4 +9,5 @@ public interface ProdutoRepository extends JpaRepository<Produto, String> {
 
     Produto findByCodigoBarras(String codigoBarras);
     String deleteByCodigoBarras(String codigoBarras);
+
 }
