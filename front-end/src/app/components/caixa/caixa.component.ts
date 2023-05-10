@@ -68,9 +68,10 @@ export class CaixaComponent implements OnInit{
       .pipe()
       .subscribe({
         next: () => {
-          this.toast.success('Venda finalizada com sucesso!', 'Finalizar Venda')
           this.imprimirComprovante();
-          this.form.reset();
+          this.cancelar();
+          this.toast.success('Venda finalizada com sucesso!', 'Finalizar Venda')
+
         },
         error: () => this.toast.error('Erro ao finalizar venda!', 'Finalizar Venda')
       });

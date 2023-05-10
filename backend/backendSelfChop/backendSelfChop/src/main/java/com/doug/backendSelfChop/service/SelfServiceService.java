@@ -26,7 +26,7 @@ public class SelfServiceService {
     public void cadastrarSelf(GastosSelfDTO gastosSelfDTO){
         CartaoClienteDTO cartaoClienteDTO = cartaoClienteService.findByRfidOpenCart(gastosSelfDTO.getCartao());
         String descricao = "Self-Service - Peso: " + String.valueOf(gastosSelfDTO.getPeso()) + "Kg";
-        CartaoClienteGastosDTO cartaoClienteGastosDTO = new CartaoClienteGastosDTO(cartaoClienteDTO,gastosSelfDTO.getPreco(),descricao);
+        CartaoClienteGastosDTO cartaoClienteGastosDTO = new CartaoClienteGastosDTO(cartaoClienteDTO,gastosSelfDTO.getValorTotal(),descricao);
         cartaoClienteGastosService.cadastrarGasto(cartaoClienteGastosDTO);
     }
 

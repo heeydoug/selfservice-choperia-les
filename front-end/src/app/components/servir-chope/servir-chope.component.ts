@@ -73,8 +73,11 @@ export class ServirChopeComponent implements OnInit{
               this.toast.error(element.message);
             });
           }
-          else{
+          else if(!this.chopeSelecionado.cartao){
             this.toast.error('Insira um cartão RFID!', 'Servir Chope');
+          }
+          else{
+            this.toast.error( ex.error.message, 'Servir Chope');
           }
         });
   }

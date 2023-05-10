@@ -35,6 +35,10 @@ import {
 } from "./components/entrada-clientes/entrada-clientes-cartao/entrada-clientes-cartao.component";
 import {ServirChopeComponent} from "./components/servir-chope/servir-chope.component";
 import {CaixaComponent} from "./components/caixa/caixa.component";
+import {
+  AlterarPrecoSelfserviceComponent
+} from "./components/selfservice/alterar-preco-selfservice/alterar-preco-selfservice.component";
+import {RelatorioComponent} from "./components/relatorio/relatorio.component";
 
 const routes: Routes = [
 
@@ -135,6 +139,9 @@ const routes: Routes = [
   {
     path: 'selfservice/registrarNotificacao', component: NotificacaoCreateComponent
   },
+  {
+    path: 'selfservice/alterarPreco', component: AlterarPrecoSelfserviceComponent
+  },
 
   {
     path: 'cozinha', component: NotificacaoListComponent
@@ -142,6 +149,10 @@ const routes: Routes = [
 
   {
     path: 'caixa', component: CaixaComponent
+  },
+
+  {
+    path: 'relatorios', component: RelatorioComponent
   },
 
 
