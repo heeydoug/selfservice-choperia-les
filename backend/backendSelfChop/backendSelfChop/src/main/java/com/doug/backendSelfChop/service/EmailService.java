@@ -1,6 +1,7 @@
 package com.doug.backendSelfChop.service;
 
 import com.doug.backendSelfChop.domain.Cliente;
+import com.doug.backendSelfChop.dto.EmailDTO;
 import com.doug.backendSelfChop.repository.ClienteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,12 @@ public class EmailService {
 
     private final String nome = "Choperia Bola de Cristal";
 
-    public Integer sendPromotion(String conteudo) throws MessagingException {
-        return sendEmail(conteudo, "Promoção na ");
+    public Integer sendPromotion(EmailDTO emailDTO) throws MessagingException {
+        return sendEmail(emailDTO, "Promoção na ");
     }
 
-    private Integer sendEmail(String conteudo,String assunto) throws MessagingException{
-        List<Cliente> clientes = clienteRepository.findClientWithRecentAccount();
+    private Integer sendEmail(EmailDTO emailDTO,String assunto) throws MessagingException{
+        List<Cliente> clientes = clienteRepository.findClientWithAccountBetween(emailDTO.getDataInicio(),emailDTO.getDataFim());
         Properties propriedades = new Properties();
         propriedades.put("mail.smtp.host", "smtp.gmail.com");
         propriedades.put("mail.smtp.port", "465");
@@ -43,12 +44,11 @@ public class EmailService {
                     return new PasswordAuthentication("choperiaboladecristal@gmail.com", "pvdrrewjbqvgkido");
                 }
             });
-
             Message mensagem = new MimeMessage(sessao);
             mensagem.setFrom(new InternetAddress("choperiaboladecristal@gmail.com"));
             mensagem.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
             mensagem.setSubject(assunto + nome);
-            mensagem.setText(conteudo);
+            mensagem.setText(emailDTO.getConteudo());
             Transport.send(mensagem);
         }
         return clientes.size();

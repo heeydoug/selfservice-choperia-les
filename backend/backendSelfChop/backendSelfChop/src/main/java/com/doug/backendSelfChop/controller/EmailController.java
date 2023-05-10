@@ -1,5 +1,6 @@
 package com.doug.backendSelfChop.controller;
 
+import com.doug.backendSelfChop.dto.EmailDTO;
 import com.doug.backendSelfChop.service.EmailService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +15,11 @@ import javax.mail.MessagingException;
 @AllArgsConstructor
 @RequestMapping(value = "api/email")
 public class EmailController {
-
     @Autowired
     private final EmailService emailService;
 
     @PostMapping("/promocao")   
-    public Integer enviarPromocao(@RequestBody String mensagem) throws MessagingException {
-        return emailService.sendPromotion(mensagem);
+    public Integer enviarPromocao(@RequestBody EmailDTO emailDTO) throws MessagingException {
+        return emailService.sendPromotion(emailDTO);
     }
 }
