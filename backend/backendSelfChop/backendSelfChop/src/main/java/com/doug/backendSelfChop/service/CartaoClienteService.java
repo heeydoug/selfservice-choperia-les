@@ -74,7 +74,9 @@ public class CartaoClienteService {
     }
 
     public CartaoClienteDTO editarCartao(CartaoClienteDTO cartaoClienteDTO){
-        return cadastrarCartao(cartaoClienteDTO);
+        CartaoCliente cartaoCliente = modelMapper.map(cartaoClienteDTO, CartaoCliente.class);
+        cartaoCliente = cartaoClienteRepository.save(cartaoCliente);
+        return modelMapper.map(cartaoCliente, CartaoClienteDTO.class);
     }
 
     public List<CartaoClienteDTO> findOpenCart(){
