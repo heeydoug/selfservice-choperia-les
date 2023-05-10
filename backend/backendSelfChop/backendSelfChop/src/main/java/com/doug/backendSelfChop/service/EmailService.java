@@ -29,7 +29,7 @@ public class EmailService {
     }
 
     private Integer sendEmail(EmailDTO emailDTO,String assunto) throws MessagingException{
-        List<Cliente> clientes = clienteRepository.findClientWithAccountBetween(emailDTO.getDataInicio(),emailDTO.getDataFim());
+        List<Cliente> clientes = clienteRepository.findClientWithAccountBetween(emailDTO.getDataInicio(),emailDTO.getDataFim().plusDays(1));
         Properties propriedades = new Properties();
         propriedades.put("mail.smtp.host", "smtp.gmail.com");
         propriedades.put("mail.smtp.port", "465");
