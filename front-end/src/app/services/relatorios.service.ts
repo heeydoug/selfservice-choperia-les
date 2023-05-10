@@ -11,7 +11,7 @@ export class RelatoriosService {
 
   constructor(private http: HttpClient) { }
 
-  enviarEmail(mensagem: string): Observable<Email>{
-    return this.http.post<Email>( 'api/email/promocao', mensagem);
+  enviarEmail(email: Email): Observable<Email>{
+    return this.http.post<Email>( 'api/email/promocao', email);
   }
 }

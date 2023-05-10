@@ -10,6 +10,8 @@
       <input matInput
              [(ngModel)]="cliente.cpf"
              name="cpf"
+             [minlength]="11"
+             [maxlength]="11"
              [formControl]="cpf"
              [disabled]="true">
     </mat-form-field>

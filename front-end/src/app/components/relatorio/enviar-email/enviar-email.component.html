@@ -3,8 +3,24 @@
 </div>
 
 <mat-dialog-content>
+
+  <div class="display-flex">
+    <mat-form-field appearance="fill" class="half-width">
+      <input matInput [(ngModel)]="email.dataInicio" name="dataInicio" [matDatepicker]="picker1" placeholder="Data inicial">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="half-width" style="margin-left: 20px">
+      <input matInput [(ngModel)]="email.dataFim" name="dataFim" [matDatepicker]="picker2" placeholder="Data final">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+
   <mat-form-field appearance="fill" class="full-width">
-    <textarea matInput placeholder="Mensagem"  [(ngModel)]="email"></textarea>
+    <textarea matInput placeholder="Mensagem"  [(ngModel)]="email.conteudo"></textarea>
     <mat-label>Mensagem</mat-label>
   </mat-form-field>
 </mat-dialog-content>
@@ -12,7 +28,7 @@
 <div mat-dialog-actions>
   <div class="center">
     <button mat-raised-button class="botao-cancelar" (click)="cancelar()">Cancelar</button>
-    <button mat-raised-button class="botao-sim" [disabled]="this.email.length < 10" (click)="confirmar()" cdkFocusInitial>Confirmar</button>
+    <button mat-raised-button class="botao-sim" [disabled]="isValid()" (click)="confirmar()" cdkFocusInitial>Confirmar</button>
   </div>
 
 </div>

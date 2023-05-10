@@ -79,6 +79,7 @@ export class ServirChopeComponent implements OnInit{
           else{
             this.toast.error( ex.error.message, 'Servir Chope');
           }
+
         });
   }
 }
