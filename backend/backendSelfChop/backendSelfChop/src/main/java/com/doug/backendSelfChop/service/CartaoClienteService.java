@@ -93,6 +93,7 @@ public class CartaoClienteService {
         CartaoCliente cartaoCliente = cartaoClienteRepository.findByRfidWithouCheckout(rfid);
         if (cartaoCliente.obterTotal() == 0.0 || !cartaoCliente.getStatus()){
             cartaoCliente.setSaida(LocalDateTime.now());
+            cartaoCliente.setStatus(false);
             return editarCartao(modelMapper.map(cartaoCliente,CartaoClienteDTO.class));
         }
         throw new ClientWihoutCheckoutException("Cliente ainda possui cartão em aberto");
