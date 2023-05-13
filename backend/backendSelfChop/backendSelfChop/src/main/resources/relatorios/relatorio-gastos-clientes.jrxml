@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.3.final using JasperReports Library version 6.20.3-415f9428cffdb6805c6f85bbb29ebaf18813a2ab  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3b183c2b-644b-48d4-b904-ec0f8f236e24">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="selfservice-choperia-db"/>
+	<parameter name="DataInicial" class="java.util.Date"/>
+	<parameter name="DataFinal" class="java.util.Date"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT 
+    c.cpf AS cpf_cliente, 
+    c.nome AS nome_cliente, 
+   COUNT(DISTINCT cc.id) AS quantidade_cartoes, 
+    SUM(ccg.valor) AS total_gastos
+FROM 
+    cliente c
+    INNER JOIN cartao_cliente cc ON c.cpf = cc.cpf_cliente
+    INNER JOIN cartao_cliente_gastos ccg ON cc.id = ccg.id_cartao_cliente
+WHERE 
+    ccg.data BETWEEN TO_DATE($P{DataInicial} || ' 00:00:00', 'yyyy-MM-dd HH24:MI:SS') 
+                 AND TO_DATE($P{DataFinal} || ' 23:59:59', 'yyyy-MM-dd HH24:MI:SS')
+GROUP BY 
+    c.cpf, c.nome, cc.cpf_cliente, cc.id
+ORDER BY 
+    total_gastos DESC
+]]>
+	</queryString>
+	<field name="cpf_cliente" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="cpf_cliente"/>
+		<property name="com.jaspersoft.studio.field.label" value="cpf_cliente"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
+	</field>
+	<field name="nome_cliente" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nome_cliente"/>
+		<property name="com.jaspersoft.studio.field.label" value="nome_cliente"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
+	</field>
+	<field name="quantidade_cartoes" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="quantidade_cartoes"/>
+		<property name="com.jaspersoft.studio.field.label" value="quantidade_cartoes"/>
+	</field>
+	<field name="total_gastos" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="total_gastos"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_gastos"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="85" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="554" height="85" uuid="a079720a-9df3-407e-b644-2570a31e1e53"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="-20" y="27" width="595" height="30" uuid="6de98d33-7dcf-4950-910a-5cf37c1254f8"/>
+				<textElement textAlignment="Center">
+					<font size="22"/>
+				</textElement>
+				<text><![CDATA[Relatório de Gastos de Clientes]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="55" width="310" height="30" uuid="f7b0b88f-333a-439b-819c-c8925de73c08"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Período de " + new SimpleDateFormat("dd/MM/yyyy").format($P{DataInicial} ) + " até " + new SimpleDateFormat("dd/MM/yyyy").format($P{DataFinal})]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="30">
+			<textField>
+				<reportElement x="454" y="0" width="100" height="30" uuid="7f28e327-d99f-4a6e-a242-6ed04ddc6033"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Data : " + new SimpleDateFormat("dd/MM/yyyy").format(new Date())]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="1" height="30" uuid="498c1b34-d436-46fc-af8f-5598166faec2"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="120" height="30" uuid="ce384c57-ab4c-44db-bdc4-ad01fc939044">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="aa119467-794d-462a-be75-c6eda0af02fe"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[CPF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="0" width="234" height="30" uuid="f1c1ef1c-9be2-422a-893b-c0cabc029b40">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a0b65cd6-3f68-4a51-a010-4802e9ec9027"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="0" width="100" height="30" uuid="10a156cd-5cfa-4fdc-976f-5145e1480d92">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a0b65cd6-3f68-4a51-a010-4802e9ec9027"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Qtd. Cartões]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="454" y="0" width="100" height="30" uuid="8100b80f-e196-4ed7-ba13-82aad6a37f73">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a0b65cd6-3f68-4a51-a010-4802e9ec9027"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Total Gasto]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="120" height="30" uuid="a4ec8b5d-26e8-470d-8fd1-7acf9c9e62bb"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cpf_cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="0" width="234" height="30" uuid="f136f784-6b4b-4675-888a-db45153f6552"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nome_cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="354" y="0" width="100" height="30" uuid="1d8d9bf0-8bcc-4a37-a270-2393bb95548f"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{quantidade_cartoes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="454" y="0" width="100" height="30" uuid="ed28268c-694b-4d6d-aed8-5cb12b801c64"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{total_gastos}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

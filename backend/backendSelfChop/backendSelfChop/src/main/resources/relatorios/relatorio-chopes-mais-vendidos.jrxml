@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.3.final using JasperReports Library version 6.20.3-415f9428cffdb6805c6f85bbb29ebaf18813a2ab  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3b183c2b-644b-48d4-b904-ec0f8f236e24">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="selfservice-choperia-db"/>
+	<parameter name="DataInicial" class="java.util.Date"/>
+	<parameter name="DataFinal" class="java.util.Date"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT 
+  INITCAP(descricao) as descricao, 
+  COUNT(*) as qtd
+FROM cartao_cliente_gastos
+WHERE descricao NOT LIKE '%Self-Service%' 
+and 
+    data BETWEEN TO_DATE($P{DataInicial} || ' 00:00:00', 'yyyy-MM-dd HH24:MI:SS') 
+                 AND TO_DATE($P{DataFinal} || ' 23:59:59', 'yyyy-MM-dd HH24:MI:SS')
+GROUP BY INITCAP(descricao)
+ORDER BY qtd DESC;
+]]>
+	</queryString>
+	<field name="descricao" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="descricao"/>
+		<property name="com.jaspersoft.studio.field.label" value="descricao"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cartao_cliente_gastos"/>
+	</field>
+	<field name="qtd" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="qtd"/>
+		<property name="com.jaspersoft.studio.field.label" value="qtd"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="85" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="554" height="85" uuid="a079720a-9df3-407e-b644-2570a31e1e53"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="-20" y="27" width="595" height="30" uuid="6de98d33-7dcf-4950-910a-5cf37c1254f8"/>
+				<textElement textAlignment="Center">
+					<font size="22"/>
+				</textElement>
+				<text><![CDATA[Relatório de Chopes mais Vendidos]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="55" width="310" height="30" uuid="4b7202eb-29f6-40a9-8797-7fcbde590937"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Período de " + new SimpleDateFormat("dd/MM/yyyy").format($P{DataInicial} ) + " até " + new SimpleDateFormat("dd/MM/yyyy").format($P{DataFinal})]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="30">
+			<textField>
+				<reportElement x="454" y="0" width="100" height="30" uuid="7f28e327-d99f-4a6e-a242-6ed04ddc6033"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Data : " + new SimpleDateFormat("dd/MM/yyyy").format(new Date())]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="1" height="30" uuid="e167be4a-9602-4fdc-a83f-c1e30376e7e0"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="280" height="30" uuid="ce384c57-ab4c-44db-bdc4-ad01fc939044">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="aa119467-794d-462a-be75-c6eda0af02fe"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nome Chope]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="0" width="274" height="30" uuid="f1c1ef1c-9be2-422a-893b-c0cabc029b40">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a0b65cd6-3f68-4a51-a010-4802e9ec9027"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Quantidade vendida]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="280" height="30" uuid="3a859e51-4614-40da-a536-d721653005b3"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="0" width="274" height="30" uuid="0aa1029f-f1a7-4438-b061-4e68f249588e"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{qtd}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

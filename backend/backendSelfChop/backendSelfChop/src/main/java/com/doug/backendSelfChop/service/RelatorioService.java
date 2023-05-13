@@ -4,6 +4,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.doug.backendSelfChop.dto.RelatorioDatasDTO;
 import lombok.RequiredArgsConstructor;
 import net.sf.jasperreports.engine.*;
 import org.springframework.stereotype.Service;
@@ -23,13 +25,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Transactional
 public class RelatorioService {
-    public byte[] gerarRelatorioEstoque() throws JRException, SQLException {
-        Connection connection = DriverManager.getConnection(
-                "jdbc:postgresql://localhost:5432/selfservice-choperia-db",
-                "postgres",
-                "123"
-        );
 
+
+    public byte[] gerarRelatorioEstoque() throws JRException, SQLException {
+        Connection connection = getConnection();
         JasperReport jasperReport = JasperCompileManager.compileReport(
                 getClass().getResourceAsStream("/relatorios/relatorio-estoque.jrxml")
         );
@@ -38,7 +37,76 @@ public class RelatorioService {
         params.put(JRParameter.REPORT_CONNECTION, connection);
 
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, connection);
+        connection.close();
+        return JasperExportManager.exportReportToPdf(jasperPrint);
+    }
 
+    public byte[] gerarRelatorioGastos(RelatorioDatasDTO datas) throws JRException, SQLException {
+        Connection connection = getConnection();
+        JasperReport jasperReport = JasperCompileManager.compileReport(
+                getClass().getResourceAsStream("/relatorios/relatorio-gastos-clientes.jrxml")
+        );
+
+        Map<String, Object> params = new HashMap<>();
+        params.put(JRParameter.REPORT_CONNECTION, connection);
+        params.put("DataInicial", datas.getDataInicial());
+        params.put("DataFinal", datas.getDataFinal());
+
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, connection);
+        connection.close();
+        return JasperExportManager.exportReportToPdf(jasperPrint);
+    }
+
+    private Connection getConnection() throws SQLException {
+        String url = "jdbc:postgresql://localhost:5432/selfservice-choperia-db";
+        String username = "postgres";
+        String password = "123";
+        return DriverManager.getConnection(url, username, password);
+    }
+
+    public byte[] gerarRelatorioFaltaEstoque() throws JRException, SQLException {
+        Connection connection = getConnection();
+        JasperReport jasperReport = JasperCompileManager.compileReport(
+                getClass().getResourceAsStream("/relatorios/relatorio-falta-estoque.jrxml")
+        );
+
+        Map<String, Object> params = new HashMap<>();
+        params.put(JRParameter.REPORT_CONNECTION, connection);
+
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, connection);
+        connection.close();
+        return JasperExportManager.exportReportToPdf(jasperPrint);
+    }
+
+    public byte[] gerarRelatorioChopesMaisVendidos(RelatorioDatasDTO datas) throws JRException, SQLException {
+        Connection connection = getConnection();
+        JasperReport jasperReport = JasperCompileManager.compileReport(
+                getClass().getResourceAsStream("/relatorios/relatorio-chopes-mais-vendidos.jrxml")
+        );
+
+        Map<String, Object> params = new HashMap<>();
+        params.put(JRParameter.REPORT_CONNECTION, connection);
+        params.put("DataInicial", datas.getDataInicial());
+        params.put("DataFinal", datas.getDataFinal());
+
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, connection);
+        connection.close();
+        return JasperExportManager.exportReportToPdf(jasperPrint);
+    }
+
+    public byte[] gerarRelatorioDespesas(RelatorioDatasDTO datas) throws JRException, SQLException {
+        Connection connection = getConnection();
+        JasperReport jasperReport = JasperCompileManager.compileReport(
+                getClass().getResourceAsStream("/relatorios/relatorio-despesas.jrxml")
+        );
+
+        Map<String, Object> params = new HashMap<>();
+        params.put(JRParameter.REPORT_CONNECTION, connection);
+        params.put("DataInicial", datas.getDataInicial());
+        params.put("DataFinal", datas.getDataFinal());
+
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, connection);
+        connection.close();
         return JasperExportManager.exportReportToPdf(jasperPrint);
     }
 }

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.3.final using JasperReports Library version 6.20.3-415f9428cffdb6805c6f85bbb29ebaf18813a2ab  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3b183c2b-644b-48d4-b904-ec0f8f236e24">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="selfservice-choperia-db"/>
+	<parameter name="DataInicial" class="java.util.Date"/>
+	<parameter name="DataFinal" class="java.util.Date"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT 
+    COALESCE((SELECT SUM(valor) FROM cartao_cliente_gastos WHERE data BETWEEN TO_DATE($P{DataInicial} || ' 00:00:00', 'yyyy-MM-dd HH24:MI:SS')
+                                                            AND TO_DATE($P{DataFinal} || ' 23:59:59', 'yyyy-MM-dd HH24:MI:SS')
+                                                            AND descricao NOT LIKE '%Self-Service%'), 0) AS total_cartao_cliente_gastos,
+    COALESCE((SELECT SUM(preco_compra * quantidade) FROM entrada_estoque WHERE data_entrada BETWEEN TO_DATE($P{DataInicial} || ' 00:00:00', 'yyyy-MM-dd HH24:MI:SS')
+                                                                           AND TO_DATE($P{DataFinal} || ' 23:59:59', 'yyyy-MM-dd HH24:MI:SS')), 0) AS total_entrada_estoque,
+    COALESCE((SELECT SUM(valor) FROM cartao_cliente_gastos WHERE data BETWEEN TO_DATE($P{DataInicial} || ' 00:00:00', 'yyyy-MM-dd HH24:MI:SS')
+                                                            AND TO_DATE($P{DataFinal} || ' 23:59:59', 'yyyy-MM-dd HH24:MI:SS')
+                                                            AND descricao NOT LIKE '%Self-Service%'), 0) - 
+    COALESCE((SELECT SUM(preco_compra * quantidade) FROM entrada_estoque WHERE data_entrada BETWEEN TO_DATE($P{DataInicial} || ' 00:00:00', 'yyyy-MM-dd HH24:MI:SS')
+                                                                           AND TO_DATE($P{DataFinal} || ' 23:59:59', 'yyyy-MM-dd HH24:MI:SS')), 0) AS saldo_total;
+]]>
+	</queryString>
+	<field name="total_cartao_cliente_gastos" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="total_cartao_cliente_gastos"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_cartao_cliente_gastos"/>
+	</field>
+	<field name="total_entrada_estoque" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="total_entrada_estoque"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_entrada_estoque"/>
+	</field>
+	<field name="saldo_total" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="saldo_total"/>
+		<property name="com.jaspersoft.studio.field.label" value="saldo_total"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="85" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="554" height="85" uuid="a079720a-9df3-407e-b644-2570a31e1e53"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="-20" y="27" width="595" height="30" uuid="6de98d33-7dcf-4950-910a-5cf37c1254f8"/>
+				<textElement textAlignment="Center">
+					<font size="22"/>
+				</textElement>
+				<text><![CDATA[Relatório de Despesas]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="55" width="310" height="30" uuid="21df05da-8ddf-471c-bfb0-37e852c7aca2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Período de " + new SimpleDateFormat("dd/MM/yyyy").format($P{DataInicial} ) + " até " + new SimpleDateFormat("dd/MM/yyyy").format($P{DataFinal})]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="30">
+			<textField>
+				<reportElement x="454" y="0" width="100" height="30" uuid="7f28e327-d99f-4a6e-a242-6ed04ddc6033"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Data : " + new SimpleDateFormat("dd/MM/yyyy").format(new Date())]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="1" height="30" uuid="a3e97f46-38b7-4791-b90d-4872f213e156"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="180" height="30" uuid="ce384c57-ab4c-44db-bdc4-ad01fc939044">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="aa119467-794d-462a-be75-c6eda0af02fe"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Total de Despesas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="0" width="200" height="30" uuid="f1c1ef1c-9be2-422a-893b-c0cabc029b40">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a0b65cd6-3f68-4a51-a010-4802e9ec9027"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Total de Vendas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="0" width="174" height="30" uuid="10a156cd-5cfa-4fdc-976f-5145e1480d92">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a0b65cd6-3f68-4a51-a010-4802e9ec9027"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Renda Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="180" height="30" uuid="56a45898-51ad-4aba-bd76-92e023ef0fb1"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{total_entrada_estoque}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="0" width="200" height="30" uuid="48d6ee29-8d90-4e2a-9d3f-6fde7afb1f9b"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{total_cartao_cliente_gastos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="0" width="174" height="30" uuid="a899ff4e-0b15-4c66-bd2d-3837479816d3"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{saldo_total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
