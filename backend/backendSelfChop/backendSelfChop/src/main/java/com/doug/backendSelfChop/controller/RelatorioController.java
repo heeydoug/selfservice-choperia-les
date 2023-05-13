@@ -69,7 +69,7 @@ public class RelatorioController {
         byte[] pdf = relatorioService.gerarRelatorioDespesas(relatorioDatasDTO);
         org.springframework.http.HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);
-        headers.setContentDispositionFormData("inline", "relatorio-chopes-mais-vendidos.pdf");
+        headers.setContentDispositionFormData("inline", "relatorio-despesas.pdf");
         return ResponseEntity.ok().headers(headers).body(pdf);
     }
 }
