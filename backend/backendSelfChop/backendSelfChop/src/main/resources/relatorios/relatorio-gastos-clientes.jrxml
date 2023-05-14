@@ -21,8 +21,7 @@ WHERE
 GROUP BY 
     c.cpf, c.nome, cc.cpf_cliente, cc.id
 ORDER BY 
-    total_gastos DESC
-]]>
+    total_gastos DESC]]>
 	</queryString>
 	<field name="cpf_cliente" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="cpf_cliente"/>
@@ -182,7 +181,7 @@ ORDER BY
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{total_gastos}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["R$" + new DecimalFormat("#.##").format(Math.round($F{total_gastos}* 100.0) / 100.0)]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

@@ -124,7 +124,7 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="42" splitType="Stretch">
+		<band height="30" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="180" height="30" uuid="56a45898-51ad-4aba-bd76-92e023ef0fb1"/>
 				<box>
@@ -134,7 +134,8 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{total_entrada_estoque}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["R$ " +new DecimalFormat("#.##").format(Math.round($F{total_entrada_estoque} * 100.0) / 100.0)
+]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="180" y="0" width="200" height="30" uuid="48d6ee29-8d90-4e2a-9d3f-6fde7afb1f9b"/>
@@ -145,7 +146,8 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{total_cartao_cliente_gastos}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["R$ " +new DecimalFormat("#.##").format(Math.round($F{total_cartao_cliente_gastos} * 100.0) / 100.0)
+]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="Variable Color" isPrintRepeatedValues="false" x="380" y="0" width="174" height="30" uuid="a899ff4e-0b15-4c66-bd2d-3837479816d3"/>
@@ -156,7 +158,8 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{saldo_total}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["R$ " +new DecimalFormat("#.##").format(Math.round($F{saldo_total} * 100.0) / 100.0)
+]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
