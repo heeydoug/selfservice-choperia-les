@@ -48,19 +48,25 @@ export class RelatoriosChopesConsumidosComponent implements OnInit{
 
   confirmar(){
     console.log(this.chopesConsumidos);
-    this.service.gerarRelatorioChopesConsumidos(this.chopesConsumidos).subscribe({
-      next: (response: any) => {
-        console.log(this.chopesConsumidos);
-        this.cancelar();
-        const blob = new Blob([response], { type: 'application/pdf' });
-        const url = URL.createObjectURL(blob);
-        window.open(url);
-        this.toast.success('Relatório gerado com sucesso!', 'Relatório de Chopes Consumidos')
-      },
-      error: (error: any) => {
-        console.log(error);
-        this.toast.error('Erro ao gerar relatório!', 'Erro');
-      }
-    });
+    if(this.chopesConsumidos.dataInicio && this.chopesConsumidos.dataFinal && this.chopesConsumidos.dataFinal < this.chopesConsumidos.dataInicio){
+      this.toast.error('Data final não pode ser anterior à data de início!', 'Erro');
+    }
+    else{
+      this.service.gerarRelatorioChopesConsumidos(this.chopesConsumidos).subscribe({
+        next: (response: any) => {
+          console.log(this.chopesConsumidos);
+          this.cancelar();
+          const blob = new Blob([response], { type: 'application/pdf' });
+          const url = URL.createObjectURL(blob);
+          window.open(url);
+          this.toast.success('Relatório gerado com sucesso!', 'Relatório de Chopes Consumidos')
+        },
+        error: (error: any) => {
+          console.log(error);
+          this.toast.error('Erro ao gerar relatório!', 'Erro');
+        }
+      });
+    }
+
   }
 }

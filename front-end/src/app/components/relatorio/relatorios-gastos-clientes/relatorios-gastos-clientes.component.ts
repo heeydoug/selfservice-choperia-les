@@ -48,19 +48,25 @@ export class RelatoriosGastosClientesComponent implements OnInit {
 
   confirmar() {
     console.log(this.gastosClientes);
-    this.service.gerarRelatorioGastosClientes(this.gastosClientes).subscribe({
-      next: (response: any) => {
-        console.log(this.gastosClientes);
-        this.cancelar();
-        const blob = new Blob([response], {type: 'application/pdf'});
-        const url = URL.createObjectURL(blob);
-        window.open(url);
-        this.toast.success('Relatório gerado com sucesso!', 'Relatório de Gastos de Clientes')
-      },
-      error: (error: any) => {
-        console.log(error);
-        this.toast.error('Erro ao gerar relatório!', 'Erro');
-      }
-    });
+    if(this.gastosClientes.dataInicio && this.gastosClientes.dataFinal && this.gastosClientes.dataFinal < this.gastosClientes.dataInicio){
+      this.toast.error('Data final não pode ser anterior à data de início!', 'Erro');
+    }
+    else{
+      this.service.gerarRelatorioGastosClientes(this.gastosClientes).subscribe({
+        next: (response: any) => {
+          console.log(this.gastosClientes);
+          this.cancelar();
+          const blob = new Blob([response], {type: 'application/pdf'});
+          const url = URL.createObjectURL(blob);
+          window.open(url);
+          this.toast.success('Relatório gerado com sucesso!', 'Relatório de Gastos de Clientes')
+        },
+        error: (error: any) => {
+          console.log(error);
+          this.toast.error('Erro ao gerar relatório!', 'Erro');
+        }
+      });
+    }
+
   }
 }

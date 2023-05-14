@@ -49,19 +49,25 @@ export class RelatoriosReceitasDespesasComponent {
 
   confirmar() {
     console.log(this.receitaDespesas);
-    this.service.gerarRelatorioReceitasDespesas(this.receitaDespesas).subscribe({
-      next: (response: any) => {
-        console.log(this.receitaDespesas);
-        this.cancelar();
-        const blob = new Blob([response], {type: 'application/pdf'});
-        const url = URL.createObjectURL(blob);
-        window.open(url);
-        this.toast.success('Relatório gerado com sucesso!', 'Relatório de Receitas x Despesas')
-      },
-      error: (error: any) => {
-        console.log(error);
-        this.toast.error('Erro ao gerar relatório!', 'Erro');
-      }
-    });
+    if(this.receitaDespesas.dataInicio && this.receitaDespesas.dataFinal && this.receitaDespesas.dataFinal < this.receitaDespesas.dataInicio){
+      this.toast.error('Data final não pode ser anterior à data de início!', 'Erro');
+    }
+    else{
+      this.service.gerarRelatorioReceitasDespesas(this.receitaDespesas).subscribe({
+        next: (response: any) => {
+          console.log(this.receitaDespesas);
+          this.cancelar();
+          const blob = new Blob([response], {type: 'application/pdf'});
+          const url = URL.createObjectURL(blob);
+          window.open(url);
+          this.toast.success('Relatório gerado com sucesso!', 'Relatório de Receitas x Despesas')
+        },
+        error: (error: any) => {
+          console.log(error);
+          this.toast.error('Erro ao gerar relatório!', 'Erro');
+        }
+      });
+    }
+
   }
 }
