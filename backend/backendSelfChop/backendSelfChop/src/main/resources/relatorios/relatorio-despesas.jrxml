@@ -3,6 +3,16 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3b183c2b-644b-48d4-b904-ec0f8f236e24">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="selfservice-choperia-db"/>
+	<style name="Variable Color">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{saldo_total}<0]]></conditionExpression>
+			<style forecolor="#FF0703"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{saldo_total}>0]]></conditionExpression>
+			<style forecolor="#37CF30"/>
+		</conditionalStyle>
+	</style>
 	<parameter name="DataInicial" class="java.util.Date"/>
 	<parameter name="DataFinal" class="java.util.Date"/>
 	<queryString language="SQL">
@@ -16,8 +26,7 @@
                                                             AND TO_DATE($P{DataFinal} || ' 23:59:59', 'yyyy-MM-dd HH24:MI:SS')
                                                             AND descricao NOT LIKE '%Self-Service%'), 0) - 
     COALESCE((SELECT SUM(preco_compra * quantidade) FROM entrada_estoque WHERE data_entrada BETWEEN TO_DATE($P{DataInicial} || ' 00:00:00', 'yyyy-MM-dd HH24:MI:SS')
-                                                                           AND TO_DATE($P{DataFinal} || ' 23:59:59', 'yyyy-MM-dd HH24:MI:SS')), 0) AS saldo_total;
-]]>
+                                                                           AND TO_DATE($P{DataFinal} || ' 23:59:59', 'yyyy-MM-dd HH24:MI:SS')), 0) AS saldo_total;]]>
 	</queryString>
 	<field name="total_cartao_cliente_gastos" class="java.lang.Double">
 		<property name="com.jaspersoft.studio.field.name" value="total_cartao_cliente_gastos"/>
@@ -139,7 +148,7 @@
 				<textFieldExpression><![CDATA[$F{total_cartao_cliente_gastos}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="380" y="0" width="174" height="30" uuid="a899ff4e-0b15-4c66-bd2d-3837479816d3"/>
+				<reportElement style="Variable Color" isPrintRepeatedValues="false" x="380" y="0" width="174" height="30" uuid="a899ff4e-0b15-4c66-bd2d-3837479816d3"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>

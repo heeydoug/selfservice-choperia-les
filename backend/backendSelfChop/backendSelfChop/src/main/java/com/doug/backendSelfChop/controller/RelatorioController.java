@@ -6,16 +6,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @RestController
 @AllArgsConstructor
@@ -36,8 +36,8 @@ public class RelatorioController {
     }
 
     @GetMapping("/gastos")
-    public ResponseEntity<byte[]> gerarRelatorioGastos(@RequestBody RelatorioDatasDTO relatorioDatasDTO) throws JRException, SQLException {
-        byte[] pdf = relatorioService.gerarRelatorioGastos(relatorioDatasDTO);
+    public ResponseEntity<byte[]> gerarRelatorioGastos(@RequestParam("dataInicio") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dataInicio, @RequestParam("dataFinal") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dataFinal) throws JRException, SQLException {
+        byte[] pdf = relatorioService.gerarRelatorioGastos(dataInicio,dataFinal);
         org.springframework.http.HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);
         headers.setContentDispositionFormData("inline", "relatorio-gastos-clientes.pdf");
@@ -56,8 +56,8 @@ public class RelatorioController {
     }
 
     @GetMapping("/chopes-mais-vendidos")
-    public ResponseEntity<byte[]> gerarRelatorioChopesMaisVendidos(@RequestBody RelatorioDatasDTO relatorioDatasDTO) throws JRException, SQLException {
-        byte[] pdf = relatorioService.gerarRelatorioChopesMaisVendidos(relatorioDatasDTO);
+    public ResponseEntity<byte[]> gerarRelatorioChopesMaisVendidos(@RequestParam("dataInicio") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dataInicio, @RequestParam("dataFinal") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dataFinal) throws JRException, SQLException {
+        byte[] pdf = relatorioService.gerarRelatorioChopesMaisVendidos(dataInicio,dataFinal);
         org.springframework.http.HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);
         headers.setContentDispositionFormData("inline", "relatorio-chopes-mais-vendidos.pdf");
@@ -65,8 +65,8 @@ public class RelatorioController {
     }
 
     @GetMapping("/despesas")
-    public ResponseEntity<byte[]> gerarRelatorioDespesas(@RequestBody RelatorioDatasDTO relatorioDatasDTO) throws JRException, SQLException {
-        byte[] pdf = relatorioService.gerarRelatorioDespesas(relatorioDatasDTO);
+    public ResponseEntity<byte[]> gerarRelatorioDespesas(@RequestParam("dataInicio") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dataInicio, @RequestParam("dataFinal") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dataFinal) throws JRException, SQLException {
+        byte[] pdf = relatorioService.gerarRelatorioDespesas(dataInicio,dataFinal);
         org.springframework.http.HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);
         headers.setContentDispositionFormData("inline", "relatorio-despesas.pdf");
