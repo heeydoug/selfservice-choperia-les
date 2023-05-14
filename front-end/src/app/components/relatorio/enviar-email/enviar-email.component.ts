@@ -58,20 +58,26 @@ export class EnviarEmailComponent implements OnInit{
   }
 
   confirmar() {
-    this.service.enviarEmail(this.email)
-      .subscribe({
-        next: () => {
-          this.cancelar();
-          this.dialogRef.afterClosed().subscribe(result => {
-            this.toast.success('E-mails enviados com sucesso!', 'Enviar E-mail');
-            console.log('Modal fechada com sucesso');
-            this.resetForm();
-          });
-        },
-        error: () => {
-          this.toast.error('Erro ao enviar e-mails!', 'Erro');
-        }
-      })
+    if(this.email.dataInicio && this.email.dataFim && this.email.dataFim < this.email.dataInicio){
+      this.toast.error('Data final não pode ser anterior à data de início!', 'Erro');
+    }
+    else{
+      this.service.enviarEmail(this.email)
+        .subscribe({
+          next: () => {
+            this.cancelar();
+            this.dialogRef.afterClosed().subscribe(result => {
+              this.toast.success('E-mails enviados com sucesso!', 'Enviar E-mail');
+              console.log('Modal fechada com sucesso');
+              this.resetForm();
+            });
+          },
+          error: () => {
+            this.toast.error('Erro ao enviar e-mails!', 'Erro');
+          }
+        });
+    }
+
   }
 
   isValid() {
