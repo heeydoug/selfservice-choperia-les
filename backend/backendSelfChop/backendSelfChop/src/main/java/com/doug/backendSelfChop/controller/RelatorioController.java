@@ -12,9 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @RestController
@@ -34,7 +32,6 @@ public class RelatorioController {
 
         return ResponseEntity.ok().headers(headers).body(pdf);
     }
-
     @GetMapping("/gastos")
     public ResponseEntity<byte[]> gerarRelatorioGastos(@RequestParam("dataInicio") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dataInicio, @RequestParam("dataFinal") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dataFinal) throws JRException, SQLException {
         byte[] pdf = relatorioService.gerarRelatorioGastos(dataInicio,dataFinal);

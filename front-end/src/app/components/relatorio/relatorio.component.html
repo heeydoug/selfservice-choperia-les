@@ -6,20 +6,24 @@
 
   <div class="botoes">
 
-    <button mat-raised-button mat-button-large mat-button-rounded style="background-color: #01a86c; padding: 50px; font-size: 1rem">
-      <span>Produtos</span>
+    <button (click)="abrirModalRelatorioEstoqueProduto()" mat-raised-button mat-button-large mat-button-rounded style="background-color: #01a86c; padding: 50px; font-size: 1rem">
+      <span>Estoque (Produto e Chope)</span>
     </button>
 
-    <button mat-raised-button mat-button-large mat-button-rounded style="background-color: #01a86c; padding: 50px; font-size: 1rem">
-      <span>Chopes</span>
+    <button (click)="abrirModalRelatorioFaltaEstoque()" mat-raised-button mat-button-large mat-button-rounded style="background-color: #01a86c; padding: 50px; font-size: 1rem">
+      <span>Falta de Estoques</span>
     </button>
 
-    <button mat-raised-button mat-button-large mat-button-rounded style="background-color: #01a86c; padding: 50px; font-size: 1rem">
-      <span>Clientes</span>
+    <button (click)="abrirModalRelatorioChopesConsumidos()" mat-raised-button mat-button-large mat-button-rounded style="background-color: #01a86c; padding: 50px; font-size: 1rem">
+      <span>Chopes Consumidos</span>
     </button>
 
-    <button mat-raised-button mat-button-large mat-button-rounded style="background-color: #01a86c; padding: 50px; font-size: 1rem">
-      <span>Administrativo</span>
+    <button (click)="abrirModalRelatorioGastosClientes()" mat-raised-button mat-button-large mat-button-rounded style="background-color: #01a86c; padding: 50px; font-size: 1rem">
+      <span>Gastos dos Clientes</span>
+    </button>
+
+    <button (click)="abrirModalRelatorioReceitasDespesas()" mat-raised-button mat-button-large mat-button-rounded style="background-color: #01a86c; padding: 50px; font-size: 1rem">
+      <span>Receita x Despesas</span>
     </button>
 
     <button (click)="abrirModalEnviarEmail()" mat-raised-button mat-button-large mat-button-rounded style="background-color: #01a86c; padding: 50px; font-size: 1rem">

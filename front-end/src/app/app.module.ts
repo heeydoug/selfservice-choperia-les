@@ -61,6 +61,11 @@ import { RelatorioComponent } from './components/relatorio/relatorio.component';
 import { EnviarEmailComponent } from './components/relatorio/enviar-email/enviar-email.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import { MatNativeDateModule } from '@angular/material/core';
+import { RelatorioEstoqueProdChopeComponent } from './components/relatorio/relatorio-estoque-prod-chope/relatorio-estoque-prod-chope.component';
+import { RelatorioFaltaEstoqueComponent } from './components/relatorio/relatorio-falta-estoque/relatorio-falta-estoque.component';
+import { RelatoriosChopesConsumidosComponent } from './components/relatorio/relatorios-chopes-consumidos/relatorios-chopes-consumidos.component';
+import { RelatoriosGastosClientesComponent } from './components/relatorio/relatorios-gastos-clientes/relatorios-gastos-clientes.component';
+import { RelatoriosReceitasDespesasComponent } from './components/relatorio/relatorios-receitas-despesas/relatorios-receitas-despesas.component';
 
 
 
@@ -110,6 +115,11 @@ import { MatNativeDateModule } from '@angular/material/core';
     AlterarPrecoSelfserviceComponent,
     RelatorioComponent,
     EnviarEmailComponent,
+    RelatorioEstoqueProdChopeComponent,
+    RelatorioFaltaEstoqueComponent,
+    RelatoriosChopesConsumidosComponent,
+    RelatoriosGastosClientesComponent,
+    RelatoriosReceitasDespesasComponent,
   ],
     imports: [
         BrowserModule,
