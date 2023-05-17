@@ -37,6 +37,7 @@ export class RelatorioComponent {
     }
   }
 
+
   abrirModalEnviarEmail() {
     this.dialog.open(EnviarEmailComponent, {
       width: '1000px',

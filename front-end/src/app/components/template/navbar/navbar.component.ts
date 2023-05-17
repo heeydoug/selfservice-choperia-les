@@ -27,6 +27,22 @@ export class NavbarComponent implements OnInit{
     return true;
   }
 
+  veririficarUsuario(tela: string): boolean {
+    if(localStorage.getItem('usuario')) {
+      let usuario = JSON.parse(localStorage.getItem('usuario') || '');
+
+      for(let i = 0; i < usuario.telas.length; i++ ) {
+        if(usuario.telas[i].nome === tela) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    return false;
+
+  }
+
 
   logout(): void{
     localStorage.removeItem("usuario");

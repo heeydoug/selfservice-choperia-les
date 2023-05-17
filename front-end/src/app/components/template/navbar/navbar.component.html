@@ -15,98 +15,98 @@
   <mat-sidenav *ngIf="estaLogado()" class="size-sidenav" #sidenav mode="side" opened>
     <mat-nav-list>
 
-      <a routerLink="/home" mat-list-item >
+      <a *ngIf="veririficarUsuario('Home')" routerLink="/home" mat-list-item >
         <div>
           <i class="material-icons" style="float: left;">home</i>
         </div>
         Home
       </a>
 
-      <a routerLink="/usuarios" mat-list-item>
+      <a *ngIf="veririficarUsuario('Usuários')" routerLink="/usuarios" mat-list-item>
         <div>
           <i class="material-icons" style="float: left;">supervised_user_circle</i>
         </div>
         Usuários
       </a>
 
-      <a routerLink="/produtos" mat-list-item>
+      <a *ngIf="veririficarUsuario('Produtos')" routerLink="/produtos" mat-list-item>
         <div>
           <i class="material-icons" style="float: left;">stars</i>
         </div>
         Produtos
       </a>
 
-      <a routerLink="/estoque/entrada" mat-list-item>
+      <a *ngIf="veririficarUsuario('Entrada Estoque')" routerLink="/estoque/entrada" mat-list-item>
         <div>
           <i class="material-icons" style="float: left;">assignment_returned</i>
         </div>
         Entrada Estoque
       </a>
 
-      <a routerLink="/estoque/saida" mat-list-item>
+      <a *ngIf="veririficarUsuario('Saída Estoque')" routerLink="/estoque/saida" mat-list-item>
         <div>
           <i class="material-icons" style="float: left;">assignment_return</i>
         </div>
         Saída Estoque
       </a>
 
-      <a routerLink="/clientes" mat-list-item>
+      <a *ngIf="veririficarUsuario('Cartão RFID Cliente')" routerLink="/clientes" mat-list-item>
         <div>
           <i class="material-icons" style="float: left;">person</i>
         </div>
         Clientes
       </a>
 
-      <a routerLink="/caixa" mat-list-item>
+      <a *ngIf="veririficarUsuario('Caixa')" routerLink="/caixa" mat-list-item>
         <div>
           <i class="material-icons" style="float: left;">add_shopping_cart</i>
         </div>
         Caixa
       </a>
 
-      <a routerLink="/selfservice" mat-list-item>
+      <a *ngIf="veririficarUsuario('Self-Service')"  routerLink="/selfservice" mat-list-item>
         <div>
           <i class="material-icons" style="float: left;">restaurant_menu</i>
         </div>
         Self-Service
       </a>
 
-      <a routerLink="/chopes" mat-list-item>
+      <a *ngIf="veririficarUsuario('Choperia')" routerLink="/chopes" mat-list-item>
         <div>
           <i class="material-icons" style="float: left;">local_drink</i>
         </div>
         Chopes
       </a>
 
-      <a routerLink="/servir-chope" mat-list-item>
+      <a *ngIf="veririficarUsuario('Servir Chope')" routerLink="/servir-chope" mat-list-item>
         <div>
           <i class="material-icons" style="float: left;">local_drink</i>
         </div>
         Servir Chope
       </a>
 
-      <a routerLink="/cozinha" mat-list-item>
+      <a *ngIf="veririficarUsuario('Cozinha')" routerLink="/cozinha" mat-list-item>
         <div>
           <i class="material-icons" style="float: left;">kitchen</i>
         </div>
         Cozinha
       </a>
 
-      <a routerLink="/clientes/entrada" mat-list-item>
+      <a *ngIf="veririficarUsuario('Entrada Clientes')" routerLink="/clientes/entrada" mat-list-item>
         <div>
           <i class="material-icons" style="float: left;">directions_run</i>
         </div>
         Entrada Clientes
       </a>
 
-      <a routerLink="/clientes/saida" mat-list-item>
+      <a *ngIf="veririficarUsuario('Saída Clientes')" routerLink="/clientes/saida" mat-list-item>
         <div>
           <i class="material-icons" style="float: left;">directions_run</i>
         </div>
         Saída Clientes
       </a>
 
-      <a routerLink="/relatorios" mat-list-item>
+      <a *ngIf="veririficarUsuario('Relatórios')" routerLink="/relatorios" mat-list-item>
         <div>
           <i class="material-icons" style="float: left;">note</i>
         </div>
