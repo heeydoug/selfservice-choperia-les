@@ -9,6 +9,7 @@ import {finalize} from "rxjs";
 import {SelfserviceService} from "../../services/selfservice.service";
 import {tsCastToAny} from "@angular/compiler-cli/src/ngtsc/typecheck/src/ts_util";
 import {ToastrService} from "ngx-toastr";
+import {BalancaService} from "../../services/balanca.service";
 
 @Component({
   selector: 'app-selfservice',
@@ -24,6 +25,7 @@ export class SelfserviceComponent implements OnInit{
     private formBuilder: FormBuilder,
     private clientesService: ClientesService,
     private selfserviceService: SelfserviceService,
+    public balancaService: BalancaService,
     private toast: ToastrService,
   ) {
     if(localStorage.getItem('usuario') == null){
@@ -102,5 +104,10 @@ export class SelfserviceComponent implements OnInit{
     let peso = Number(event.target.value);
     mult = peso * preco;
     this.formGroup.controls['valorTotal'].setValue(mult);
+  }
+
+  iniciarBalanca() {
+    this.balancaService.readerBalanca();
+
   }
 }
