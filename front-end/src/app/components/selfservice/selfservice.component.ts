@@ -44,6 +44,16 @@ export class SelfserviceComponent implements OnInit{
   ngOnInit() {
     this.focusInputRfid();
     this.receberPrecoSelfService();
+    this.receberPeso();
+    setInterval(() => {
+      this.selfserviceService.receberPesoBalanca().subscribe(response => {
+        if(response){
+          this.formGroup.patchValue({peso: response.lastWeight})
+        }else{
+          this.formGroup.setValue({peso: 0.0})
+        }
+      })
+    }, 1000)
   }
   receberPrecoSelfService(){
     this.selfserviceService.receberPrecoSelfService()
@@ -104,6 +114,17 @@ export class SelfserviceComponent implements OnInit{
     let peso = Number(event.target.value);
     mult = peso * preco;
     this.formGroup.controls['valorTotal'].setValue(mult);
+  }
+
+  receberPeso() {
+    this.selfserviceService.receberPesoBalanca().subscribe(response => {
+      if(response){
+        this.formGroup.patchValue({peso: response.lastWeight})
+        console.log(response + ' PESO')
+      }else{
+        this.formGroup.setValue({peso: 0.0})
+      }
+    })
   }
 
   iniciarBalanca() {

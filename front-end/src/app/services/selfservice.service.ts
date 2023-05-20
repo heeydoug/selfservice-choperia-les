@@ -21,6 +21,10 @@ export class SelfserviceService {
     return this.http.get(this.API + '/preco');
   }
 
+  receberPesoBalanca(): Observable<any>{
+    return this.http.get("http://192.168.0.109/peso");
+  }
+
   alterarPreco(preco: number){
     return this.http.put(this.API + '/preco/alterar', preco);
   }
