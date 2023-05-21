@@ -82,7 +82,7 @@ export class CaixaComponent implements OnInit{
     const mywindow = window.open('', 'PRINT', 'height=600,width=600');
 
     mywindow?.document.write('<html><head><title>' + "Choperia e Self-Service Bola de Cristal" + '</title>');
-    mywindow?.document.write('<head><body style="margin: 0; display: grid; font-family:Arial, Helvetica, sans-serif;"></div> </body></html>')
+    mywindow?.document.write('<head><body style="margin: 0; display: grid; font-family:Arial, Helvetica, sans-serif; font-size: 14px"></div> </body></html>')
 
     const divPrincipal = this.criarDivPrincipal();
 
@@ -124,7 +124,7 @@ export class CaixaComponent implements OnInit{
 
      div.innerHTML = `
      <hr>
-     <table style="width: 100%">
+     <table style="width: 100%; font-size: 12px">
         <tr>
             <td colspan="3">Valor total:</td>
             <td style="text-align: right">${this.numeroParaReal(this.form.get('valorTotal')?.value)}</td>
@@ -143,12 +143,16 @@ export class CaixaComponent implements OnInit{
     const colunaPreco = document.createElement('td');
 
     table.style.width = '100%';
+    table.style.fontSize = '8px';
 
     colunaItem.innerHTML = 'Nome';
+    colunaItem.style.textAlign = 'center';
+
     colunaData.innerHTML = 'Data e Hora';
     colunaData.style.textAlign = 'center';
+
     colunaPreco.innerHTML = 'Preço';
-    colunaPreco.style.textAlign = 'right';
+    colunaPreco.style.textAlign = 'center';
 
     linha.append(colunaItem, colunaData, colunaPreco);
     head.append(linha);
@@ -186,7 +190,7 @@ export class CaixaComponent implements OnInit{
      let div = document.createElement('div');
 
      div.innerHTML = `
-     <table style="width: 100%">
+     <table style="width: 100%; font-size: 12px">
          <tr>
             <td colspan="3">Método de pagamento:</td>
             <td style="text-align: right">${this.verificarMetodoPagamento(this.form.get('metodoPagamento')?.value)}</td>
@@ -201,7 +205,7 @@ export class CaixaComponent implements OnInit{
 
      div.innerHTML = `
      <ht>
-     <table style="width: 100%">
+     <table style="width: 100%; font-size: 12px">
          <tr>
             <td colspan="3">Nome do cliente:</td>
             <td style="text-align: right">${this.form.get('nome')?.value}</td>

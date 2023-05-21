@@ -32,7 +32,7 @@ export class ChopCreateComponent {
     private location: Location,
     private toast: ToastrService,
     private router: Router,
-    public rfidService: RfidService,
+    public    rfidService: RfidService,
   ) {
     if(localStorage.getItem('usuario') == null){
       console.log(localStorage.getItem('usuario'));
