@@ -16,6 +16,9 @@ public class EntradaEstoque {
     @Column(name = "nome")
     private String nome;
 
+    @Column(name = "tipo")
+    private String tipo;
+
     @Column(name = "preco_compra")
     private Double precoCompra;
 
@@ -25,10 +28,11 @@ public class EntradaEstoque {
     @Column(name = "data_entrada")
     private LocalDateTime dataEntrada;
 
-    public EntradaEstoque(String nome, Double precoCompra, Integer quantidade) {
+    public EntradaEstoque(String nome, Double precoCompra, Integer quantidade,String tipo) {
         this.nome = nome;
         this.precoCompra = precoCompra;
         this.quantidade = quantidade;
+        this.tipo = tipo;
         this.dataEntrada = LocalDateTime.now();
     }
 }

@@ -16,25 +16,91 @@
 	<parameter name="DataInicial" class="java.util.Date"/>
 	<parameter name="DataFinal" class="java.util.Date"/>
 	<queryString language="SQL">
-		<![CDATA[SELECT 
-    COALESCE((SELECT SUM(valor) FROM cartao_cliente_gastos WHERE data BETWEEN TO_DATE($P{DataInicial} || ' 00:00:00', 'yyyy-MM-dd HH24:MI:SS')
-                                                            AND TO_DATE($P{DataFinal} || ' 23:59:59', 'yyyy-MM-dd HH24:MI:SS')
-                                                            AND descricao NOT LIKE '%Self-Service%'), 0) AS total_cartao_cliente_gastos,
-    COALESCE((SELECT SUM(preco_compra * quantidade) FROM entrada_estoque WHERE data_entrada BETWEEN TO_DATE($P{DataInicial} || ' 00:00:00', 'yyyy-MM-dd HH24:MI:SS')
-                                                                           AND TO_DATE($P{DataFinal} || ' 23:59:59', 'yyyy-MM-dd HH24:MI:SS')), 0) AS total_entrada_estoque,
-    COALESCE((SELECT SUM(valor) FROM cartao_cliente_gastos WHERE data BETWEEN TO_DATE($P{DataInicial} || ' 00:00:00', 'yyyy-MM-dd HH24:MI:SS')
-                                                            AND TO_DATE($P{DataFinal} || ' 23:59:59', 'yyyy-MM-dd HH24:MI:SS')
-                                                            AND descricao NOT LIKE '%Self-Service%'), 0) - 
-    COALESCE((SELECT SUM(preco_compra * quantidade) FROM entrada_estoque WHERE data_entrada BETWEEN TO_DATE($P{DataInicial} || ' 00:00:00', 'yyyy-MM-dd HH24:MI:SS')
-                                                                           AND TO_DATE($P{DataFinal} || ' 23:59:59', 'yyyy-MM-dd HH24:MI:SS')), 0) AS saldo_total;]]>
+		<![CDATA[WITH todas_datas AS (
+    SELECT generate_series(
+        DATE($P{DataInicial}),
+        DATE($P{DataFinal}),
+        '1 day'::interval
+    ) AS data
+),
+cartao_cliente AS (
+    SELECT 
+        DATE_TRUNC('day', data) AS data,
+        SUM(CASE WHEN descricao NOT LIKE '%Self-Service%' THEN valor ELSE 0 END) AS total_chope,
+        SUM(CASE WHEN descricao LIKE '%Self-Service%' THEN valor ELSE 0 END) AS total_self
+    FROM 
+        cartao_cliente_gastos
+    WHERE
+        DATE_TRUNC('day', data) <= DATE($P{DataFinal})
+    GROUP BY
+        DATE_TRUNC('day', data)
+),
+entrada_chope AS (
+    SELECT 
+        DATE_TRUNC('day', data_entrada) AS data,
+        SUM(preco_compra * quantidade) AS total_entrada_chope
+    FROM 
+        entrada_estoque
+    WHERE
+        tipo = 'chope'
+        AND DATE_TRUNC('day', data_entrada) <= DATE($P{DataFinal})
+    GROUP BY
+        DATE_TRUNC('day', data_entrada)
+),
+entrada_produto AS (
+    SELECT 
+        DATE_TRUNC('day', data_entrada) AS data,
+        SUM(preco_compra * quantidade) AS total_entrada_produto
+    FROM 
+        entrada_estoque
+    WHERE
+        tipo = 'produto'
+        AND DATE_TRUNC('day', data_entrada) <= DATE($P{DataFinal})
+    GROUP BY
+        DATE_TRUNC('day', data_entrada)
+)
+SELECT 
+    todas_datas.data,
+    COALESCE(cc.total_chope, 0) AS total_chope,
+    COALESCE(cc.total_self, 0) AS total_self,
+    COALESCE(ec.total_entrada_chope, 0) AS total_entrada_chope,
+    COALESCE(ep.total_entrada_produto, 0) AS total_entrada_produto,
+    COALESCE(cc.total_chope, 0) - COALESCE(ec.total_entrada_chope, 0) - COALESCE(ep.total_entrada_produto, 0) AS saldo_total
+FROM 
+    todas_datas
+LEFT JOIN 
+    cartao_cliente cc ON todas_datas.data = cc.data
+LEFT JOIN 
+    entrada_chope ec ON todas_datas.data = ec.data
+LEFT JOIN 
+    entrada_produto ep ON todas_datas.data = ep.data
+GROUP BY 
+    todas_datas.data, cc.total_chope, cc.total_self, ec.total_entrada_chope, ep.total_entrada_produto
+HAVING 
+    COALESCE(cc.total_chope, 0) + COALESCE(cc.total_self, 0) + COALESCE(ec.total_entrada_chope, 0) + COALESCE(ep.total_entrada_produto, 0) > 0
+ORDER BY 
+    todas_datas.data;
+]]>
 	</queryString>
-	<field name="total_cartao_cliente_gastos" class="java.lang.Double">
-		<property name="com.jaspersoft.studio.field.name" value="total_cartao_cliente_gastos"/>
-		<property name="com.jaspersoft.studio.field.label" value="total_cartao_cliente_gastos"/>
+	<field name="data" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="data"/>
+		<property name="com.jaspersoft.studio.field.label" value="data"/>
 	</field>
-	<field name="total_entrada_estoque" class="java.lang.Double">
-		<property name="com.jaspersoft.studio.field.name" value="total_entrada_estoque"/>
-		<property name="com.jaspersoft.studio.field.label" value="total_entrada_estoque"/>
+	<field name="total_chope" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="total_chope"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_chope"/>
+	</field>
+	<field name="total_self" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="total_self"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_self"/>
+	</field>
+	<field name="total_entrada_chope" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="total_entrada_chope"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_entrada_chope"/>
+	</field>
+	<field name="total_entrada_produto" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="total_entrada_produto"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_entrada_produto"/>
 	</field>
 	<field name="saldo_total" class="java.lang.Double">
 		<property name="com.jaspersoft.studio.field.name" value="saldo_total"/>
@@ -83,7 +149,7 @@
 	<columnHeader>
 		<band height="30" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="180" height="30" uuid="ce384c57-ab4c-44db-bdc4-ad01fc939044">
+				<reportElement x="330" y="0" width="80" height="30" uuid="ce384c57-ab4c-44db-bdc4-ad01fc939044">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="aa119467-794d-462a-be75-c6eda0af02fe"/>
 				</reportElement>
 				<box>
@@ -96,7 +162,7 @@
 				<text><![CDATA[Total de Despesas]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="180" y="0" width="200" height="30" uuid="f1c1ef1c-9be2-422a-893b-c0cabc029b40">
+				<reportElement x="410" y="0" width="80" height="30" uuid="f1c1ef1c-9be2-422a-893b-c0cabc029b40">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a0b65cd6-3f68-4a51-a010-4802e9ec9027"/>
 				</reportElement>
 				<box>
@@ -109,7 +175,7 @@
 				<text><![CDATA[Total de Vendas]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="380" y="0" width="174" height="30" uuid="10a156cd-5cfa-4fdc-976f-5145e1480d92">
+				<reportElement x="490" y="0" width="64" height="30" uuid="10a156cd-5cfa-4fdc-976f-5145e1480d92">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a0b65cd6-3f68-4a51-a010-4802e9ec9027"/>
 				</reportElement>
 				<box>
@@ -121,12 +187,79 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[Renda Total]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="260" y="0" width="70" height="30" uuid="ebabe91c-aede-411d-afa7-46c7770a16e9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="aa119467-794d-462a-be75-c6eda0af02fe"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Vendas 
+Self-Service]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="0" width="70" height="30" uuid="292cb967-7865-4496-8662-b23673d76c2c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="aa119467-794d-462a-be75-c6eda0af02fe"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Despesas Chope]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="0" width="70" height="30" uuid="a6483bf0-2548-4342-8c3e-7a1d91f9683e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="aa119467-794d-462a-be75-c6eda0af02fe"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Despesas Produtos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="0" width="70" height="30" uuid="eb26efb0-3810-4bdf-9ab7-0511ef437ddd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="aa119467-794d-462a-be75-c6eda0af02fe"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Vendas 
+Chope]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="50" height="30" uuid="3701784c-d536-478e-bc40-692a39d4cdf8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="aa119467-794d-462a-be75-c6eda0af02fe"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Data]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="30" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="180" height="30" uuid="56a45898-51ad-4aba-bd76-92e023ef0fb1"/>
+				<reportElement x="330" y="0" width="80" height="30" uuid="56a45898-51ad-4aba-bd76-92e023ef0fb1"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -134,11 +267,10 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA["R$ " +new DecimalFormat("#.##").format(Math.round($F{total_entrada_estoque} * 100.0) / 100.0)
-]]></textFieldExpression>
+				<textFieldExpression><![CDATA["R$ " +new DecimalFormat("#.##").format(Math.round(($F{total_entrada_chope} + $F{total_entrada_produto}) * 100.0) / 100.0)]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="180" y="0" width="200" height="30" uuid="48d6ee29-8d90-4e2a-9d3f-6fde7afb1f9b"/>
+				<reportElement x="410" y="0" width="80" height="30" uuid="48d6ee29-8d90-4e2a-9d3f-6fde7afb1f9b"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -146,11 +278,10 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA["R$ " +new DecimalFormat("#.##").format(Math.round($F{total_cartao_cliente_gastos} * 100.0) / 100.0)
-]]></textFieldExpression>
+				<textFieldExpression><![CDATA["R$ " +new DecimalFormat("#.##").format(Math.round(($F{total_chope}+$F{total_self}) * 100.0) / 100.0)]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Variable Color" isPrintRepeatedValues="false" x="380" y="0" width="174" height="30" uuid="a899ff4e-0b15-4c66-bd2d-3837479816d3"/>
+				<reportElement style="Variable Color" isPrintRepeatedValues="false" x="490" y="0" width="64" height="30" uuid="a899ff4e-0b15-4c66-bd2d-3837479816d3"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -158,8 +289,74 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA["R$ " +new DecimalFormat("#.##").format(Math.round($F{saldo_total} * 100.0) / 100.0)
-]]></textFieldExpression>
+				<textFieldExpression><![CDATA["R$ " +new DecimalFormat("#.##").format(Math.round((($F{total_chope} + $F{total_self}) - ($F{total_entrada_chope} + $F{total_entrada_produto}))* 100.0) / 100.0)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Variable Color" x="0" y="0" width="50" height="30" uuid="cfbbb733-de84-4af6-bf29-5f1ddd8d6223">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="09c87c58-497c-4fea-8a9c-ca42daf15cf8"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{data} ) ]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="0" width="70" height="30" uuid="583849d3-0c71-4d99-9ca2-511c23cda607">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="09c87c58-497c-4fea-8a9c-ca42daf15cf8"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["R$ " +new DecimalFormat("#.##").format(Math.round($F{total_entrada_chope} * 100.0) / 100.0)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="0" width="70" height="30" uuid="22292032-9b28-49c2-8d51-314f404bdae4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="09c87c58-497c-4fea-8a9c-ca42daf15cf8"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["R$ " +new DecimalFormat("#.##").format(Math.round($F{total_entrada_produto}* 100.0) / 100.0)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="190" y="0" width="70" height="30" uuid="f5834280-1dc3-465e-9d9d-7ed6cb57f83b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="09c87c58-497c-4fea-8a9c-ca42daf15cf8"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["R$ " +new DecimalFormat("#.##").format(Math.round($F{total_chope}* 100.0) / 100.0)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="260" y="0" width="70" height="30" uuid="884acbe6-55a6-4a45-8e09-a6230a64d2e3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="09c87c58-497c-4fea-8a9c-ca42daf15cf8"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["R$ " +new DecimalFormat("#.##").format(Math.round($F{total_self} * 100.0) / 100.0)]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

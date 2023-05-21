@@ -29,10 +29,10 @@ public class EntradaEstoqueService {
     public void EntradaChope(Chope chope){
         Optional<Chope> chopeBD = Optional.ofNullable(chopeRepository.findByRfid(chope.getRfid()));
         if (chopeBD.isEmpty()){
-            EntradaEstoque entradaEstoque = new EntradaEstoque(chope.getNome(),chope.getPrecoCompra(), (int) (chope.getSaldoEstoque()/100));
+            EntradaEstoque entradaEstoque = new EntradaEstoque(chope.getNome(),chope.getPrecoCompra(), (int) (chope.getSaldoEstoque()/100),"chope");
             entradaEstoqueRepository.save(entradaEstoque);
         }else if (chope.getSaldoEstoque() > chopeBD.get().getSaldoEstoque()){
-            EntradaEstoque entradaEstoque = new EntradaEstoque(chope.getNome(),chope.getPrecoCompra(),(int) ((chope.getSaldoEstoque()-chopeBD.get().getSaldoEstoque())/100));
+            EntradaEstoque entradaEstoque = new EntradaEstoque(chope.getNome(),chope.getPrecoCompra(),(int) ((chope.getSaldoEstoque()-chopeBD.get().getSaldoEstoque())/100),"chope");
             entradaEstoqueRepository.save(entradaEstoque);
         }
     }
@@ -40,10 +40,10 @@ public class EntradaEstoqueService {
     public void EntradaProduto(Produto produto){
         Optional<Produto> produtoBD = Optional.ofNullable(produtoRepository.findByCodigoBarras(produto.getCodigoBarras()));
         if (produtoBD.isEmpty()){
-            EntradaEstoque entradaEstoque = new EntradaEstoque(produto.getNome(),produto.getPrecoCompra(),produto.getSaldoEstoque());
+            EntradaEstoque entradaEstoque = new EntradaEstoque(produto.getNome(),produto.getPrecoCompra(),produto.getSaldoEstoque(),"produto");
             entradaEstoqueRepository.save(entradaEstoque);
         }else if(produto.getSaldoEstoque() > produtoBD.get().getSaldoEstoque()){
-            EntradaEstoque entradaEstoque = new EntradaEstoque(produto.getNome(),produto.getPrecoCompra(),produto.getSaldoEstoque()-produtoBD.get().getSaldoEstoque());
+            EntradaEstoque entradaEstoque = new EntradaEstoque(produto.getNome(),produto.getPrecoCompra(),produto.getSaldoEstoque()-produtoBD.get().getSaldoEstoque(),"produto");
             entradaEstoqueRepository.save(entradaEstoque);
         }
     }

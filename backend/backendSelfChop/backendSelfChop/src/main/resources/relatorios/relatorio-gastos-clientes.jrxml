@@ -9,7 +9,7 @@
 		<![CDATA[SELECT 
     c.cpf AS cpf_cliente, 
     c.nome AS nome_cliente, 
-   COUNT(DISTINCT cc.id) AS quantidade_cartoes, 
+    COUNT(DISTINCT cc.id) AS quantidade_cartoes, 
     SUM(ccg.valor) AS total_gastos
 FROM 
     cliente c
@@ -19,9 +19,10 @@ WHERE
     ccg.data BETWEEN TO_DATE($P{DataInicial} || ' 00:00:00', 'yyyy-MM-dd HH24:MI:SS') 
                  AND TO_DATE($P{DataFinal} || ' 23:59:59', 'yyyy-MM-dd HH24:MI:SS')
 GROUP BY 
-    c.cpf, c.nome, cc.cpf_cliente, cc.id
+    c.cpf, c.nome
 ORDER BY 
-    total_gastos DESC]]>
+    total_gastos DESC
+]]>
 	</queryString>
 	<field name="cpf_cliente" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="cpf_cliente"/>
