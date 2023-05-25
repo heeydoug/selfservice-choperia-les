@@ -1,8 +1,8 @@
 <mat-toolbar *ngIf="estaLogado()" class="cor-principal nav-bar">
-<!--  <button (click)="sidenav.toggle()" mat-icon-button>-->
-<!--    <mat-icon class="branco">menu</mat-icon>-->
-<!--  </button>-->
-  <span class="branco">Restaurante e Chopperia - Grupo 4</span>
+  <button (click)="toggleSidenav()" mat-icon-button>
+    <mat-icon class="branco">menu</mat-icon>
+  </button>
+  <span class="branco">Self-Service e Choperia Bola de Cristal - Grupo 4</span>
   <span class="example-spacer"></span>
   <span class="usuario">Bem-vindo {{nomeUsuarioLogado}}</span>
 
@@ -121,6 +121,12 @@
   </mat-sidenav-content>
 
 </mat-sidenav-container>
+
+<footer>
+  <div class="rodape">
+    <p>Desenvolvido por Clarisse, Douglas, João Kleber e Lucila. &copy; 2023</p>
+  </div>
+</footer>
 
 
 
