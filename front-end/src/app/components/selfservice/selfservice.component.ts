@@ -49,12 +49,18 @@ export class SelfserviceComponent implements OnInit{
       this.selfserviceService.receberPesoBalanca().subscribe(response => {
         if(response){
           this.formGroup.patchValue({peso: response.lastWeight})
+          let mult = 0;
+          let preco = this.formGroup.get('preco')?.value;
+          let peso = this.formGroup.get('peso')?.value;
+          mult = peso * preco;
+          this.formatarCasasDecimais(mult);
         }else{
           this.formGroup.setValue({peso: 0.0})
         }
       })
     }, 1000)
   }
+
   receberPrecoSelfService(){
     this.selfserviceService.receberPrecoSelfService()
       .pipe()
@@ -63,6 +69,13 @@ export class SelfserviceComponent implements OnInit{
 
       });
   }
+
+  formatarCasasDecimais(mult: any) {
+    const valor = parseFloat(mult);
+    mult = valor.toFixed(2);
+    this.formGroup.controls['valorTotal'].setValue(mult);
+  }
+
   focusInputRfid(): void{
     let blurElement: HTMLElement = document.getElementById("rfidInput") as HTMLElement;
     blurElement.blur();
@@ -93,6 +106,7 @@ export class SelfserviceComponent implements OnInit{
           this.toast.success('Pedido registrado com sucesso!', 'Self-Service');
           this.formGroup.reset();
           this.receberPrecoSelfService();
+          this.focusInputRfid();
         },
         error: (error) => {
           this.toast.error('Erro!', 'Erro');
@@ -111,7 +125,7 @@ export class SelfserviceComponent implements OnInit{
   multValorTotal(event: any): void {
     let mult = 0;
     let preco = this.formGroup.get('preco')?.value;
-    let peso = Number(event.target.value);
+    let peso = this.formGroup.get('peso')?.value;
     mult = peso * preco;
     this.formGroup.controls['valorTotal'].setValue(mult);
   }

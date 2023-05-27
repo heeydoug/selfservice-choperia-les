@@ -10,29 +10,53 @@ size-sidenav a{
   color: white;
 }
 
+.mat-drawer-container {
+  z-index: 1;
+}
+
+.footer {
+  position: absolute; /* Define a posição absoluta para que o rodapé fique no lugar correto */
+  bottom: 0; /* Alinha o rodapé na parte inferior da sidenav */
+  left: 0; /* Alinha o rodapé no canto esquerdo */
+  right: 0; /* Alinha o rodapé no canto direito */
+  background-color: #f5f5f5; /* Defina a cor de fundo do rodapé conforme desejado */
+  padding: 10px; /* Adicione o espaçamento interno desejado para o rodapé */
+}
+
+
 .container{
   height: 85%;
+  display: flex;
 }
 
 i{
   padding-right: .6rem;
+
 }
 
 a{
   color: white;
+  size: 1rem;
 }
 
 .nav-bar{
-  height: 110px;
+  height: 5rem;
 }
 
 .size-sidenav {
+  flex: 0 0 auto; /* Define a largura fixa da sidenav */
+  z-index: 1;
   width: 220px;
-  height: 88vh;
 }
 a:hover{
   background-color: #66E4A4;
 }
+
+.mat-sidenav-content {
+  flex: 1 1 auto; /* Faz o conteúdo principal ocupar todo o espaço disponível */
+  position: relative; /* Define a posição relativa para que o rodapé possa ser posicionado corretamente */
+}
+
 .usuario{
   color: white;
   margin-right: 1em;
@@ -49,6 +73,19 @@ button:hover{
 .branco{
   color: white;
 }
+
+footer {
+  background-color: #f5f5f5;
+  padding: 20px;
+  text-align: center;
+}
+
+.rodape p {
+  margin: 0;
+  font-size: 14px;
+  color: #666666;
+}
+
 
 
 

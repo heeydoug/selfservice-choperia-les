@@ -2,7 +2,6 @@
 .container{
   width: 60%;
   margin: 1rem auto;
-
 }
 
 .mat-mdc-form-field {
@@ -29,8 +28,9 @@
 
 
 button {
+  margin-top: 1rem;
   margin-right: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1rem;;
 }
 
 table {
@@ -44,3 +44,17 @@ table {
 .material-icons.icone-editar{
   color: #0B2641;
 }
+.custom-checkbox .mat-checkbox-input:checked + .mat-checkbox-ripple .mat-ripple-element {
+  background-color: green;
+}
+
+.custom-checkbox .mat-checkbox-frame {
+  border-color: green;
+}
+
+.custom-checkbox .mat-checkbox-background {
+  background-color: transparent;
+}
+
+
+

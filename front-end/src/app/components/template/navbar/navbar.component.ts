@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {RfidService} from "../../../services/rfid.service";
 
@@ -11,6 +11,9 @@ export class NavbarComponent implements OnInit{
 
   nomeUsuarioLogado?: string;
 
+  @ViewChild('sidenav') sidenav: any;
+
+
   constructor(private router: Router,
               public rfidService: RfidService) {
   }
@@ -18,6 +21,11 @@ export class NavbarComponent implements OnInit{
   ngOnInit(): void {
 
   }
+
+  toggleSidenav() {
+    this.sidenav.toggle();
+  }
+
 
   estaLogado() {
     if(localStorage.getItem('usuario') == null){

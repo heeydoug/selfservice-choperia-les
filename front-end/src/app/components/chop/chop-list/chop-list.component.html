@@ -7,11 +7,11 @@
   <div>
     <button mat-raised-button class="button-mais"
             *ngIf="rfidService.rfid === null || rfidService.rfid === undefined"
-            (click)="rfidService.readerRfid()">Iniciar Leitor RFID</button>
+            (click)="rfidService.readerRfid()" style="background-color: #0B2641; color: white">Iniciar Leitor RFID</button>
   </div>
 
   <div>
-    <button mat-raised-button class="button" (click)="create()">
+    <button mat-raised-button class="button" (click)="create()" style="background-color: #01a86c;">
       Cadastrar Chope
     </button>
 
@@ -79,7 +79,7 @@
 
   <div>
     <button [disabled]="dataSource.data.length === 0" (click)="(abrirTelaEstoqueChope())"
-            mat-raised-button class="button-add">
+            mat-raised-button class="button-add" style="background-color: #01a86c;">
       Inserir Chopes no Estoque
     </button>
   </div>
