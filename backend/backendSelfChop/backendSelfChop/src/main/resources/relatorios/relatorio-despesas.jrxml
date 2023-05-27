@@ -79,8 +79,7 @@ GROUP BY
 HAVING 
     COALESCE(cc.total_chope, 0) + COALESCE(cc.total_self, 0) + COALESCE(ec.total_entrada_chope, 0) + COALESCE(ep.total_entrada_produto, 0) > 0
 ORDER BY 
-    todas_datas.data;
-]]>
+    todas_datas.data;]]>
 	</queryString>
 	<field name="data" class="java.sql.Timestamp">
 		<property name="com.jaspersoft.studio.field.name" value="data"/>
@@ -316,7 +315,7 @@ Chope]]></text>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{data} ) ]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{data} )]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="50" y="0" width="70" height="30" uuid="583849d3-0c71-4d99-9ca2-511c23cda607">
@@ -413,7 +412,7 @@ Chope]]></text>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA["R$ " +new DecimalFormat("#.##").format(Math.round($V{Total Despesas Chope}* 100.0) / 100.0)]]></textFieldExpression>
+				<textFieldExpression><![CDATA["R$ " +new DecimalFormat("#.##").format(Math.round($V{Total Despesas Produtos}* 100.0) / 100.0)]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="190" y="0" width="70" height="30" uuid="d6f8f214-2102-40f0-ad87-c2dffea6a631">
@@ -426,7 +425,7 @@ Chope]]></text>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA["R$ " +new DecimalFormat("#.##").format(Math.round($V{Total Despesas Chope}* 100.0) / 100.0)]]></textFieldExpression>
+				<textFieldExpression><![CDATA["R$ " +new DecimalFormat("#.##").format(Math.round($V{Total Vendas Chopes}* 100.0) / 100.0)]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="260" y="0" width="70" height="30" uuid="10119624-55a5-483b-9247-513a42020ccf">
@@ -468,7 +467,7 @@ Chope]]></text>
 				<textFieldExpression><![CDATA["R$ " +new DecimalFormat("#.##").format(Math.round(($V{Total Vendas Chopes} + $V{Total Vendas Self})* 100.0) / 100.0)]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="480" y="0" width="74" height="30" uuid="6956151f-2987-4a79-96e4-583785b3219b">
+				<reportElement style="Variable Color" x="480" y="0" width="74" height="30" uuid="6956151f-2987-4a79-96e4-583785b3219b">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="09c87c58-497c-4fea-8a9c-ca42daf15cf8"/>
 				</reportElement>
 				<box>
