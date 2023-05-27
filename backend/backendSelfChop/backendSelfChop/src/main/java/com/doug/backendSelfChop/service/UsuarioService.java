@@ -81,5 +81,10 @@ public class UsuarioService {
             admin.setTelas(telaRepository.findAll());
             usuarioRepository.save(admin);
         }
+        else{
+            Usuario admin = usuarioRepository.findByNome("Administrador");
+            admin.setTelas(telaRepository.findAll());
+            usuarioRepository.save(admin);
+        }
     }
 }
