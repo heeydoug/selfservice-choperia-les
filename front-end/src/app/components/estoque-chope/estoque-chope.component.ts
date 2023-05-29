@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {MatPaginator} from "@angular/material/paginator";
 import {RfidService} from "../../services/rfid.service";
 import {EstoqueChopeService} from "../../services/estoque-chope.service";
+import {ChopesService} from "../../services/chopes.service";
 
 @Component({
   selector: 'app-estoque-chope',
@@ -18,6 +19,7 @@ export class EstoqueChopeComponent implements AfterViewInit{
   rfid: string = "";
   saldoEstoque: number = 1;
   chopes: Chope[] = [];
+  ELEMENT_DATA: Chope[] = [];
 
   displayedColumns: string[] = ['rfid', 'nome', 'saldoEstoque'];
   dataSource = new MatTableDataSource<Chope>(this.chopes);
@@ -28,7 +30,8 @@ export class EstoqueChopeComponent implements AfterViewInit{
     private toast: ToastrService,
     private router: Router,
     public rfidService: RfidService,
-    private estoqueChopeService: EstoqueChopeService
+    private estoqueChopeService: EstoqueChopeService,
+    private serviceChope: ChopesService,
 
   ) {
     if(localStorage.getItem('usuario') == null){
@@ -54,13 +57,6 @@ export class EstoqueChopeComponent implements AfterViewInit{
   }
 
   inserir(){
-
-    // this.rfidService.rfid.addEventListener('change', () => {
-    //   // Simula a pressão da tecla Enter
-    //   const teclaEnter = new KeyboardEvent('keydown', { keyCode: 6 });
-    //   document.dispatchEvent(teclaEnter);
-    // });
-
     this.rfid = this.rfidService.rfid;
     if(this.rfid.length === 6){
       let chp: Chope | undefined = this.dataSource.data.find( chp =>
@@ -91,10 +87,12 @@ export class EstoqueChopeComponent implements AfterViewInit{
     }
   }
 
+
   finalizarEntradaEstoque() {
     this.estoqueChopeService.atualizarEstoque(this.dataSource.data).subscribe();
     this.toast.success('Entrada de chope realizada com sucesso!', 'Entrada Chope');
-    this.router.navigate(['/chopes']);
+    this.router.navigate(['/home']);
+
 
 
   }

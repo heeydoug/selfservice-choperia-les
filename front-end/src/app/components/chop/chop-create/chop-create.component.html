@@ -10,6 +10,8 @@
       <input matInput
              [(ngModel)]="rfidService.rfid"
              name="rfid"
+             [minlength]="6"
+             [maxlength]="6"
              [formControl]="rfid"
              required>
     </mat-form-field>

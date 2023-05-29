@@ -5,6 +5,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import {EstoqueEntradaService} from "../../services/estoque-entrada.service";
+import {ChopesService} from "../../services/chopes.service";
 
 @Component({
   selector: 'app-estoque-entrada',
@@ -26,7 +27,7 @@ export class EstoqueEntradaComponent implements AfterViewInit{
   constructor(
     private toast: ToastrService,
     private router: Router,
-    private entradaEstoqueService: EstoqueEntradaService
+    private entradaEstoqueService: EstoqueEntradaService,
 
   ) {
 
@@ -79,6 +80,7 @@ export class EstoqueEntradaComponent implements AfterViewInit{
       }
       this.codigoBarras = "";
     }
+    this.codigoBarras = "";
   }
 
   finalizarEntradaEstoque() {

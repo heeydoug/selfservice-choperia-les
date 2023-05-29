@@ -12,6 +12,8 @@
              [(ngModel)]="produto.codigoBarras"
              name="codigoBarras"
              [formControl]="codigoBarras"
+             [minlength]="13"
+             [maxlength]="13"
              required>
     </mat-form-field>
 

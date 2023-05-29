@@ -10,6 +10,8 @@
       <input matInput
              [(ngModel)]="codigoBarras"
              name="codigoBarras"
+             [minlength]="13"
+             [maxlength]="13"
              id="codigoBarraInput"
              (ngModelChange)="retirar()">
     </mat-form-field>

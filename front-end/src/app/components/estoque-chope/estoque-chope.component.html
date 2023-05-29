@@ -4,8 +4,6 @@
     <h1>Estoque Chope</h1>
   </div>
 
-
-
   <div>
     <form>
       <mat-form-field appearance="fill" class="InputCodBarras">
@@ -14,13 +12,8 @@
                [(ngModel)]="rfidService.rfid"
                name="rfid"
                id="rfidInput"
-               (keyup.enter)="inserir()">
+               (ngModelChange)="inserir()">
       </mat-form-field>
-<!--      <button (click)="inserir()"-->
-<!--              mat-raised-button-->
-<!--              class="button-mais">-->
-<!--        +-->
-<!--      </button>-->
     </form>
   </div>
 
@@ -56,7 +49,7 @@
 
   <div>
     <button [disabled]="dataSource.data.length === 0" (click)="finalizarEntradaEstoque()"
-            mat-raised-button class="button">
+            mat-raised-button class="button" style="background-color: #01a86c;">
       Finalizar Entrada Estoque
     </button>
   </div>
